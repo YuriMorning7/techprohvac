@@ -5,32 +5,14 @@ import Link from "next/link";
 import { useForm, type FieldPath } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  ArrowLeft,
-  CheckCircle,
-  ChevronDown,
-  Upload,
-  X,
-} from "lucide-react";
+import { ArrowLeft, CheckCircle, Upload, X } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
 /*  SCHEMA                                                             */
 /* ------------------------------------------------------------------ */
 
-const serviceOptions = [
-  "Heat Pump Installation",
-  "AC Repair",
-  "AC Installation",
-  "Furnace Repair",
-  "Furnace Maintenance",
-  "Ductless Mini-Split",
-  "Water Heater",
-  "Thermostat Installation",
-  "Indoor Air Quality",
-  "Maintenance Plan",
-  "Free Estimate",
-  "Other",
-] as const;
+const serviceOptions = ["Repair", "New system", "Tune-up"] as const;
+type Service = (typeof serviceOptions)[number];
 
 const formSchema = z.object({
   // Step 1
@@ -40,8 +22,9 @@ const formSchema = z.object({
     .trim()
     .min(7, "Enter a valid phone number")
     .regex(/^[\d+\-()\s.]+$/, "Enter a valid phone number"),
-  service: z.string().min(1, "Choose the service you need"),
-  urgency: z.enum(["Emergency", "Within 24h", "This week", "Flexible"]),
+  service: z.enum(serviceOptions, {
+    message: "Choose the service you need",
+  }),
   // Step 2 — all optional
   street: z.string().optional().or(z.literal("")),
   city: z.string().optional().or(z.literal("")),
@@ -65,19 +48,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const step1Fields: FieldPath<FormData>[] = [
-  "fullName",
-  "phone",
-  "service",
-  "urgency",
-];
-
-const urgencyOptions: FormData["urgency"][] = [
-  "Emergency",
-  "Within 24h",
-  "This week",
-  "Flexible",
-];
+const step1Fields: FieldPath<FormData>[] = ["fullName", "phone", "service"];
 
 const TOTAL_STEPS = 2;
 
@@ -142,8 +113,7 @@ export default function ContactForm() {
     defaultValues: {
       fullName: "",
       phone: "",
-      service: "",
-      urgency: "Flexible",
+      service: undefined,
       street: "",
       city: "",
       zip: "",
@@ -153,7 +123,7 @@ export default function ContactForm() {
     },
   });
 
-  const selectedUrgency = watch("urgency");
+  const selectedService = watch("service");
 
   async function goNext() {
     const valid = await trigger(step1Fields, { shouldFocus: true });
@@ -234,21 +204,18 @@ export default function ContactForm() {
         {/* STEP 1                                                        */}
         {/* ============================================================ */}
         <div hidden={step !== 1} aria-hidden={step !== 1}>
-          <h2 className="text-[26px] sm:text-[30px] font-[800] text-navy leading-[1.15] tracking-tight mb-2">
-            Tell us how to reach you
+          <h2 className="text-[26px] sm:text-[30px] font-[800] text-navy leading-[1.15] tracking-tight mb-7">
+            Let&apos;s start with the basics
           </h2>
-          <p className="text-[15px] text-text-muted mb-7">
-            Just the essentials — we&apos;ll cover the rest on the next step.
-          </p>
 
           <div className="space-y-5">
             <div>
-              <FieldLabel htmlFor="fullName">Full name</FieldLabel>
+              <FieldLabel htmlFor="fullName">Your name</FieldLabel>
               <input
                 id="fullName"
                 type="text"
                 autoComplete="name"
-                placeholder="Jane Doe"
+                placeholder="First and last name"
                 className={fieldClass(!!errors.fullName)}
                 {...register("fullName")}
               />
@@ -261,7 +228,7 @@ export default function ContactForm() {
                 id="phone"
                 type="tel"
                 autoComplete="tel"
-                placeholder="(650) 000-0000"
+                placeholder="(650) 555-0143"
                 className={fieldClass(!!errors.phone)}
                 {...register("phone")}
               />
@@ -269,47 +236,26 @@ export default function ContactForm() {
             </div>
 
             <div>
-              <FieldLabel htmlFor="service">What do you need?</FieldLabel>
-              <div className="relative">
-                <select
-                  id="service"
-                  className={`${fieldClass(!!errors.service)} appearance-none pr-11 cursor-pointer`}
-                  {...register("service")}
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Select a service…
-                  </option>
-                  {serviceOptions.map((opt) => (
-                    <option key={opt} value={opt}>
-                      {opt}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted pointer-events-none" />
-              </div>
-              <FieldError message={errors.service?.message} />
-            </div>
-
-            <div>
-              <FieldLabel>How soon?</FieldLabel>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                {urgencyOptions.map((opt) => {
-                  const active = selectedUrgency === opt;
+              <FieldLabel>What do you need?</FieldLabel>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5" role="radiogroup">
+                {serviceOptions.map((opt) => {
+                  const active = selectedService === opt;
                   return (
                     <button
                       key={opt}
                       type="button"
+                      role="radio"
+                      aria-checked={active}
                       onClick={() =>
-                        setValue("urgency", opt, {
+                        setValue("service", opt as Service, {
                           shouldValidate: true,
                           shouldDirty: true,
                         })
                       }
-                      className={`h-[46px] px-3 rounded-[12px] border text-[13.5px] font-[600] transition-colors cursor-pointer ${
+                      className={`h-[54px] px-3 rounded-[12px] border-[1.5px] text-[15px] font-[700] transition-colors cursor-pointer ${
                         active
-                          ? "border-orange bg-badge-bg text-navy"
-                          : "border-input-border text-text-dark hover:border-text-muted/50"
+                          ? "border-orange bg-badge-bg text-orange"
+                          : "border-input-border bg-white text-navy hover:border-text-muted/50"
                       }`}
                     >
                       {opt}
@@ -317,7 +263,7 @@ export default function ContactForm() {
                   );
                 })}
               </div>
-              <FieldError message={errors.urgency?.message} />
+              <FieldError message={errors.service?.message} />
             </div>
           </div>
 
