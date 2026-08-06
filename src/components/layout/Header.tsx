@@ -24,18 +24,19 @@ export default function Header() {
       <div className="container-site h-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
-          <Image
-            src="/images/logo-mark.png"
-            alt="TechPro"
-            width={46}
-            height={46}
-            className="rounded-[10px]"
-          />
+          <div className="w-[46px] h-[46px] bg-[#1a2238] rounded-[12px] flex items-center justify-center overflow-hidden">
+            <Image
+              src="/images/Techpro_logo.png"
+              alt="TechPro"
+              width={38}
+              height={38}
+            />
+          </div>
           <div className="flex flex-col">
-            <span className="text-[17px] font-[800] text-white tracking-[.07em] leading-none">
+            <span className="text-[20px] font-[800] text-white tracking-[.08em] leading-none">
               TECHPRO
             </span>
-            <span className="text-[9px] font-[600] text-orange tracking-[.19em] leading-none mt-0.5">
+            <span className="text-[9.5px] font-[500] text-orange tracking-[.22em] leading-none mt-1">
               HEATING &amp; COOLING
             </span>
           </div>

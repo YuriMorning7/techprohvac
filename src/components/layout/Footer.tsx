@@ -47,11 +47,11 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-5">
               <Image
-                src="/images/logo-mark.png"
+                src="/images/Techpro_logo.png"
                 alt="TechPro"
                 width={40}
                 height={40}
-                className="rounded-[8px]"
+                className="rounded-full"
               />
               <div className="flex flex-col">
                 <span className="text-[15px] font-[800] text-white tracking-[.07em] leading-none">
