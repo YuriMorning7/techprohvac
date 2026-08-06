@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionTitle from "@/components/ui/SectionTitle";
+import ContactForm from "@/components/ui/ContactForm";
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
@@ -799,75 +800,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            {/* Contact Form */}
-            <div className="bg-white rounded-[18px] p-8">
-              <h3 className="text-xl font-[700] text-text-dark mb-6">
-                Get a Free Estimate
-              </h3>
-              <form className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[13px] font-[600] text-text-dark mb-1.5">
-                      First Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-2.5 rounded-[12px] border border-input-border text-[14px] focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20"
-                      placeholder="John"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[13px] font-[600] text-text-dark mb-1.5">
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-2.5 rounded-[12px] border border-input-border text-[14px] focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20"
-                      placeholder="Doe"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-[13px] font-[600] text-text-dark mb-1.5">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    className="w-full px-4 py-2.5 rounded-[12px] border border-input-border text-[14px] focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20"
-                    placeholder="(650) 000-0000"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[13px] font-[600] text-text-dark mb-1.5">
-                    Service Needed
-                  </label>
-                  <select className="w-full px-4 py-2.5 rounded-[12px] border border-input-border text-[14px] focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 bg-white text-text-dark">
-                    <option value="">Select a service</option>
-                    <option value="installation">Installation</option>
-                    <option value="repair">Repair</option>
-                    <option value="maintenance">Maintenance</option>
-                    <option value="estimate">Free Estimate</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[13px] font-[600] text-text-dark mb-1.5">
-                    Message
-                  </label>
-                  <textarea
-                    rows={4}
-                    className="w-full px-4 py-2.5 rounded-[12px] border border-input-border text-[14px] focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 resize-none"
-                    placeholder="Tell us about your HVAC needs..."
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-orange hover:bg-orange-hover text-white font-[700] py-3.5 rounded-[12px] transition-colors text-[15px]"
-                >
-                  Submit Request
-                </button>
-              </form>
-            </div>
+            <ContactForm />
           </div>
         </div>
       </section>
