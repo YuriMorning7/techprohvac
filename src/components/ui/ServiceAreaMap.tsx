@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { X } from "lucide-react";
+import { CheckCircle2, Phone, X } from "lucide-react";
+import { PHONE, PHONE_HREF } from "@/lib/constants";
 
 type Props = {
   /** Default map query when no ZIP has been checked. */
@@ -10,7 +11,46 @@ type Props = {
   defaultLabel: string;
 };
 
+/**
+ * ZIP codes we serve in San Mateo County. Value is the primary city
+ * label used for personalized messaging (some ZIPs span multiple towns).
+ */
+const SERVICE_ZIPS: Record<string, string> = {
+  "94070": "San Carlos",
+  "94002": "Belmont",
+  "94061": "Redwood City",
+  "94062": "Redwood City / Woodside",
+  "94063": "Redwood City",
+  "94064": "Redwood City",
+  "94065": "Redwood City",
+  "94401": "San Mateo",
+  "94402": "San Mateo",
+  "94403": "San Mateo",
+  "94404": "Foster City",
+  "94010": "Burlingame / Hillsborough",
+  "94011": "Burlingame",
+  "94025": "Menlo Park",
+  "94026": "Menlo Park",
+  "94027": "Atherton",
+  "94028": "Portola Valley",
+  "94019": "Half Moon Bay",
+  "94044": "Pacifica",
+  "94014": "Daly City",
+  "94015": "Daly City",
+  "94017": "Daly City",
+  "94080": "South San Francisco",
+  "94083": "South San Francisco",
+  "94066": "San Bruno",
+  "94030": "Millbrae",
+  "94005": "Brisbane",
+};
+
 const zipRegex = /^\d{5}$/;
+
+type CheckResult =
+  | { status: "served"; zip: string; city: string }
+  | { status: "unserved"; zip: string }
+  | { status: "invalid"; message: string };
 
 function buildMapSrc(query: string) {
   return `https://maps.google.com/maps?q=${encodeURIComponent(
@@ -20,28 +60,37 @@ function buildMapSrc(query: string) {
 
 export default function ServiceAreaMap({ defaultQuery, defaultLabel }: Props) {
   const [zipInput, setZipInput] = useState("");
-  const [checkedZip, setCheckedZip] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<CheckResult | null>(null);
 
-  const currentQuery = checkedZip ? `${checkedZip}, USA` : defaultQuery;
+  const pinnedZip =
+    result?.status === "served" || result?.status === "unserved"
+      ? result.zip
+      : null;
+
+  const currentQuery = pinnedZip ? `${pinnedZip}, USA` : defaultQuery;
   const mapSrc = buildMapSrc(currentQuery);
-  const mapLabel = checkedZip ? `ZIP ${checkedZip}` : defaultLabel;
+  const mapLabel = pinnedZip ? `ZIP ${pinnedZip}` : defaultLabel;
 
   function handleCheck() {
     const value = zipInput.trim();
     if (!zipRegex.test(value)) {
-      setError("Enter a valid 5-digit ZIP");
+      setResult({ status: "invalid", message: "Enter a valid 5-digit ZIP" });
       return;
     }
-    setError(null);
-    setCheckedZip(value);
+    const city = SERVICE_ZIPS[value];
+    if (city) {
+      setResult({ status: "served", zip: value, city });
+    } else {
+      setResult({ status: "unserved", zip: value });
+    }
   }
 
   function handleReset() {
-    setCheckedZip(null);
     setZipInput("");
-    setError(null);
+    setResult(null);
   }
+
+  const inputHasError = result?.status === "invalid";
 
   return (
     <div className="space-y-5">
@@ -58,10 +107,10 @@ export default function ServiceAreaMap({ defaultQuery, defaultLabel }: Props) {
             allowFullScreen
           />
         </div>
-        {checkedZip && (
+        {pinnedZip && (
           <div className="absolute left-3 top-3 inline-flex items-center gap-2 h-[36px] pl-3.5 pr-1 rounded-full bg-white/95 backdrop-blur border border-border-light shadow-sm">
             <span className="text-[12.5px] font-[700] text-navy">
-              Pinned to {checkedZip}
+              Pinned to {pinnedZip}
             </span>
             <button
               type="button"
@@ -98,13 +147,13 @@ export default function ServiceAreaMap({ defaultQuery, defaultLabel }: Props) {
             value={zipInput}
             onChange={(e) => {
               setZipInput(e.target.value.replace(/\D/g, ""));
-              if (error) setError(null);
+              if (result?.status === "invalid") setResult(null);
             }}
             placeholder="Enter ZIP code"
             aria-label="ZIP code"
-            aria-invalid={!!error}
+            aria-invalid={inputHasError}
             className={`flex-1 h-[48px] px-4 rounded-[12px] border bg-white text-[15px] text-text-dark placeholder:text-text-muted/70 focus:outline-none transition-colors ${
-              error
+              inputHasError
                 ? "border-orange focus:border-orange"
                 : "border-input-border focus:border-orange"
             }`}
@@ -116,8 +165,51 @@ export default function ServiceAreaMap({ defaultQuery, defaultLabel }: Props) {
             Check
           </button>
         </form>
-        {error && (
-          <p className="text-[13px] text-orange mt-2">{error}</p>
+
+        {result?.status === "invalid" && (
+          <p role="alert" className="text-[13px] text-orange mt-2">
+            {result.message}
+          </p>
+        )}
+
+        {result?.status === "served" && (
+          <div
+            role="status"
+            className="mt-4 flex items-start gap-3 rounded-[12px] border border-success-border bg-success-bg px-4 py-3"
+          >
+            <CheckCircle2 className="w-5 h-5 text-success shrink-0 mt-0.5" />
+            <div className="min-w-0">
+              <p className="text-[14.5px] font-[700] text-success leading-tight">
+                Great news — we serve {result.city}.
+              </p>
+              <p className="text-[13px] text-text-dark/80 mt-0.5">
+                ZIP {result.zip} is inside our service area. Request a visit
+                and we&apos;ll be out soon.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {result?.status === "unserved" && (
+          <div
+            role="status"
+            className="mt-4 rounded-[12px] border border-orange/30 bg-badge-bg px-4 py-3.5"
+          >
+            <p className="text-[14.5px] font-[700] text-navy leading-tight">
+              ZIP {result.zip} is outside our service area.
+            </p>
+            <p className="text-[13px] text-text-dark/80 mt-1">
+              We currently serve 18 cities across San Mateo County. Give us a
+              call — we may still be able to help.
+            </p>
+            <a
+              href={PHONE_HREF}
+              className="mt-3 inline-flex items-center gap-2 h-[40px] px-4 rounded-[10px] bg-navy text-white text-[13.5px] font-[700] hover:bg-navy/90 transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              Call {PHONE}
+            </a>
+          </div>
         )}
       </div>
     </div>
