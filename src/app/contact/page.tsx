@@ -1,13 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  ChevronRight,
-  Phone,
-  Clock,
-  MapPin,
-  Headphones,
-} from "lucide-react";
+import { ChevronRight, Phone } from "lucide-react";
 import ContactForm from "@/components/ui/ContactForm";
 import {
   PHONE,
@@ -22,36 +16,80 @@ import {
 /*  CONTACT INFO CARDS                                                 */
 /* ------------------------------------------------------------------ */
 
-const contactCards = [
+type InfoCard = {
+  label: string;
+  value: React.ReactNode;
+  href?: string;
+  featured?: boolean;
+};
+
+const infoCards: InfoCard[] = [
   {
-    icon: Phone,
-    title: "Phone",
-    primary: PHONE,
-    secondary: "Call for service or estimates",
+    label: "Call or text",
+    value: PHONE,
+    href: PHONE_HREF,
+    featured: true,
+  },
+  {
+    label: "Office hours",
+    value: OFFICE_HOURS,
+  },
+  {
+    label: "Emergency",
+    value: EMERGENCY_HOURS,
     href: PHONE_HREF,
   },
   {
-    icon: Clock,
-    title: "Office Hours",
-    primary: OFFICE_HOURS,
-    secondary: "Walk-ins welcome",
-    href: null,
-  },
-  {
-    icon: Headphones,
-    title: "Emergency Service",
-    primary: EMERGENCY_HOURS,
-    secondary: "After-hours emergency line",
-    href: PHONE_HREF,
-  },
-  {
-    icon: MapPin,
-    title: "Address",
-    primary: ADDRESS,
-    secondary: CITY_STATE_ZIP,
-    href: `https://maps.google.com/?q=${encodeURIComponent(`${ADDRESS}, ${CITY_STATE_ZIP}`)}`,
+    label: "Office",
+    value: (
+      <>
+        {ADDRESS}
+        <br />
+        {CITY_STATE_ZIP}
+      </>
+    ),
+    href: `https://maps.google.com/?q=${encodeURIComponent(
+      `${ADDRESS}, ${CITY_STATE_ZIP}`
+    )}`,
   },
 ];
+
+const MAP_QUERY = encodeURIComponent(`${ADDRESS}, ${CITY_STATE_ZIP}`);
+const MAP_EMBED_SRC = `https://maps.google.com/maps?q=${MAP_QUERY}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+const MAP_DIRECTIONS_HREF = `https://maps.google.com/?q=${MAP_QUERY}`;
+
+function InfoCardTile({ card }: { card: InfoCard }) {
+  const body = (
+    <div className="h-full bg-white rounded-[16px] border border-border-light p-5 sm:p-6 transition-colors hover:border-orange/40">
+      <p className="text-[11.5px] font-[800] text-orange tracking-[.16em] uppercase mb-2">
+        {card.label}
+      </p>
+      <p
+        className={`text-navy font-[800] leading-[1.2] ${
+          card.featured
+            ? "text-[22px] sm:text-[26px] tracking-tight"
+            : "text-[15px] sm:text-[16px]"
+        }`}
+      >
+        {card.value}
+      </p>
+    </div>
+  );
+
+  if (!card.href) return body;
+
+  const external = card.href.startsWith("http");
+  return (
+    <a
+      href={card.href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      className="block h-full"
+    >
+      {body}
+    </a>
+  );
+}
 
 /* ------------------------------------------------------------------ */
 /*  PAGE                                                               */
@@ -86,62 +124,36 @@ export default function ContactPage() {
       {/* ========== FORM + INFO ========== */}
       <section className="bg-light-bg section-padding">
         <div className="container-site">
-          <div className="grid lg:grid-cols-[minmax(0,1fr)_380px] gap-8 lg:gap-10 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
             <ContactForm />
 
-            <div className="space-y-4">
-              {contactCards.map((card) => {
-                const content = (
-                  <div className="bg-white rounded-[18px] p-5 sm:p-6 border border-border-light hover:border-orange/30 transition-colors">
-                    <div className="flex items-start gap-4">
-                      <div className="w-11 h-11 rounded-[14px] bg-badge-bg flex items-center justify-center shrink-0">
-                        <card.icon className="w-5 h-5 text-orange" />
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="text-[14px] font-[700] text-text-dark mb-1">
-                          {card.title}
-                        </h3>
-                        <p className="text-[15px] font-[600] text-navy break-words">
-                          {card.primary}
-                        </p>
-                        <p className="text-[13px] text-text-muted mt-0.5">
-                          {card.secondary}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
+            <div className="flex flex-col gap-4 sm:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                {infoCards.map((card) => (
+                  <InfoCardTile key={card.label} card={card} />
+                ))}
+              </div>
 
-                if (card.href) {
-                  return (
-                    <a
-                      key={card.title}
-                      href={card.href}
-                      target={
-                        card.href.startsWith("http") ? "_blank" : undefined
-                      }
-                      rel={
-                        card.href.startsWith("http")
-                          ? "noopener noreferrer"
-                          : undefined
-                      }
-                    >
-                      {content}
-                    </a>
-                  );
-                }
-
-                return <div key={card.title}>{content}</div>;
-              })}
-
-              <div className="bg-white rounded-[18px] overflow-hidden border border-border-light aspect-[4/3] flex items-center justify-center">
-                <div className="text-center text-text-muted px-6">
-                  <MapPin className="w-10 h-10 mx-auto mb-2 opacity-30" />
-                  <p className="text-sm font-[600]">Google Maps</p>
-                  <p className="text-xs text-text-muted mt-1">
-                    {ADDRESS}, {CITY_STATE_ZIP}
-                  </p>
+              <div className="relative rounded-[18px] overflow-hidden border border-border-light bg-progress-bg">
+                <div className="aspect-[4/3]">
+                  <iframe
+                    title="TechPro Heating & Cooling — office location"
+                    src={MAP_EMBED_SRC}
+                    className="w-full h-full block"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                  />
                 </div>
+                <a
+                  href={MAP_DIRECTIONS_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute right-3 bottom-3 inline-flex items-center gap-1.5 h-[36px] px-3.5 rounded-full bg-white/95 backdrop-blur border border-border-light text-[12.5px] font-[700] text-navy shadow-sm hover:bg-white transition-colors"
+                >
+                  Directions
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </a>
               </div>
             </div>
           </div>
