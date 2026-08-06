@@ -32,6 +32,7 @@ import {
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionTitle from "@/components/ui/SectionTitle";
 import ContactForm from "@/components/ui/ContactForm";
+import ServiceAreaMap from "@/components/ui/ServiceAreaMap";
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
@@ -656,19 +657,10 @@ export default function HomePage() {
                 We proudly serve {CITIES_SERVED} cities across San Mateo County
                 and surrounding areas.
               </p>
-              {/* Map placeholder */}
-              <div className="aspect-[4/3] bg-light-bg rounded-[18px] border border-border-light flex items-center justify-center">
-                <div className="text-center text-text-muted">
-                  <MapPin className="w-10 h-10 mx-auto mb-2 opacity-30" />
-                  <p className="text-sm">Service Area Map</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-lg font-[700] text-text-dark mb-6">
+              <h3 className="text-lg font-[700] text-text-dark mb-5">
                 Cities We Serve
               </h3>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-3 mb-10">
+              <div className="grid grid-cols-2 gap-x-6 gap-y-3">
                 {serviceAreas.map((city) => (
                   <div key={city} className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-success shrink-0" />
@@ -676,30 +668,11 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-              {/* ZIP code checker */}
-              <div className="bg-light-bg rounded-[18px] p-6 border border-border-light">
-                <h4 className="font-[700] text-text-dark mb-3 text-[15px]">
-                  Check Your ZIP Code
-                </h4>
-                <p className="text-text-muted text-[14px] mb-4">
-                  Not sure if we serve your area? Enter your ZIP code below.
-                </p>
-                <div className="flex gap-3">
-                  <input
-                    type="text"
-                    placeholder="Enter ZIP code"
-                    className="flex-1 px-4 py-2.5 rounded-[12px] border border-input-border text-[14px] focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20"
-                    maxLength={5}
-                  />
-                  <button
-                    type="button"
-                    className="bg-navy hover:bg-navy/90 text-white font-[600] px-6 py-2.5 rounded-[12px] transition-colors text-[14px]"
-                  >
-                    Check
-                  </button>
-                </div>
-              </div>
             </div>
+            <ServiceAreaMap
+              defaultQuery="San Mateo County, CA"
+              defaultLabel="San Mateo County"
+            />
           </div>
         </div>
       </section>
