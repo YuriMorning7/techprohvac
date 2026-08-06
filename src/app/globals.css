@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Typography */
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+
+  /* Primary Colors */
+  --color-navy: #13294B;
+  --color-orange: #F15A29;
+  --color-orange-hover: #D64A1C;
+
+  /* Text Colors */
+  --color-text-dark: #1E2532;
+  --color-text-muted: #5A6478;
+
+  /* Background Colors */
+  --color-light-bg: #F5F6F8;
+  --color-white: #FFFFFF;
+
+  /* Border Colors */
+  --color-border-light: #E4E7EC;
+  --color-border-lighter: #EBEEF3;
+  --color-input-border: #D7DCE5;
+
+  /* Badge */
+  --color-badge-bg: #FDEDE7;
+
+  /* Success */
+  --color-success: #1F7A45;
+  --color-success-bg: #EAF6EF;
+  --color-success-border: #BFE3CE;
+
+  /* Progress */
+  --color-progress-bg: #EDEFF3;
+  --color-progress-track: #E1E5EC;
+
+  /* Layout */
+  --container-max: 1240px;
+  --header-height: 78px;
+
+  /* Border Radius */
+  --radius-card: 18px;
+  --radius-button: 12px;
+  --radius-icon: 14px;
+
+  /* Section Spacing */
+  --section-padding-y: 88px;
+  --section-padding-y-lg: 96px;
+  --section-padding-x: 32px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-white);
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+::selection {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+/* Container utility */
+.container-site {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--section-padding-x);
+}
+
+/* Section utility */
+.section-padding {
+  padding-block: var(--section-padding-y);
+  padding-inline: var(--section-padding-x);
 }
