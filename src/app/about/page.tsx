@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { placeholderImage } from "@/lib/placeholder";
 import Link from "next/link";
 import {
   ChevronRight,
@@ -181,10 +182,14 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="relative rounded-[18px] overflow-hidden aspect-[4/3]">
+            <div className="relative rounded-[18px] overflow-hidden aspect-[4/3] bg-light-bg">
               <Image
-                src="/images/team.png"
-                alt="TechPro Heating & Cooling team"
+                src={placeholderImage("hvac,team,workers", {
+                  w: 960,
+                  h: 720,
+                  seed: "about-team",
+                })}
+                alt="TechPro Heating & Cooling team (placeholder)"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -328,10 +333,14 @@ export default function AboutPage() {
                 ))}
               </ul>
             </div>
-            <div className="relative rounded-[18px] overflow-hidden aspect-[4/3]">
+            <div className="relative rounded-[18px] overflow-hidden aspect-[4/3] bg-light-bg">
               <Image
-                src="/images/vans-lot.png"
-                alt="TechPro fleet of service vehicles"
+                src={placeholderImage("service-van,fleet,truck", {
+                  w: 960,
+                  h: 720,
+                  seed: "about-fleet",
+                })}
+                alt="TechPro fleet of service vehicles (placeholder)"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -356,17 +365,27 @@ export default function AboutPage() {
           </div>
           <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[
-              { name: "Team Member", role: "HVAC Technician" },
-              { name: "Team Member", role: "Service Manager" },
-              { name: "Team Member", role: "Installation Lead" },
-              { name: "Team Member", role: "Office Manager" },
+              { name: "Team Member", role: "HVAC Technician", tags: "portrait,worker,uniform", seed: "tp-team-01" },
+              { name: "Team Member", role: "Service Manager", tags: "portrait,professional,manager", seed: "tp-team-02" },
+              { name: "Team Member", role: "Installation Lead", tags: "portrait,contractor,tools", seed: "tp-team-03" },
+              { name: "Team Member", role: "Office Manager", tags: "portrait,professional,office", seed: "tp-team-04" },
             ].map((member, index) => (
               <div
                 key={index}
                 className="bg-light-bg rounded-[18px] overflow-hidden border border-border-light"
               >
-                <div className="aspect-square bg-border-lighter flex items-center justify-center">
-                  <Users className="w-12 h-12 text-text-muted/20" />
+                <div className="aspect-square bg-border-lighter relative">
+                  <Image
+                    src={placeholderImage(member.tags, {
+                      w: 480,
+                      h: 480,
+                      seed: member.seed,
+                    })}
+                    alt={`${member.name} — ${member.role} (placeholder)`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                  />
                 </div>
                 <div className="p-5 text-center">
                   <h3 className="font-[700] text-text-dark">{member.name}</h3>

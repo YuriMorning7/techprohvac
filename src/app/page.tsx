@@ -33,6 +33,7 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import SectionTitle from "@/components/ui/SectionTitle";
 import ContactForm from "@/components/ui/ContactForm";
 import ServiceAreaMap from "@/components/ui/ServiceAreaMap";
+import { placeholderImage } from "@/lib/placeholder";
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
@@ -338,26 +339,21 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="relative hidden lg:block">
-              <div className="relative rounded-[18px] overflow-hidden aspect-[4/3]">
-                <Image
-                  src="/images/team.png"
-                  alt="TechPro Heating & Cooling team"
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-6 w-48 rounded-[14px] overflow-hidden shadow-2xl border-4 border-navy">
-                <Image
-                  src="/images/van-cut.png"
-                  alt="TechPro service van"
-                  width={192}
-                  height={128}
-                  className="object-cover w-full"
-                />
-              </div>
+            <div className="relative hidden lg:flex items-center justify-center lg:justify-end lg:-mr-6 xl:-mr-12">
+              {/* Soft radial glow behind the van */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(241,90,41,0.18),transparent_60%)] pointer-events-none"
+              />
+              <Image
+                src="/images/van-cut.png"
+                alt="TechPro Heating & Cooling service van"
+                width={1200}
+                height={800}
+                priority
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="relative w-full max-w-[720px] xl:max-w-[820px] h-auto drop-shadow-2xl"
+              />
             </div>
           </div>
         </div>
@@ -645,7 +641,10 @@ export default function HomePage() {
       </section>
 
       {/* ========== SERVICE AREAS ========== */}
-      <section className="bg-white section-padding">
+      <section
+        id="service-areas"
+        className="bg-white section-padding scroll-mt-[100px]"
+      >
         <div className="container-site">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div>
@@ -711,10 +710,14 @@ export default function HomePage() {
                 Learn More About Us <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-            <div className="relative rounded-[18px] overflow-hidden aspect-[4/3]">
+            <div className="relative rounded-[18px] overflow-hidden aspect-[4/3] bg-light-bg">
               <Image
-                src="/images/vans-lot.png"
-                alt="TechPro Heating & Cooling fleet"
+                src={placeholderImage("hvac,technician,workshop", {
+                  w: 960,
+                  h: 720,
+                  seed: "techpro-crew",
+                })}
+                alt="TechPro Heating & Cooling crew (placeholder)"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { placeholderImage } from "@/lib/placeholder";
 import {
   ChevronRight,
   ThermometerSun,
@@ -34,6 +36,7 @@ interface ProductItem {
   category: ProductCategory[];
   brands: string[];
   slug: string;
+  imageTags: string;
 }
 
 const filterTabs: { value: ProductCategory; label: string }[] = [
@@ -53,6 +56,7 @@ const products: ProductItem[] = [
     category: ["heating", "cooling"],
     brands: ["Carrier", "Lennox", "Trane", "Daikin"],
     slug: "heat-pumps",
+    imageTags: "heat-pump,hvac,outdoor-unit",
   },
   {
     icon: Flame,
@@ -62,6 +66,7 @@ const products: ProductItem[] = [
     category: ["heating"],
     brands: ["Carrier", "Lennox", "Trane", "Rheem"],
     slug: "furnaces",
+    imageTags: "furnace,boiler,heater",
   },
   {
     icon: Snowflake,
@@ -71,6 +76,7 @@ const products: ProductItem[] = [
     category: ["cooling"],
     brands: ["Carrier", "Lennox", "Trane", "Goodman"],
     slug: "air-conditioners",
+    imageTags: "air-conditioner,ac-unit,condenser",
   },
   {
     icon: Droplets,
@@ -80,6 +86,7 @@ const products: ProductItem[] = [
     category: ["water-air"],
     brands: ["Rheem", "Rinnai", "Navien", "A.O. Smith"],
     slug: "water-heaters",
+    imageTags: "water-heater,tankless,boiler",
   },
   {
     icon: Gauge,
@@ -89,6 +96,7 @@ const products: ProductItem[] = [
     category: ["controls"],
     brands: ["Ecobee", "Honeywell", "Nest", "Carrier"],
     slug: "thermostats",
+    imageTags: "thermostat,smart-home,nest",
   },
   {
     icon: Fan,
@@ -98,6 +106,7 @@ const products: ProductItem[] = [
     category: ["heating", "cooling"],
     brands: ["Mitsubishi", "Daikin", "Fujitsu", "LG"],
     slug: "ductless-systems",
+    imageTags: "mini-split,ductless,indoor-unit",
   },
   {
     icon: Wind,
@@ -107,6 +116,7 @@ const products: ProductItem[] = [
     category: ["water-air"],
     brands: ["Aprilaire", "Honeywell", "Carrier", "Lennox"],
     slug: "indoor-air-quality",
+    imageTags: "air-purifier,filter,clean-air",
   },
   {
     icon: Layers,
@@ -116,6 +126,7 @@ const products: ProductItem[] = [
     category: ["controls"],
     brands: ["Honeywell", "Carrier", "EWC Controls", "Arzel"],
     slug: "zoning-systems",
+    imageTags: "smart-thermostat,zone-control,home-tech",
   },
 ];
 
@@ -184,11 +195,25 @@ export default function ProductsPage() {
                 key={product.slug}
                 className="group bg-light-bg rounded-[18px] overflow-hidden border border-border-light hover:border-orange/30 hover:shadow-lg transition-all duration-300"
               >
-                {/* Image area placeholder */}
-                <div className="aspect-[4/3] bg-border-lighter flex items-center justify-center relative">
-                  <product.icon className="w-16 h-16 text-navy/20" />
-                  <div className="absolute top-3 left-3">
-                    <span className="text-[11px] font-[700] bg-white text-navy px-3 py-1 rounded-full">
+                {/* Cover image (placeholder) */}
+                <div className="aspect-[4/3] bg-border-lighter relative overflow-hidden">
+                  <Image
+                    src={placeholderImage(product.imageTags, {
+                      w: 640,
+                      h: 480,
+                      seed: `prod-${product.slug}`,
+                    })}
+                    alt={`${product.title} (placeholder)`}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
+                  <div className="absolute top-3 left-3 flex items-center gap-2">
+                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/95 backdrop-blur">
+                      <product.icon className="w-4 h-4 text-orange" />
+                    </span>
+                    <span className="text-[11px] font-[700] bg-white/95 backdrop-blur text-navy px-3 py-1 rounded-full">
                       {product.category.includes("heating") &&
                       product.category.includes("cooling")
                         ? "Heating & Cooling"

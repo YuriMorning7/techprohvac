@@ -33,7 +33,7 @@ const productLinks = [
 const companyLinks = [
   { label: "About Us", href: "/about" },
   { label: "Projects", href: "/projects" },
-  { label: "Service Areas", href: "/service-areas" },
+  { label: "Service Areas", href: "/#service-areas" },
   { label: "Contact", href: "/contact" },
   { label: "Careers", href: "/careers" },
 ];

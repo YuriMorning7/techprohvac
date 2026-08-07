@@ -16,6 +16,21 @@ import {
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { SITE_NAME, PHONE, PHONE_HREF } from "@/lib/constants";
+import { placeholderImage } from "@/lib/placeholder";
+
+const serviceImageTags: Record<string, string> = {
+  "heat-pump-installation": "heat-pump,hvac,installation",
+  "ac-repair": "air-conditioner,technician,repair",
+  "furnace-maintenance": "furnace,technician,heater",
+  "heating-repair": "heater,technician,repair",
+  installation: "hvac,installation,contractor",
+  maintenance: "hvac,maintenance,tune-up",
+  "duct-services": "ductwork,ventilation,duct",
+  "indoor-air-quality": "air-purifier,filter,clean-air",
+  repairs: "hvac,repair,tools",
+  "water-heater-services": "water-heater,tankless,plumbing",
+  "ductless-mini-splits": "mini-split,ductless,indoor-unit",
+};
 
 /* ------------------------------------------------------------------ */
 /*  SERVICE DATA                                                       */
@@ -1132,8 +1147,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <div className="relative hidden lg:block">
               <div className="relative rounded-[18px] overflow-hidden aspect-[4/3]">
                 <Image
-                  src={service.image}
-                  alt={service.title}
+                  src={
+                    service.image.startsWith("http")
+                      ? service.image
+                      : placeholderImage(
+                          serviceImageTags[service.slug] ?? "hvac,service",
+                          { w: 960, h: 720, seed: `svc-${service.slug}` }
+                        )
+                  }
+                  alt={`${service.title} (placeholder)`}
                   fill
                   className="object-cover"
                   priority

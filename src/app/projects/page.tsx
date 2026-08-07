@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { placeholderImage } from "@/lib/placeholder";
 import {
   ChevronRight,
   MapPin,
   ArrowRight,
-  Settings,
   Phone,
 } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
@@ -194,18 +195,34 @@ export default function ProjectsPage() {
                 key={project.slug}
                 className="group bg-light-bg rounded-[18px] overflow-hidden border border-border-light hover:shadow-lg hover:border-orange/20 transition-all duration-300"
               >
-                {/* Image placeholder */}
-                <div className="aspect-[16/10] bg-border-lighter relative">
-                  <div className="absolute inset-0 flex items-center justify-center text-text-muted/20">
-                    <Settings className="w-14 h-14" />
-                  </div>
+                {/* Cover image (placeholder) */}
+                <div className="aspect-[16/10] bg-border-lighter relative overflow-hidden">
+                  <Image
+                    src={placeholderImage(
+                      project.category === "heat-pumps"
+                        ? "heat-pump,hvac,installation"
+                        : project.category === "air-conditioning"
+                          ? "air-conditioner,ac-unit,install"
+                          : "water-heater,plumbing,tankless",
+                      {
+                        w: 800,
+                        h: 500,
+                        seed: `proj-${project.slug}`,
+                      }
+                    )}
+                    alt={`${project.title} (placeholder)`}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   <div className="absolute top-3 left-3">
-                    <span className="text-[11px] font-[700] bg-white/90 text-navy px-3 py-1 rounded-full">
+                    <span className="text-[11px] font-[700] bg-white/95 backdrop-blur text-navy px-3 py-1 rounded-full">
                       {categoryLabels[project.category]}
                     </span>
                   </div>
                   <div className="absolute top-3 right-3">
-                    <span className="text-[11px] font-[600] bg-navy/80 text-white px-3 py-1 rounded-full">
+                    <span className="text-[11px] font-[600] bg-navy/85 backdrop-blur text-white px-3 py-1 rounded-full">
                       {project.completedAt}
                     </span>
                   </div>
