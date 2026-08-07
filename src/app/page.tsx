@@ -158,6 +158,7 @@ const recentProjects = [
       "Replaced aging furnace and AC with a high-efficiency heat pump system, improving comfort and reducing energy costs by 35%.",
     slug: "hvac-system-replacement-san-carlos",
     category: "Heat Pumps",
+    imageTags: "heat-pump",
   },
   {
     title: "Ductless Mini-Split Installation",
@@ -166,6 +167,7 @@ const recentProjects = [
       "Installed a 3-zone ductless system in a home addition, providing precise temperature control without ductwork.",
     slug: "ductless-mini-split-belmont",
     category: "Air Conditioning",
+    imageTags: "ductless-mini-split",
   },
   {
     title: "Tankless Water Heater Upgrade",
@@ -174,6 +176,7 @@ const recentProjects = [
       "Upgraded from a 50-gallon tank to a high-efficiency tankless unit, delivering endless hot water with lower energy bills.",
     slug: "tankless-water-heater-redwood-city",
     category: "Water Heaters",
+    imageTags: "plumbing",
   },
 ];
 
@@ -542,12 +545,21 @@ export default function HomePage() {
                 href={`/projects/${project.slug}`}
                 className="group bg-light-bg rounded-[18px] overflow-hidden border border-border-light hover:shadow-lg hover:border-orange/20 transition-all duration-300"
               >
-                <div className="aspect-[16/10] bg-border-light relative">
-                  <div className="absolute inset-0 flex items-center justify-center text-text-muted/30">
-                    <Settings className="w-12 h-12" />
-                  </div>
+                <div className="aspect-[16/10] bg-border-light relative overflow-hidden">
+                  <Image
+                    src={placeholderImage(project.imageTags, {
+                      w: 800,
+                      h: 500,
+                      seed: `home-proj-${project.slug}`,
+                    })}
+                    alt={`${project.title} (placeholder)`}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   <div className="absolute top-3 left-3">
-                    <span className="text-[11px] font-[700] bg-white/90 text-navy px-3 py-1 rounded-full">
+                    <span className="text-[11px] font-[700] bg-white/95 backdrop-blur text-navy px-3 py-1 rounded-full">
                       {project.category}
                     </span>
                   </div>

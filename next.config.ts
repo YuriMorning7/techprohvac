@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "loremflickr.com",
+        hostname: "placehold.co",
       },
       {
         protocol: "https",

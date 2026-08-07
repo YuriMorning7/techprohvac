@@ -93,15 +93,15 @@ export default function ServiceAreaMap({ defaultQuery, defaultLabel }: Props) {
   const inputHasError = result?.status === "invalid";
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 w-full min-w-0">
       {/* Map */}
-      <div className="relative rounded-[18px] overflow-hidden border border-border-light bg-progress-bg">
-        <div className="aspect-[4/3]">
+      <div className="relative rounded-[18px] overflow-hidden border border-border-light bg-progress-bg w-full">
+        <div className="aspect-[4/3] w-full">
           <iframe
             key={mapSrc}
             title={`Service area map — ${mapLabel}`}
             src={mapSrc}
-            className="w-full h-full block"
+            className="w-full h-full block border-0"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
@@ -138,7 +138,7 @@ export default function ServiceAreaMap({ defaultQuery, defaultLabel }: Props) {
             e.preventDefault();
             handleCheck();
           }}
-          className="flex gap-3"
+          className="flex flex-col sm:flex-row gap-3 w-full min-w-0"
         >
           <input
             type="text"
@@ -152,7 +152,7 @@ export default function ServiceAreaMap({ defaultQuery, defaultLabel }: Props) {
             placeholder="Enter ZIP code"
             aria-label="ZIP code"
             aria-invalid={inputHasError}
-            className={`flex-1 h-[48px] px-4 rounded-[12px] border bg-white text-[15px] text-text-dark placeholder:text-text-muted/70 focus:outline-none transition-colors ${
+            className={`min-w-0 flex-1 h-[48px] px-4 rounded-[12px] border bg-white text-[15px] text-text-dark placeholder:text-text-muted/70 focus:outline-none transition-colors ${
               inputHasError
                 ? "border-orange focus:border-orange"
                 : "border-input-border focus:border-orange"
@@ -160,7 +160,7 @@ export default function ServiceAreaMap({ defaultQuery, defaultLabel }: Props) {
           />
           <button
             type="submit"
-            className="h-[48px] bg-navy hover:bg-navy/90 text-white font-[700] px-6 rounded-[12px] transition-colors text-[14.5px] cursor-pointer"
+            className="h-[48px] bg-navy hover:bg-navy/90 text-white font-[700] px-6 rounded-[12px] transition-colors text-[14.5px] cursor-pointer shrink-0"
           >
             Check
           </button>

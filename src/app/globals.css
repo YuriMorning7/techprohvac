@@ -62,6 +62,9 @@
     color: var(--color-text-dark);
     font-family: var(--font-sans);
     line-height: 1.6;
+    /* Belt-and-suspenders: never allow a stray wide child to
+       push the whole page sideways on small viewports. */
+    overflow-x: hidden;
   }
 
   ::selection {
@@ -89,16 +92,44 @@
 }
 
 @layer components {
-  /* Container utility */
+  /* Container utility — tighter side gutters on small screens so
+     content isn't squeezed when a parent section already pads. */
   .container-site {
     max-width: var(--container-max);
     margin-inline: auto;
-    padding-inline: var(--section-padding-x);
+    padding-inline: 16px;
   }
 
-  /* Section utility */
+  @media (min-width: 640px) {
+    .container-site {
+      padding-inline: 24px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-site {
+      padding-inline: var(--section-padding-x);
+    }
+  }
+
+  /* Section utility — vertical only on mobile so it doesn't stack
+     horizontal padding with container-site; matches the original
+     desktop rhythm at lg+ where side padding is preserved. */
   .section-padding {
-    padding-block: var(--section-padding-y);
-    padding-inline: var(--section-padding-x);
+    padding-block: 56px;
+    padding-inline: 0;
+  }
+
+  @media (min-width: 640px) {
+    .section-padding {
+      padding-block: 72px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-block: var(--section-padding-y);
+      padding-inline: var(--section-padding-x);
+    }
   }
 }
