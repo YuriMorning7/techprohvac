@@ -51,6 +51,15 @@
 
 /* Base Styles */
 @layer base {
+  html,
+  body {
+    /* Lock horizontal scroll at both the html and body level — some
+       mobile browsers use html as the scroll container, so setting
+       overflow-x on body alone is not enough. */
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -62,9 +71,7 @@
     color: var(--color-text-dark);
     font-family: var(--font-sans);
     line-height: 1.6;
-    /* Belt-and-suspenders: never allow a stray wide child to
-       push the whole page sideways on small viewports. */
-    overflow-x: hidden;
+    position: relative;
   }
 
   ::selection {
