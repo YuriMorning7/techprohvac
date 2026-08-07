@@ -291,6 +291,414 @@ const servicesData: Record<string, ServiceData> = {
         "One visit, one written report, and a clear picture of your system's health.",
     },
   },
+  "heating-repair": {
+    title: "Heating Repair",
+    slug: "heating-repair",
+    heroDescription:
+      "Fast, honest heating repair when your furnace or heat pump quits. Same-day service, upfront pricing, and after-hours emergency response.",
+    longDescription:
+      "When the heat drops out on a cold night, you want a tech who can diagnose it fast and fix it right. We repair every major brand of furnace, heat pump, and hydronic system across San Mateo County — usually the same day, with upfront pricing before we touch a wrench.",
+    image: "/images/team.png",
+    included: [
+      "Full system diagnostic and safety check",
+      "Upfront written quote before any repair",
+      "Repair or replacement of failed parts (common parts on the truck)",
+      "Gas pressure and combustion analysis",
+      "Carbon monoxide safety test",
+      "Thermostat calibration and testing",
+      "Blower motor and control-board diagnostics",
+      "Ductwork airflow verification",
+      "90-day repair warranty on labor",
+    ],
+    benefits: [
+      "Same-day repairs in most cases",
+      "After-hours emergency response",
+      "Upfront, no-surprise pricing",
+      "All major brands serviced",
+      "90-day workmanship warranty",
+      "Background-checked, certified technicians",
+    ],
+    howItGoes: [
+      {
+        title: "Diagnose",
+        description:
+          "On-site inspection to isolate the exact failure — not a guess.",
+      },
+      {
+        title: "Quote",
+        description:
+          "Upfront price for the repair before any parts come off the shelf.",
+      },
+      {
+        title: "Repair",
+        description:
+          "Same-day fix on most calls; common parts stay stocked on the truck.",
+      },
+      {
+        title: "Verify",
+        description:
+          "Full-cycle retest and a CO safety check before we leave.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do you offer emergency service?",
+        answer:
+          "Yes. Our line is answered 24/7. Same-day dispatch on repair calls during business hours; after-hours we prioritize no-heat and safety calls.",
+      },
+      {
+        question: "Should I repair or replace an older furnace?",
+        answer:
+          "Rule of thumb: if the unit is over 15 years old and the repair is more than half the cost of a new system, replacement usually pays back in a few seasons. We show you both numbers so you can decide.",
+      },
+      {
+        question: "How do I know if it's the thermostat or the furnace?",
+        answer:
+          "Sometimes the fix is a $12 battery or a dead thermostat, not a broken furnace. We check the simple stuff first — you never pay for a repair you didn't need.",
+      },
+      {
+        question: "What if you can't get the part today?",
+        answer:
+          "We keep the common failure parts stocked on every truck. If your unit needs something special-order, we tell you upfront and get you a firm ETA.",
+      },
+      {
+        question: "Is the repair warrantied?",
+        answer:
+          "Yes — 90 days on labor and the manufacturer's warranty on any parts we install. Terms are on your invoice.",
+      },
+    ],
+    estimatePitch: {
+      title: "Heat back on today — with a clear repair price",
+      subtitle:
+        "Same-day diagnostic, upfront quote, and a 90-day repair warranty.",
+    },
+  },
+  installation: {
+    title: "HVAC Installation",
+    slug: "installation",
+    heroDescription:
+      "Whole-system replacements and new installs sized to your house, not a generic table. Written quote, city permits, and a clean install every time.",
+    longDescription:
+      "Replacing an aging system is one of the biggest comfort upgrades you can make. We start with an in-home load calculation so the system is sized to your house, not a rule of thumb. Then a written quote with real equipment models, city permits pulled by us, a professional install, and a walkthrough before we leave.",
+    image: "/images/team.png",
+    included: [
+      "In-home load calculation — we measure the house, not the square footage",
+      "Written quote with equipment models and full pricing, no line items hidden",
+      "City permit pulled and inspection scheduled by us",
+      "Refrigerant lines, electrical, and condensate handled to code",
+      "Old equipment hauled away and disposed of properly",
+      "Commissioning, thermostat setup, and a walkthrough before we leave",
+      "Manufacturer warranty registration handled on your behalf",
+      "Post-installation follow-up inspection",
+      "Two-year labor warranty on top of manufacturer coverage",
+    ],
+    benefits: [
+      "Correctly sized systems that actually run efficiently",
+      "Rebate and financing paperwork handled for you",
+      "Two-year labor warranty",
+      "Certified installers on every crew",
+      "Written price — no bait-and-switch",
+      "Clean-site guarantee: we leave it better than we found it",
+    ],
+    howItGoes: [
+      {
+        title: "Free estimate",
+        description: "About an hour at your house. No charge, no pressure.",
+      },
+      {
+        title: "Written quote",
+        description:
+          "Two or three equipment options with real pricing, usually within two business days.",
+      },
+      {
+        title: "Install",
+        description:
+          "One to three days depending on ductwork and electrical.",
+      },
+      {
+        title: "Inspection",
+        description:
+          "We meet the city inspector so you don't have to take the day off.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How long does a full system install take?",
+        answer:
+          "Most residential installs finish in one to three days. Straight equipment swaps can go in a day; new ductwork, electrical upgrades, or full system changes add time. Your quote will list a firm schedule.",
+      },
+      {
+        question: "Do I need to be home the whole time?",
+        answer:
+          "You need to let us in and be available for the final walkthrough. In between, most homeowners go about their day — we protect the work area and keep it clean.",
+      },
+      {
+        question: "Do you handle the city permit?",
+        answer:
+          "Yes. Every install includes the city permit pulled by us and the final inspection scheduled with the city inspector. You never chase paperwork.",
+      },
+      {
+        question: "What if my ductwork is undersized?",
+        answer:
+          "We test static pressure during the estimate. If your ducts can't support the new system, we tell you before the quote and lay out options — repair, seal, or replace — so you're not surprised later.",
+      },
+      {
+        question: "Do you offer financing?",
+        answer:
+          "Yes. We partner with lenders that offer 0% and low-APR plans for qualified customers. We show monthly numbers next to cash pricing so you can compare.",
+      },
+    ],
+    estimatePitch: {
+      title: "A quote that reflects your actual house",
+      subtitle:
+        "In-home load calculation, written pricing, and no obligation.",
+    },
+  },
+  maintenance: {
+    title: "Maintenance Plans & Tune-Ups",
+    slug: "maintenance",
+    heroDescription:
+      "Annual tune-ups that keep your system efficient, safe, and under warranty. Plans include priority scheduling and repair discounts.",
+    longDescription:
+      "Manufacturers require annual maintenance to keep the warranty valid, and a well-tuned system uses noticeably less energy than one that's been ignored. Our plans include a full tune-up on your AC and heating each year, priority scheduling year-round, and discounts on any repair we do.",
+    image: "/images/team.png",
+    included: [
+      "Complete AC and heating tune-up each year",
+      "Refrigerant level and pressure check",
+      "Coil cleaning — indoor and outdoor",
+      "Blower and motor inspection with lubrication",
+      "Electrical connection tightening",
+      "Thermostat calibration",
+      "Combustion analysis and CO check on gas systems",
+      "Filter replacement each visit",
+      "Written report of findings and recommendations",
+      "Priority scheduling and repair discounts for plan members",
+    ],
+    benefits: [
+      "Manufacturer warranty stays valid",
+      "Fewer breakdowns and lower energy bills",
+      "Priority booking during heat waves and cold snaps",
+      "Discount on any repair we do",
+      "Multi-system plans available",
+      "Reminders sent — you don't need to remember",
+    ],
+    howItGoes: [
+      {
+        title: "Schedule",
+        description:
+          "Pick a spring window for AC and a fall window for heat. We send the reminders.",
+      },
+      {
+        title: "Tune-up",
+        description:
+          "Full inspect-clean-test on each system, roughly 90 minutes each.",
+      },
+      {
+        title: "Report",
+        description:
+          "Written summary with photos of anything we recommend.",
+      },
+      {
+        title: "Follow-up",
+        description:
+          "Priority booking and member discounts on any repair we do.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How often should I have my system serviced?",
+        answer:
+          "Once a year at minimum — twice for combined AC and heating (once each in spring and fall). Our plans schedule this for you automatically.",
+      },
+      {
+        question: "What's included in a plan versus a single tune-up?",
+        answer:
+          "A single tune-up covers one visit. A plan adds priority scheduling year-round, repair discounts, and reminders so you never lapse on maintenance.",
+      },
+      {
+        question: "Can you service what you didn't install?",
+        answer:
+          "Yes. We service every major brand, whether we installed it or not. First visit includes a baseline inspection so we know what we're working with.",
+      },
+      {
+        question: "Do plans cover repairs?",
+        answer:
+          "Plans include the tune-up, not repairs. Members get a discount on any repair labor and priority booking — repairs are quoted separately with upfront pricing.",
+      },
+      {
+        question: "Can I add more than one system?",
+        answer:
+          "Yes. Multi-system plans are available at a discount per system. Common for homes with separate upstairs/downstairs units or a mini-split addition.",
+      },
+    ],
+    estimatePitch: {
+      title: "Two visits a year, one plan, zero worry",
+      subtitle:
+        "Priority scheduling, repair discounts, and written reports each visit.",
+    },
+  },
+  "duct-services": {
+    title: "Ductwork Services",
+    slug: "duct-services",
+    heroDescription:
+      "Duct repair, sealing, and full replacement — because leaky ducts quietly waste 20-30% of what your system produces.",
+    longDescription:
+      "Even a great HVAC system can't overcome bad ductwork. Leaks, kinks, and undersized runs mean the air never makes it where you actually live. We inspect, seal, repair, and replace ductwork across San Mateo County — usually with the same crew that services your equipment.",
+    image: "/images/team.png",
+    included: [
+      "Full duct system inspection and static pressure test",
+      "Leak testing at joints, boots, and plenums",
+      "Aeroseal or manual mastic sealing where appropriate",
+      "Repair or replacement of damaged sections",
+      "Insulation upgrade on attic and crawlspace runs",
+      "Return-air sizing and balancing",
+      "Register and grille cleaning",
+      "Written report with before/after airflow numbers",
+    ],
+    benefits: [
+      "Rooms that finally get the airflow you're paying for",
+      "Meaningful energy savings from sealed ducts",
+      "Better indoor air quality from clean, sealed systems",
+      "Extends the life of your HVAC equipment",
+      "Available with any equipment install",
+      "No-mess process — we protect finished surfaces",
+    ],
+    howItGoes: [
+      {
+        title: "Inspect",
+        description:
+          "Static pressure test and a visual scan of every accessible run.",
+      },
+      {
+        title: "Diagnose",
+        description:
+          "Report on where you're losing air and why airflow is uneven.",
+      },
+      {
+        title: "Repair",
+        description:
+          "Seal, patch, or replace the sections that are actually the problem.",
+      },
+      {
+        title: "Verify",
+        description:
+          "Retest room by room — you see the before/after airflow numbers.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How do I know if my ducts are the problem?",
+        answer:
+          "Rooms that are always too hot or cold, high energy bills, dusty registers, or a system that runs constantly are all signs. A static pressure test tells us for sure.",
+      },
+      {
+        question: "Do you clean ducts?",
+        answer:
+          "Yes — we clean registers and accessible ductwork, but honest talk: most homes don't need a full duct cleaning. We'll tell you if yours actually does.",
+      },
+      {
+        question: "How much of my ductwork usually needs work?",
+        answer:
+          "Varies a lot. Many homes just need sealing at a few key joints; others have crushed or disconnected sections that need replacement. The inspection tells us exactly what.",
+      },
+      {
+        question: "Will this improve my energy bill?",
+        answer:
+          "Usually yes. Sealed ducts can reduce energy waste by 20-30%. Bill impact depends on how leaky your ducts are today and how you use the system.",
+      },
+      {
+        question: "Can you do this without opening walls?",
+        answer:
+          "In most cases yes. We work through attic and crawlspace access. When wall access is required, we tell you before the work — no surprises.",
+      },
+    ],
+    estimatePitch: {
+      title: "Find out where your airflow is really going",
+      subtitle:
+        "Static pressure test, room-by-room airflow, and a written report.",
+    },
+  },
+  "indoor-air-quality": {
+    title: "Indoor Air Quality",
+    slug: "indoor-air-quality",
+    heroDescription:
+      "Whole-home air purifiers, filtration upgrades, and ventilation that actually work — no gadgets, no false claims.",
+    longDescription:
+      "Bay Area homes deal with wildfire smoke, allergens, and tight construction that traps pollutants inside. We install proven indoor air quality solutions — MERV-rated filtration, whole-home purifiers, humidity control, and fresh-air ventilation — matched to your home's specific problems, not a one-size-fits-all package.",
+    image: "/images/team.png",
+    included: [
+      "Indoor air quality assessment and testing",
+      "MERV filter upgrade compatible with your equipment",
+      "Whole-home air purifier installation (UV, PCO, or media)",
+      "Humidification and dehumidification systems",
+      "Fresh-air ventilation (ERV/HRV) options",
+      "Ductwork sealing to prevent contamination",
+      "Post-install air quality retest",
+      "Filter replacement schedule and reminders",
+    ],
+    benefits: [
+      "Real reduction in allergens, VOCs, and smoke particles",
+      "Whole-home coverage vs. one-room purifiers",
+      "Works while your HVAC runs — no counter-top device",
+      "Sized to your system, not a generic recommendation",
+      "Options for every budget",
+      "Ideal for allergy sufferers and wildfire smoke season",
+    ],
+    howItGoes: [
+      {
+        title: "Assess",
+        description:
+          "Test the air, look at your equipment, and identify the actual problem.",
+      },
+      {
+        title: "Recommend",
+        description:
+          "One or two options with honest pros and cons — no gadget upsells.",
+      },
+      {
+        title: "Install",
+        description:
+          "Half-day install for most upgrades; larger systems take a day.",
+      },
+      {
+        title: "Retest",
+        description:
+          "Verify the numbers improved and set up filter reminders.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do those little UV wands actually work?",
+        answer:
+          "Whole-home UV systems installed on the coil can help with mold and some pathogens. The clip-on wands sold online? Not really. We only recommend what's been shown to work.",
+      },
+      {
+        question: "What MERV rating should I use?",
+        answer:
+          "Depends on your equipment. MERV 11-13 is a great balance for most residential systems; higher ratings can restrict airflow and hurt performance. We check your blower before recommending.",
+      },
+      {
+        question: "Is a humidifier worth it in the Bay Area?",
+        answer:
+          "Usually not, unless you have hardwood floors that are cracking in winter or a family member with respiratory issues. We'll be honest — we don't push these when they aren't needed.",
+      },
+      {
+        question: "Will an air purifier help during wildfire smoke?",
+        answer:
+          "A whole-home purifier plus a high-MERV filter can make a real difference indoors during smoke events. We can also add a fresh-air ventilator that stops pulling outside air when air quality drops.",
+      },
+      {
+        question: "How often do filters need to change?",
+        answer:
+          "Standard filters every 1-3 months. Higher-MERV media filters typically 6-12 months. We include a reminder schedule after install.",
+      },
+    ],
+    estimatePitch: {
+      title: "Air you can actually breathe better",
+      subtitle:
+        "Whole-home solutions matched to your equipment and your problem.",
+    },
+  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -306,6 +714,11 @@ export async function generateStaticParams() {
     { slug: "heat-pump-installation" },
     { slug: "ac-repair" },
     { slug: "furnace-maintenance" },
+    { slug: "heating-repair" },
+    { slug: "installation" },
+    { slug: "maintenance" },
+    { slug: "duct-services" },
+    { slug: "indoor-air-quality" },
   ];
 }
 
