@@ -3,13 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ChevronRight,
-  CheckCircle,
+  Check,
   Phone,
   ArrowRight,
-  ChevronDown,
   Shield,
+  ShieldCheck,
   Clock,
   Award,
+  BadgeCheck,
   Star,
 } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
@@ -20,6 +21,11 @@ import { SITE_NAME, PHONE, PHONE_HREF } from "@/lib/constants";
 /*  SERVICE DATA                                                       */
 /* ------------------------------------------------------------------ */
 
+interface ProcessStep {
+  title: string;
+  description: string;
+}
+
 interface ServiceData {
   title: string;
   slug: string;
@@ -28,7 +34,12 @@ interface ServiceData {
   image: string;
   included: string[];
   benefits: string[];
+  howItGoes: ProcessStep[];
   faqs: { question: string; answer: string }[];
+  estimatePitch: {
+    title: string;
+    subtitle: string;
+  };
 }
 
 const servicesData: Record<string, ServiceData> = {
@@ -60,34 +71,59 @@ const servicesData: Record<string, ServiceData> = {
       "Improved indoor air quality",
       "Longer equipment lifespan with proper maintenance",
     ],
-    faqs: [
+    howItGoes: [
       {
-        question: "How much does a heat pump installation cost?",
-        answer:
-          "Heat pump installation costs vary based on the system size, type, and your home's specific requirements. We offer free in-home estimates so we can assess your needs and provide an accurate quote. Most installations range from $5,000 to $15,000, and many qualify for rebates and tax credits that can significantly reduce the cost.",
+        title: "Free estimate",
+        description: "About an hour at your house. No charge, no pressure.",
       },
       {
-        question: "How long does installation take?",
-        answer:
-          "A typical heat pump installation takes 1-2 days, depending on the complexity of the project. This includes removing the old equipment, installing the new system, running any necessary electrical or ductwork, and thorough testing.",
+        title: "Written quote",
+        description:
+          "Usually within two business days, with two or three options.",
       },
       {
-        question: "Are heat pumps effective in colder weather?",
-        answer:
-          "Modern heat pumps are highly efficient even in cold temperatures. The Bay Area's mild climate is ideal for heat pump performance. For the occasional very cold night, many systems include auxiliary heating to ensure consistent comfort.",
+        title: "Install",
+        description:
+          "One to three days depending on ductwork and electrical.",
       },
       {
-        question: "What brands do you install?",
-        answer:
-          "We install all major heat pump brands including Carrier, Lennox, Trane, Daikin, Mitsubishi, and more. We will recommend the best brand and model based on your specific needs and budget.",
-      },
-      {
-        question:
-          "What maintenance does a heat pump need?",
-        answer:
-          "Heat pumps benefit from annual maintenance including filter changes, coil cleaning, refrigerant checks, and system inspections. We offer maintenance plans that keep your system running efficiently and extend its lifespan.",
+        title: "Inspection",
+        description:
+          "We meet the city inspector so you do not have to take the day off.",
       },
     ],
+    faqs: [
+      {
+        question: "How long does a heat pump install take?",
+        answer:
+          "Most installs run one to three days, depending on ductwork and electrical work. Simple swaps can finish in a day; new ductwork or a panel upgrade adds time. We give you a firm schedule with the written quote.",
+      },
+      {
+        question: "Do I need to upgrade my electrical panel?",
+        answer:
+          "Sometimes. Heat pumps need dedicated 240V circuits and older panels may not have the capacity. We include a panel check in the free estimate and price any upgrade transparently in the quote.",
+      },
+      {
+        question: "Are there rebates available?",
+        answer:
+          "Yes — federal tax credits, state incentives, and PG&E rebates can cover thousands of dollars. We handle the paperwork for BayREN and TECH Clean California rebates so you do not have to chase them yourself.",
+      },
+      {
+        question: "What warranty comes with the equipment?",
+        answer:
+          "Standard equipment warranties run 10 years on parts when registered, and we add a 2-year labor warranty on top. Extended coverage is available for the equipment you choose.",
+      },
+      {
+        question: "Do you offer financing?",
+        answer:
+          "Yes. We partner with lenders that offer 0% and low-APR plans for qualified customers. We will lay out the monthly numbers next to the cash price so you can compare.",
+      },
+    ],
+    estimatePitch: {
+      title: "Find out what your house actually needs",
+      subtitle:
+        "An hour at your house, a written quote, and no obligation.",
+    },
   },
   "ac-repair": {
     title: "AC Repair & Service",
@@ -117,28 +153,60 @@ const servicesData: Record<string, ServiceData> = {
       "90-day repair warranty",
       "No overtime charges for regular hours",
     ],
+    howItGoes: [
+      {
+        title: "Diagnose",
+        description:
+          "On-site inspection, usually within an hour of the tech arriving.",
+      },
+      {
+        title: "Quote",
+        description:
+          "Upfront pricing before any work starts — no surprises on the invoice.",
+      },
+      {
+        title: "Repair",
+        description:
+          "Most repairs finished the same day; common parts are on the truck.",
+      },
+      {
+        title: "Verify",
+        description:
+          "System retested end-to-end so you know it is truly fixed before we leave.",
+      },
+    ],
     faqs: [
       {
-        question: "How quickly can you come for an AC repair?",
+        question: "How quickly can you come out?",
         answer:
-          "We offer same-day service for most AC repairs. For emergencies, we prioritize getting a technician to your home as quickly as possible, often within a few hours of your call.",
+          "We aim for same-day service on repair calls placed before noon, and priority booking the next morning for late-day calls. After-hours emergency service is answered 24/7.",
       },
       {
         question: "Do you charge a diagnostic fee?",
         answer:
-          "We charge a standard service call fee that includes the diagnostic. If you proceed with the repair, the diagnostic fee is typically applied toward the cost of the repair.",
+          "There is a standard service call fee that covers the visit and diagnostic. If you approve the repair, that fee is applied to the total — you are not paying twice.",
       },
       {
-        question: "Should I repair or replace my AC unit?",
+        question: "Should I repair or replace my AC?",
         answer:
-          "We will provide an honest assessment. As a general rule, if your AC is over 15 years old and the repair costs more than half the price of a new system, replacement may be the better investment. We always explain both options so you can make an informed decision.",
+          "Honest rule of thumb: if the unit is over 15 years old and the repair is more than half the cost of a new system, replacement usually pays back inside three seasons. We will lay out both numbers so you can decide.",
+      },
+      {
+        question: "Is the repair warrantied?",
+        answer:
+          "Yes — 90 days on the labor and the manufacturer's warranty on any parts we install. We will note the terms on your invoice.",
       },
       {
         question: "What brands do you repair?",
         answer:
-          "We repair all major AC brands including Carrier, Lennox, Trane, Rheem, Goodman, York, Daikin, and many more. Our technicians are trained and certified to work on all systems.",
+          "All the major residential brands — Carrier, Lennox, Trane, Rheem, Goodman, York, Daikin, Mitsubishi, and more.",
       },
     ],
+    estimatePitch: {
+      title: "Cool air, fast — with a written repair quote",
+      subtitle:
+        "Same-day diagnostic, upfront price, and a 90-day repair warranty.",
+    },
   },
   "furnace-maintenance": {
     title: "Furnace Maintenance & Tune-Up",
@@ -168,28 +236,60 @@ const servicesData: Record<string, ServiceData> = {
       "Maintains manufacturer warranty",
       "Improves indoor air quality",
     ],
-    faqs: [
+    howItGoes: [
       {
-        question: "How often should I have my furnace maintained?",
-        answer:
-          "We recommend annual furnace maintenance, ideally in the fall before the heating season begins. Regular maintenance can extend your furnace's lifespan by several years and prevent costly emergency repairs.",
+        title: "Inspect",
+        description:
+          "Full safety and performance check across every burner, motor, and control.",
       },
       {
-        question: "How long does a furnace tune-up take?",
+        title: "Clean",
+        description:
+          "Burners, coils, and blower cleaned back to factory spec.",
+      },
+      {
+        title: "Test",
+        description:
+          "Combustion analysis, thermostat calibration, and a carbon monoxide check.",
+      },
+      {
+        title: "Report",
+        description:
+          "Written summary of what we found and anything we recommend before winter.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How often should I service my furnace?",
         answer:
-          "A standard furnace tune-up takes approximately 60 to 90 minutes. Our technician will thoroughly inspect, clean, and adjust your system and provide a detailed report of their findings.",
+          "Once a year, ideally in the fall before you rely on it every night. Annual tune-ups keep the manufacturer warranty valid and catch small issues before they become no-heat calls.",
+      },
+      {
+        question: "How long does a tune-up take?",
+        answer:
+          "Plan on 60 to 90 minutes. We text a heads-up when we are 20 minutes out and leave a written report before we go.",
       },
       {
         question: "Do you offer maintenance plans?",
         answer:
-          "Yes, we offer annual maintenance plans that include priority scheduling, discounts on repairs, and peace of mind. Plans typically include one or two tune-ups per year depending on the level you choose.",
+          "Yes — annual plans include a tune-up, priority scheduling, and discounts on any repairs. Multi-system plans cover the AC too.",
       },
       {
-        question: "Will maintenance help lower my energy bills?",
+        question: "Will a tune-up lower my heating bill?",
         answer:
-          "Yes. A well-maintained furnace operates more efficiently, which translates to lower energy bills. Dirty filters, worn parts, and misaligned components can increase energy consumption by 10-25%.",
+          "Usually yes. Dirty filters, worn parts, and mis-set gas pressure can add 10-25% to your bill. A tune-up brings the system back to its rated efficiency.",
+      },
+      {
+        question: "Is my furnace safe to run?",
+        answer:
+          "The tune-up includes a heat exchanger inspection and a CO check. If we find anything unsafe we will explain it, show you the reading, and lay out options before doing any work.",
       },
     ],
+    estimatePitch: {
+      title: "Book your annual tune-up before winter",
+      subtitle:
+        "One visit, one written report, and a clear picture of your system's health.",
+    },
   },
 };
 
@@ -244,21 +344,26 @@ export async function generateMetadata({
 function FAQItem({
   question,
   answer,
-  index,
 }: {
   question: string;
   answer: string;
   index: number;
 }) {
   return (
-    <details className="group border border-border-light rounded-[14px] overflow-hidden">
-      <summary className="flex items-center justify-between gap-4 p-5 cursor-pointer list-none hover:bg-light-bg transition-colors">
-        <span className="text-[15px] font-[600] text-text-dark">
+    <details className="group">
+      <summary className="flex items-center justify-between gap-4 py-5 cursor-pointer list-none">
+        <span className="text-[16px] sm:text-[17px] font-[700] text-navy leading-snug">
           {question}
         </span>
-        <ChevronDown className="w-5 h-5 text-text-muted shrink-0 transition-transform group-open:rotate-180" />
+        <span
+          aria-hidden="true"
+          className="relative flex-none w-5 h-5 text-orange"
+        >
+          <span className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-current" />
+          <span className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[2px] bg-current transition-transform duration-200 group-open:rotate-90 group-open:scale-0" />
+        </span>
       </summary>
-      <div className="px-5 pb-5 text-text-muted text-[14px] leading-relaxed border-t border-border-light pt-4">
+      <div className="pb-5 pr-6 -mt-1 text-text-muted text-[14.5px] leading-relaxed">
         {answer}
       </div>
     </details>
@@ -402,103 +507,123 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ========== DESCRIPTION + BENEFITS ========== */}
+      {/* ========== BODY: CONTENT + STICKY ESTIMATE ========== */}
       <section className="bg-white section-padding">
         <div className="container-site">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <SectionLabel>About This Service</SectionLabel>
-              <SectionTitle className="mt-3">Overview</SectionTitle>
-              <p className="text-text-muted text-[15px] leading-relaxed mt-4">
-                {service.longDescription}
-              </p>
-              {/* Benefits */}
-              <div className="mt-8">
-                <h3 className="text-lg font-[700] text-text-dark mb-4">
-                  Key Benefits
-                </h3>
-                <ul className="space-y-3">
-                  {service.benefits.map((benefit) => (
-                    <li key={benefit} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-success shrink-0 mt-0.5" />
-                      <span className="text-[15px] text-text-dark">
-                        {benefit}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_380px] xl:grid-cols-[minmax(0,1fr)_420px] gap-10 lg:gap-14 items-start">
+            {/* Left: content stack */}
+            <div className="space-y-14 lg:space-y-16 min-w-0">
+              {/* Overview */}
+              <div>
+                <p className="text-text-muted text-[16px] leading-relaxed">
+                  {service.longDescription}
+                </p>
               </div>
-            </div>
 
-            {/* What's Included */}
-            <div>
-              <div className="bg-light-bg rounded-[18px] p-8 border border-border-light">
-                <h3 className="text-xl font-[700] text-text-dark mb-6">
-                  What Is Included
-                </h3>
-                <ul className="space-y-3">
+              {/* What is included */}
+              <div>
+                <h2 className="text-[clamp(28px,3vw,36px)] font-[800] text-navy tracking-tight leading-[1.1] mb-6">
+                  What is included
+                </h2>
+                <ul className="space-y-4">
                   {service.included.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-orange shrink-0 mt-0.5" />
-                      <span className="text-[15px] text-text-dark">
+                    <li key={item} className="flex items-start gap-4">
+                      <span className="flex-none w-6 h-6 flex items-center justify-center mt-0.5">
+                        <Check className="w-5 h-5 text-orange" strokeWidth={2.5} />
+                      </span>
+                      <span className="text-[15.5px] text-text-dark leading-relaxed">
                         {item}
                       </span>
                     </li>
                   ))}
                 </ul>
               </div>
+
+              {/* How it goes */}
+              <div>
+                <h2 className="text-[clamp(28px,3vw,36px)] font-[800] text-navy tracking-tight leading-[1.1] mb-6">
+                  How it goes
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {service.howItGoes.map((step, i) => (
+                    <div
+                      key={step.title}
+                      className="bg-light-bg rounded-[16px] border border-border-light p-6"
+                    >
+                      <p className="text-[11.5px] font-[800] text-orange tracking-[.16em] uppercase mb-2">
+                        Step {i + 1}
+                      </p>
+                      <h3 className="text-[18px] font-[800] text-navy mb-2 tracking-tight">
+                        {step.title}
+                      </h3>
+                      <p className="text-[14.5px] text-text-muted leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Common questions */}
+              <div>
+                <h2 className="text-[clamp(28px,3vw,36px)] font-[800] text-navy tracking-tight leading-[1.1] mb-6">
+                  Common questions
+                </h2>
+                <div className="divide-y divide-border-light border-y border-border-light">
+                  {service.faqs.map((faq, index) => (
+                    <FAQItem
+                      key={index}
+                      question={faq.question}
+                      answer={faq.answer}
+                      index={index}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ========== FAQ ========== */}
-      <section className="bg-light-bg section-padding">
-        <div className="container-site max-w-3xl">
-          <div className="text-center mb-10">
-            <SectionLabel>FAQ</SectionLabel>
-            <SectionTitle className="mt-3">
-              Frequently Asked Questions
-            </SectionTitle>
-          </div>
-          <div className="space-y-3">
-            {service.faqs.map((faq, index) => (
-              <FAQItem
-                key={index}
-                question={faq.question}
-                answer={faq.answer}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========== CTA BANNER ========== */}
-      <section className="bg-orange section-padding">
-        <div className="container-site text-center">
-          <h2 className="text-[clamp(28px,3vw,40px)] font-[800] tracking-[-.02em] text-white leading-[1.15] mb-4">
-            Ready to Schedule Your {service.title}?
-          </h2>
-          <p className="text-white/80 text-lg max-w-xl mx-auto mb-8">
-            Contact us today for a free consultation and estimate. Our certified
-            technicians are ready to help.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              href={PHONE_HREF}
-              className="inline-flex items-center gap-2 bg-navy hover:bg-navy/90 text-white font-[700] px-7 py-3.5 rounded-[12px] transition-colors text-[15px]"
-            >
-              <Phone className="w-4 h-4" />
-              Call {PHONE}
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white font-[600] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] border border-white/30"
-            >
-              Request Free Estimate
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            {/* Right: sticky Free Estimate sidebar */}
+            <aside className="lg:sticky lg:top-24">
+              <div className="bg-light-bg rounded-[18px] border border-border-light p-6 sm:p-8">
+                <p className="text-[11.5px] font-[800] text-orange tracking-[.16em] uppercase mb-3">
+                  Free Estimate
+                </p>
+                <h3 className="text-[22px] sm:text-[24px] font-[800] text-navy leading-[1.2] tracking-tight mb-3">
+                  {service.estimatePitch.title}
+                </h3>
+                <p className="text-[14.5px] text-text-muted leading-relaxed mb-6">
+                  {service.estimatePitch.subtitle}
+                </p>
+                <div className="space-y-3">
+                  <Link
+                    href="/contact"
+                    className="flex items-center justify-center h-[54px] bg-orange hover:bg-orange-hover text-white font-[700] text-[15.5px] rounded-[12px] transition-colors"
+                  >
+                    Schedule Online
+                  </Link>
+                  <a
+                    href={PHONE_HREF}
+                    className="flex items-center justify-center h-[54px] bg-white border border-border-light hover:border-navy/30 text-navy font-[700] text-[15.5px] rounded-[12px] transition-colors"
+                  >
+                    {PHONE}
+                  </a>
+                </div>
+                <div className="mt-7 pt-6 border-t border-border-light space-y-3">
+                  <div className="flex items-center gap-3 text-[13.5px] text-text-dark">
+                    <ShieldCheck className="w-[18px] h-[18px] text-text-muted shrink-0" />
+                    <span>Licensed &amp; insured · CSLB #860715</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-[13.5px] text-text-dark">
+                    <BadgeCheck className="w-[18px] h-[18px] text-text-muted shrink-0" />
+                    <span>NATE-certified technicians</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-[13.5px] text-text-dark">
+                    <Clock className="w-[18px] h-[18px] text-text-muted shrink-0" />
+                    <span>Family owned since 2005</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
