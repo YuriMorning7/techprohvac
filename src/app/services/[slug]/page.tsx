@@ -699,6 +699,252 @@ const servicesData: Record<string, ServiceData> = {
         "Whole-home solutions matched to your equipment and your problem.",
     },
   },
+  repairs: {
+    title: "HVAC Repairs",
+    slug: "repairs",
+    heroDescription:
+      "Fast, reliable repairs for every major HVAC brand — AC, heating, mini-splits, and more. Same-day service with upfront pricing.",
+    longDescription:
+      "When your system quits, you need a tech who can diagnose fast and fix it right the first time. We repair every major residential HVAC brand across San Mateo County — usually the same day, with upfront pricing before we touch a wrench.",
+    image: "/images/team.png",
+    included: [
+      "Full system diagnostic and inspection",
+      "Upfront written quote before any repair",
+      "AC, furnace, heat pump, and mini-split repairs",
+      "Refrigerant leak testing and recharge",
+      "Electrical, control-board, and thermostat repairs",
+      "Same-day service on common failures",
+      "Common parts stocked on every truck",
+      "Carbon monoxide safety check on gas systems",
+      "90-day labor warranty",
+    ],
+    benefits: [
+      "Same-day service in most cases",
+      "After-hours emergency response",
+      "Upfront, no-surprise pricing",
+      "All major brands serviced",
+      "Certified, background-checked technicians",
+      "90-day workmanship warranty",
+    ],
+    howItGoes: [
+      {
+        title: "Diagnose",
+        description:
+          "On-site inspection to isolate the exact failure — not a guess.",
+      },
+      {
+        title: "Quote",
+        description:
+          "Upfront price for the repair before any parts come off the shelf.",
+      },
+      {
+        title: "Repair",
+        description:
+          "Same-day fix on most calls; common parts stay stocked on the truck.",
+      },
+      {
+        title: "Verify",
+        description:
+          "Full-cycle retest and safety check before we leave.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How quickly can you come out?",
+        answer:
+          "Same-day service on repair calls placed before noon, and priority booking the next morning for late-day calls. After-hours emergency line is answered 24/7.",
+      },
+      {
+        question: "Do you charge a diagnostic fee?",
+        answer:
+          "There's a standard service call fee that covers the visit and diagnostic. If you approve the repair, that fee is applied to the total — no double-charging.",
+      },
+      {
+        question: "What brands do you repair?",
+        answer:
+          "All major residential brands — Carrier, Lennox, Trane, Rheem, Goodman, York, Daikin, Mitsubishi, and more. Our techs are trained on every current platform.",
+      },
+      {
+        question: "What if you can't finish today?",
+        answer:
+          "If the repair needs a special-order part, we tell you upfront with a firm ETA. In most cases we'll have you back up the same day.",
+      },
+      {
+        question: "Is the repair warrantied?",
+        answer:
+          "Yes — 90 days on labor and the manufacturer's warranty on any parts we install. Terms are on your invoice.",
+      },
+    ],
+    estimatePitch: {
+      title: "Get it running again — with an honest quote",
+      subtitle:
+        "Same-day diagnostic, upfront price, and a 90-day repair warranty.",
+    },
+  },
+  "water-heater-services": {
+    title: "Water Heater Services",
+    slug: "water-heater-services",
+    heroDescription:
+      "Tank and tankless water heater installation and repair. Energy-efficient upgrades that save money on utility bills.",
+    longDescription:
+      "Whether you need a quick repair on a leaking tank or a full tankless upgrade, we handle every part of the water heater job — sizing, permits, install, and inspection. Gas, electric, and hybrid heat-pump water heaters across San Mateo County.",
+    image: "/images/team.png",
+    included: [
+      "Free in-home consultation and sizing",
+      "Written quote with equipment models and full pricing",
+      "City permit pulled and inspection handled by us",
+      "Tank, tankless, and heat pump water heater install",
+      "Removal and proper disposal of the old unit",
+      "Gas line, venting, and electrical brought to code",
+      "Temperature and pressure test before we leave",
+      "Manufacturer warranty registration",
+      "Two-year labor warranty",
+    ],
+    benefits: [
+      "Never-run-out hot water with tankless upgrades",
+      "Rebates available on heat pump water heaters",
+      "All major brands installed and serviced",
+      "Emergency service for leaks and no-hot-water calls",
+      "Two-year labor warranty",
+      "Rebate paperwork handled for you",
+    ],
+    howItGoes: [
+      {
+        title: "Free estimate",
+        description:
+          "Sizing, venting, and space walkthrough at your house. No charge.",
+      },
+      {
+        title: "Written quote",
+        description:
+          "Two or three options — tank, tankless, or heat pump — with real pricing.",
+      },
+      {
+        title: "Install",
+        description:
+          "Most jobs finish in a day, including permit prep and haul-away.",
+      },
+      {
+        title: "Inspection",
+        description:
+          "City sign-off scheduled and coordinated by us.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Should I go tankless or stay with a tank?",
+        answer:
+          "Tankless costs more up front but never runs out of hot water and uses less energy long-term. Tanks are cheaper to install and simpler to replace. We lay out both numbers so you can decide.",
+      },
+      {
+        question: "How long does a water heater install take?",
+        answer:
+          "Straight tank swaps run 3-4 hours. Tankless installs typically take a full day because of gas line, venting, and electrical work.",
+      },
+      {
+        question: "Are there rebates for heat pump water heaters?",
+        answer:
+          "Yes — significant federal tax credits plus BayREN and TECH Clean California rebates can cover thousands. We handle the paperwork.",
+      },
+      {
+        question: "Can I get hot water back today?",
+        answer:
+          "For repairs, usually yes — common parts are on the truck. For full replacements we can often do same-day if you approve the quote by mid-morning.",
+      },
+      {
+        question: "Do you handle the city permit?",
+        answer:
+          "Yes. Every install includes the permit pulled by us and the final inspection scheduled. You never chase paperwork.",
+      },
+    ],
+    estimatePitch: {
+      title: "Hot water on demand, sized to your house",
+      subtitle:
+        "Free in-home sizing, written quote, and no obligation.",
+    },
+  },
+  "ductless-mini-splits": {
+    title: "Ductless Mini-Splits",
+    slug: "ductless-mini-splits",
+    heroDescription:
+      "Flexible ductless solutions for room additions, garages, and homes without ductwork. Efficient zone-based comfort you can dial in.",
+    longDescription:
+      "Mini-splits are the right answer when adding central ductwork isn't practical — new additions, converted garages, ADUs, or older homes without existing ducts. Each indoor unit runs on its own thermostat, so every room gets exactly the temperature you want with much lower energy use than window units or portable heaters.",
+    image: "/images/team.png",
+    included: [
+      "Free in-home consultation and load calculation",
+      "Written quote with equipment models and full pricing",
+      "Single-zone or multi-zone system design",
+      "Professional install by certified mini-split technicians",
+      "Line-set routing planned to minimize visible runs",
+      "Electrical, condensate, and refrigerant handled to code",
+      "Thermostat and controls setup on each zone",
+      "Manufacturer warranty registration",
+      "Two-year labor warranty",
+    ],
+    benefits: [
+      "No ductwork required — perfect for older homes and additions",
+      "Room-by-room temperature control",
+      "Rebates and tax credits available on many systems",
+      "Much quieter than window units or portable ACs",
+      "Both heating and cooling from a single system",
+      "Often the lowest energy-cost option per room",
+    ],
+    howItGoes: [
+      {
+        title: "Free estimate",
+        description:
+          "About an hour on site to plan zones and line-set routing.",
+      },
+      {
+        title: "Written quote",
+        description:
+          "Single-zone or multi-zone options with real pricing per zone.",
+      },
+      {
+        title: "Install",
+        description:
+          "One to two days depending on the number of zones.",
+      },
+      {
+        title: "Walkthrough",
+        description:
+          "Thermostat setup and a full demo on each zone before we leave.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How many zones do I need?",
+        answer:
+          "Depends on the number of rooms and how independently you want them controlled. Common setups: 1 zone for an addition or garage, 2-3 for a small home, 4+ for whole-home retrofits.",
+      },
+      {
+        question: "Can mini-splits heat and cool?",
+        answer:
+          "Yes — modern mini-splits are heat pumps that do both. They're highly efficient in the Bay Area climate.",
+      },
+      {
+        question: "Where do you route the line-sets?",
+        answer:
+          "We plan the routing to keep runs as short and hidden as possible. Line-set covers match the wall color, and we walk you through the plan before install day.",
+      },
+      {
+        question: "Are they hard to maintain?",
+        answer:
+          "Filters need cleaning every couple of months (rinse in the sink), and an annual professional tune-up covers the rest. We include mini-splits in our maintenance plans.",
+      },
+      {
+        question: "Do they qualify for rebates?",
+        answer:
+          "Many models qualify for federal tax credits, PG&E rebates, and TECH Clean California incentives. We handle the paperwork for the rebates you qualify for.",
+      },
+    ],
+    estimatePitch: {
+      title: "Add zones without adding ductwork",
+      subtitle:
+        "In-home walkthrough, real pricing per zone, and no obligation.",
+    },
+  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -719,6 +965,9 @@ export async function generateStaticParams() {
     { slug: "maintenance" },
     { slug: "duct-services" },
     { slug: "indoor-air-quality" },
+    { slug: "repairs" },
+    { slug: "water-heater-services" },
+    { slug: "ductless-mini-splits" },
   ];
 }
 
