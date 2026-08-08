@@ -191,6 +191,7 @@ export default function AboutPage() {
                 src="/images/father_son.jpg"
                 alt="The father and son team who founded TechPro Heating & Cooling"
                 fill
+                priority
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />

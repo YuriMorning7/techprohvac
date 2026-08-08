@@ -80,7 +80,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${archivo.variable} antialiased`}>
-      <body className="min-h-screen flex flex-col">
+      <body
+        className="min-h-screen flex flex-col"
+        suppressHydrationWarning
+      >
         <TopProgressBar />
         <Header />
         <main className="flex-1">{children}</main>

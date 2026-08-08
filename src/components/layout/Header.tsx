@@ -42,14 +42,14 @@ export default function Header() {
       <div className="container-site h-full flex items-center justify-between gap-4">
         {/* Logo — mark + wordmark */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
-          <div className="w-[44px] h-[44px] lg:w-[48px] lg:h-[48px] xl:w-[52px] xl:h-[52px] bg-[#1a2238] rounded-[12px] flex items-center justify-center overflow-hidden shrink-0">
+          <div className="relative w-[44px] h-[44px] lg:w-[48px] lg:h-[48px] xl:w-[52px] xl:h-[52px] bg-[#1a2238] rounded-[12px] overflow-hidden shrink-0">
             <Image
               src="/images/Techpro_logo.png"
               alt="TechPro Heating & Cooling"
-              width={44}
-              height={44}
+              fill
               priority
-              className="w-[80%] h-[80%] object-contain"
+              sizes="52px"
+              className="object-contain p-[10%]"
             />
           </div>
           <div className="flex flex-col">
