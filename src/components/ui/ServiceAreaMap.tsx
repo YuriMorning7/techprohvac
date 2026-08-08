@@ -12,36 +12,69 @@ type Props = {
 };
 
 /**
- * ZIP codes we serve in San Mateo County. Value is the primary city
- * label used for personalized messaging (some ZIPs span multiple towns).
+ * ZIP codes we serve, keyed to the 18 cities on the Service Areas
+ * section of the home page. The label is what customers see in the
+ * success card; several ZIPs span more than one town, so the label
+ * lists every real municipality on that ZIP.
  */
 const SERVICE_ZIPS: Record<string, string> = {
+  // San Carlos
   "94070": "San Carlos",
+
+  // Belmont
   "94002": "Belmont",
+
+  // Redwood City (+ shared Woodside coverage on 94062)
+  "94059": "Redwood City",
   "94061": "Redwood City",
   "94062": "Redwood City / Woodside",
   "94063": "Redwood City",
   "94064": "Redwood City",
   "94065": "Redwood City",
+
+  // San Mateo
   "94401": "San Mateo",
   "94402": "San Mateo",
   "94403": "San Mateo",
+
+  // Foster City (shares 94404 with parts of San Mateo)
   "94404": "Foster City",
+
+  // Burlingame + Hillsborough (both live on 94010; 94011 is Burlingame PO)
   "94010": "Burlingame / Hillsborough",
   "94011": "Burlingame",
+
+  // Menlo Park + Atherton (94027 covers Atherton and adjacent Menlo Park)
   "94025": "Menlo Park",
   "94026": "Menlo Park",
-  "94027": "Atherton",
+  "94027": "Atherton / Menlo Park",
+
+  // Portola Valley
   "94028": "Portola Valley",
+
+  // Half Moon Bay
   "94019": "Half Moon Bay",
+
+  // Pacifica
   "94044": "Pacifica",
+
+  // Daly City
   "94014": "Daly City",
   "94015": "Daly City",
+  "94016": "Daly City",
   "94017": "Daly City",
+
+  // South San Francisco
   "94080": "South San Francisco",
   "94083": "South San Francisco",
+
+  // San Bruno
   "94066": "San Bruno",
+
+  // Millbrae
   "94030": "Millbrae",
+
+  // Brisbane
   "94005": "Brisbane",
 };
 
