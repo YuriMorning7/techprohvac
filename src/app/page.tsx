@@ -316,10 +316,9 @@ export default function HomePage() {
               <span className="inline-block text-[13px] font-[700] tracking-[.13em] uppercase text-orange mb-4">
                 San Mateo County&apos;s Trusted HVAC Experts
               </span>
-              <h1 className="text-[clamp(36px,5vw,60px)] font-[800] tracking-[-.02em] leading-[1.08] mb-6">
-                San Mateo County’s
-                <br />
-                Heat Pump Specialists
+              <h1 className="text-[clamp(32px,4.4vw,52px)] font-[800] tracking-[-.02em] leading-[1.1] mb-6">
+                <span className="block">San Mateo County’s</span>
+                <span className="block">Heat Pump Specialists</span>
               </h1>
               <p className="text-lg text-white/80 leading-relaxed mb-8 max-w-md">
                 Family-owned since 2005. Professional HVAC installation, repair,
