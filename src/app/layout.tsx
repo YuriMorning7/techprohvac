@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import TopProgressBar from "@/components/layout/TopProgressBar";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -11,18 +12,64 @@ const archivo = Archivo({
   variable: "--font-archivo",
 });
 
+const SITE_TITLE = "TechPro Heating & Cooling | San Carlos, CA HVAC";
+const SITE_DESCRIPTION =
+  "Family-owned heating and cooling for San Mateo County since 2005. Professional HVAC installation, repair, and maintenance services.";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://techprohvac.com";
+
 export const metadata: Metadata = {
-  title: "TechPro Heating & Cooling | San Carlos, CA HVAC",
-  description:
-    "Family-owned heating and cooling for San Mateo County since 2005. Professional HVAC installation, repair, and maintenance services.",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://techprohvac.com"
-  ),
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: "%s | TechPro Heating & Cooling",
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: "TechPro Heating & Cooling",
+  keywords: [
+    "HVAC San Carlos",
+    "heating and cooling San Mateo County",
+    "AC repair",
+    "heat pump installation",
+    "furnace maintenance",
+    "water heater services",
+    "ductless mini-split",
+    "indoor air quality",
+    "Bay Area HVAC contractor",
+  ],
+  authors: [{ name: "TechPro Heating & Cooling" }],
+  creator: "TechPro Heating & Cooling",
+  publisher: "TechPro Heating & Cooling",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "TechPro Heating & Cooling | San Carlos, CA HVAC",
-    description:
-      "Family-owned heating and cooling for San Mateo County since 2005.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: "TechPro Heating & Cooling",
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  icons: {
+    icon: "/images/Techpro_logo.png",
+    apple: "/images/Techpro_logo.png",
   },
 };
 
@@ -34,10 +81,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${archivo.variable} antialiased`}>
       <body className="min-h-screen flex flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </body>
+        <TopProgressBar />
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

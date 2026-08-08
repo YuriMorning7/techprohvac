@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { Phone, Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ChevronRight, Menu, Phone, X } from "lucide-react";
 import { PHONE, PHONE_HREF } from "@/lib/constants";
 
 const navLinks = [
@@ -19,6 +19,23 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close the drawer whenever the route changes.
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll while the drawer is open.
+  useEffect(() => {
+    if (mobileOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [mobileOpen]);
 
   return (
     <header className="sticky top-0 z-50 bg-[#182849] h-[72px] xl:h-[84px]">
@@ -78,51 +95,121 @@ export default function Header() {
         {/* Mobile/Tablet Toggle */}
         <button
           type="button"
-          className="xl:hidden text-white p-2 cursor-pointer shrink-0"
-          onClick={() => setMobileOpen(!mobileOpen)}
+          className="xl:hidden w-[44px] h-[44px] flex items-center justify-center rounded-[12px] bg-white/[0.08] border border-white/10 text-white hover:bg-white/[0.14] active:scale-95 transition-all shrink-0 cursor-pointer"
+          onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-drawer"
         >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <span className="relative w-5 h-5 block">
+            <Menu
+              className={`absolute inset-0 w-5 h-5 transition-all duration-200 ${
+                mobileOpen
+                  ? "opacity-0 rotate-90 scale-75"
+                  : "opacity-100 rotate-0 scale-100"
+              }`}
+            />
+            <X
+              className={`absolute inset-0 w-5 h-5 transition-all duration-200 ${
+                mobileOpen
+                  ? "opacity-100 rotate-0 scale-100"
+                  : "opacity-0 -rotate-90 scale-75"
+              }`}
+            />
+          </span>
         </button>
       </div>
 
       {/* Mobile/Tablet Drawer */}
-      {mobileOpen && (
-        <div className="xl:hidden fixed inset-0 top-[72px] z-40">
-          <div
-            className="absolute inset-0 bg-black/40"
-            onClick={() => setMobileOpen(false)}
-          />
-          <nav className="relative bg-[#182849] w-[85vw] max-w-[320px] h-full ml-auto p-6 flex flex-col gap-2 overflow-y-auto shadow-2xl">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-[16px] font-normal text-white/90 hover:text-white py-4 border-b border-white/10 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="mt-6 flex flex-col gap-3">
-              <a
-                href={PHONE_HREF}
-                className="flex items-center justify-center gap-2.5 h-[48px] border border-white/25 rounded-lg text-white text-[15px] font-[600]"
-              >
-                <Phone className="w-[18px] h-[18px]" />
-                {PHONE}
-              </a>
-              <Link
-                href="/contact"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center h-[48px] bg-[#DF6339] rounded-lg text-white text-[15px] font-[700]"
-              >
-                Schedule Online
-              </Link>
-            </div>
-          </nav>
-        </div>
-      )}
+      <div
+        id="mobile-drawer"
+        className={`xl:hidden fixed inset-0 top-[72px] z-40 transition-opacity duration-300 ${
+          mobileOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!mobileOpen}
+      >
+        {/* Scrim */}
+        <div
+          className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
+            mobileOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={() => setMobileOpen(false)}
+        />
+
+        {/* Panel */}
+        <nav
+          className={`relative bg-[#182849] w-[86vw] max-w-[340px] h-full ml-auto flex flex-col overflow-y-auto shadow-[0_10px_40px_rgba(0,0,0,0.4)] transition-transform duration-300 ease-out ${
+            mobileOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+          aria-label="Mobile navigation"
+        >
+          {/* Drawer label */}
+          <div className="px-6 pt-6 pb-4">
+            <p className="text-[11px] font-[800] text-orange tracking-[.18em] uppercase">
+              Menu
+            </p>
+          </div>
+
+          {/* Nav links */}
+          <div className="flex-1 pb-4">
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === pathname ||
+                (link.href !== "/" &&
+                  !link.href.startsWith("/#") &&
+                  pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`group flex items-center justify-between gap-3 px-6 py-3.5 text-[17px] font-[600] transition-colors ${
+                    isActive
+                      ? "text-white bg-white/[0.05]"
+                      : "text-white/85 hover:text-white hover:bg-white/[0.04]"
+                  }`}
+                >
+                  <span className="flex items-center gap-3">
+                    <span
+                      className={`w-[3px] h-6 rounded-full bg-orange transition-transform duration-200 origin-center ${
+                        isActive
+                          ? "scale-y-100"
+                          : "scale-y-0 group-hover:scale-y-100"
+                      }`}
+                      aria-hidden="true"
+                    />
+                    {link.label}
+                  </span>
+                  <ChevronRight
+                    className="w-4 h-4 text-white/40 group-hover:text-orange group-hover:translate-x-0.5 transition-all"
+                    aria-hidden="true"
+                  />
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* CTA cluster */}
+          <div className="px-6 py-5 border-t border-white/10 space-y-3 bg-[#131e3b]">
+            <a
+              href={PHONE_HREF}
+              className="flex items-center justify-center gap-2.5 h-[50px] border border-white/25 rounded-[12px] text-white text-[15px] font-[600] hover:bg-white/[0.06] transition-colors"
+            >
+              <Phone className="w-[18px] h-[18px]" />
+              {PHONE}
+            </a>
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-center h-[50px] bg-[#DF6339] hover:bg-[#c8562f] rounded-[12px] text-white text-[15px] font-[700] transition-colors shadow-[0_6px_18px_rgba(223,99,57,0.35)]"
+            >
+              Schedule Online
+            </Link>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }

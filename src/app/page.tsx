@@ -317,9 +317,9 @@ export default function HomePage() {
                 San Mateo County&apos;s Trusted HVAC Experts
               </span>
               <h1 className="text-[clamp(36px,5vw,60px)] font-[800] tracking-[-.02em] leading-[1.08] mb-6">
-                Heating & Cooling
+                San Mateo County’s
                 <br />
-                Done Right
+                Heat Pump Specialists
               </h1>
               <p className="text-lg text-white/80 leading-relaxed mb-8 max-w-md">
                 Family-owned since 2005. Professional HVAC installation, repair,

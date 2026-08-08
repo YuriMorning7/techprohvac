@@ -3,27 +3,20 @@ import type { MetadataRoute } from "next";
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://techprohvac.com";
 
+// Keep this list in sync with generateStaticParams in
+// src/app/services/[slug]/page.tsx — every slug here must resolve.
 const serviceSlugs = [
   "heat-pump-installation",
   "ac-repair",
   "furnace-maintenance",
+  "heating-repair",
   "installation",
-  "repairs",
   "maintenance",
+  "duct-services",
+  "indoor-air-quality",
+  "repairs",
   "water-heater-services",
   "ductless-mini-splits",
-  "indoor-air-quality",
-];
-
-const productSlugs = [
-  "heat-pumps",
-  "furnaces",
-  "air-conditioners",
-  "water-heaters",
-  "thermostats",
-  "ductless-systems",
-  "indoor-air-quality",
-  "zoning-systems",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -75,12 +68,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const productPages: MetadataRoute.Sitemap = productSlugs.map((slug) => ({
-    url: `${BASE_URL}/products/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
-
-  return [...staticPages, ...servicePages, ...productPages];
+  return [...staticPages, ...servicePages];
 }
