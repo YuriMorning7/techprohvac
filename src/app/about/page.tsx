@@ -161,35 +161,35 @@ export default function AboutPage() {
               </SectionTitle>
               <div className="mt-6 space-y-4 text-text-muted text-[15px] leading-relaxed">
                 <p>
-                  TechPro Heating &amp; Cooling was founded in 2005 with a simple
-                  mission: provide honest, high-quality HVAC services to our
-                  neighbors in San Mateo County. What started as a small
-                  operation has grown into one of the county&apos;s most trusted
-                  heating and cooling companies.
+                  <span className="font-[700] text-navy">
+                    Father and son.
+                  </span>{" "}
+                  That&apos;s how TechPro Heating &amp; Cooling started back in
+                  2005, and it&apos;s still how we run the business today. What
+                  began as one truck and a shared last name has grown into one
+                  of San Mateo County&apos;s most trusted heating and cooling
+                  companies — but the family DNA hasn&apos;t changed.
                 </p>
                 <p>
-                  As a family-owned business, we bring a personal touch to
-                  everything we do. We treat every home like our own and every
-                  customer like family. Our team of certified technicians is
-                  dedicated to delivering exceptional service, from the initial
-                  consultation through installation and ongoing maintenance.
+                  Our founding mission was simple: provide honest,
+                  high-quality HVAC service to our neighbors, treat every home
+                  like our own, and stand behind the work. As a family-owned
+                  shop, we bring that personal touch to everything we do — from
+                  the initial consultation through installation and ongoing
+                  maintenance.
                 </p>
                 <p>
                   Over the past two decades, we have completed more than 5,000
                   jobs, installed over 1,000 heat pump systems, and maintained a
-                  4.9-star Google rating. We are proud of the trust our community
-                  has placed in us and work every day to earn it.
+                  4.9-star Google rating. We are proud of the trust our
+                  community has placed in us and work every day to earn it.
                 </p>
               </div>
             </div>
             <div className="relative rounded-[18px] overflow-hidden aspect-[4/3] bg-light-bg">
               <Image
-                src={placeholderImage("hvac,team,workers", {
-                  w: 960,
-                  h: 720,
-                  seed: "about-team",
-                })}
-                alt="TechPro Heating & Cooling team (placeholder)"
+                src="/images/father_son.jpg"
+                alt="The father and son team who founded TechPro Heating & Cooling"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
