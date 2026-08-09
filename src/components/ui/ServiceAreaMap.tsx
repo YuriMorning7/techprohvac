@@ -185,7 +185,7 @@ export default function ServiceAreaMap({ defaultQuery, defaultLabel }: Props) {
             placeholder="Enter ZIP code"
             aria-label="ZIP code"
             aria-invalid={inputHasError}
-            className={`min-w-0 flex-1 h-[48px] px-4 rounded-[12px] border bg-white text-[15px] text-text-dark placeholder:text-text-muted/70 focus:outline-none transition-colors ${
+            className={`min-w-0 w-full sm:w-auto sm:flex-1 h-[48px] px-4 rounded-[12px] border bg-white text-[15px] text-text-dark placeholder:text-text-muted/70 focus:outline-none transition-colors ${
               inputHasError
                 ? "border-orange focus:border-orange"
                 : "border-input-border focus:border-orange"
