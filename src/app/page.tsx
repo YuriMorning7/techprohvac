@@ -70,7 +70,8 @@ export const metadata: Metadata = {
 /* ------------------------------------------------------------------ */
 
 const trustBadges = [
-  { icon: Users, label: "Established in", sublabel: "2005" },
+  { icon: CalendarCheck, label: "Established in", sublabel: "2005" },
+  { icon: Users, label: "Father & Son", sublabel: "Owned" },
   { icon: Shield, label: "Licensed & Insured", sublabel: LICENSE },
   { icon: Award, label: "EPA Certified", sublabel: "Certified Technicians" },
   { icon: Clock, label: "24/7 Service", sublabel: "Emergency Available" },
@@ -365,7 +366,7 @@ export default function HomePage() {
       {/* ========== TRUST BADGES ========== */}
       <section className="bg-white border-b border-border-light">
         <div className="container-site py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
             {trustBadges.map((badge) => (
               <div
                 key={badge.label}
@@ -378,7 +379,7 @@ export default function HomePage() {
                   <p className="text-[14px] font-[800] text-text-dark leading-tight">
                     {badge.label}
                   </p>
-                  <p className="text-[12px] font-[700] text-text-muted leading-tight mt-0.5">
+                  <p className="text-[12px] font-[800] text-text-dark leading-tight mt-0.5">
                     {badge.sublabel}
                   </p>
                 </div>
