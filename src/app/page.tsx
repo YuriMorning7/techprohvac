@@ -431,11 +431,11 @@ export default function HomePage() {
               </p>
             </div>
             <Link
-              href={PHONE_HREF}
+              href="/contact"
               className="inline-flex items-center gap-2 bg-orange hover:bg-orange-hover text-white font-[700] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] shrink-0"
             >
-              <Phone className="w-4 h-4" />
-              Call Now
+              <CalendarCheck className="w-4 h-4" />
+              Schedule online
             </Link>
           </div>
         </div>
