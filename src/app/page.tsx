@@ -94,8 +94,7 @@ const services = [
   {
     icon: CalendarCheck,
     title: "Maintenance",
-    description:
-      "Preventive maintenance plans that extend equipment life, improve efficiency, and prevent costly breakdowns.",
+    description: "Tune-up & protect your existing system.",
     slug: "maintenance",
   },
 ];
