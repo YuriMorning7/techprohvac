@@ -379,7 +379,7 @@ export default function HomePage() {
                   <p className="text-[14px] font-[800] text-text-dark leading-tight">
                     {badge.label}
                   </p>
-                  <p className="text-[12px] font-[800] text-text-dark leading-tight mt-0.5">
+                  <p className="text-[14px] font-[800] text-text-dark leading-tight mt-0.5">
                     {badge.sublabel}
                   </p>
                 </div>
