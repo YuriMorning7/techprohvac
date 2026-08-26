@@ -88,8 +88,7 @@ const services = [
   {
     icon: Wrench,
     title: "Repairs",
-    description:
-      "Fast, reliable repairs for all HVAC brands. Same-day service available with upfront pricing and no hidden fees.",
+    description: "Troubleshoot & diagnose your existing system.",
     slug: "repairs",
   },
   {
