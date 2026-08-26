@@ -56,7 +56,7 @@ export default function Header() {
             <span className="text-[19px] lg:text-[22px] xl:text-[25px] font-[900] text-white leading-none tracking-tight">
               TECHPRO
             </span>
-            <span className="text-[10px] lg:text-[11px] xl:text-[12px] font-[700] text-orange tracking-[.14em] leading-none mt-[5px] xl:mt-[6px]">
+            <span className="text-[11px] lg:text-[11px] xl:text-[12px] font-[700] text-orange tracking-[.14em] leading-none mt-[5px] xl:mt-[6px]">
               HEATING &amp; COOLING
             </span>
           </div>

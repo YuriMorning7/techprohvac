@@ -12,10 +12,11 @@ import {
   Award,
   BadgeCheck,
   Star,
+  CalendarCheck,
 } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { SITE_NAME, PHONE, PHONE_HREF } from "@/lib/constants";
+import { SITE_NAME, PHONE, PHONE_HREF, BOOKING_URL } from "@/lib/constants";
 import { placeholderImage } from "@/lib/placeholder";
 
 const serviceImageTags: Record<string, string> = {
@@ -1135,13 +1136,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   <Phone className="w-4 h-4" />
                   Call {PHONE}
                 </Link>
-                <Link
-                  href="/contact"
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-[600] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] border border-white/20"
                 >
-                  Get Free Estimate
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                  <CalendarCheck className="w-4 h-4" />
+                  Schedule Online
+                </a>
               </div>
             </div>
             <div className="relative hidden lg:block">
@@ -1279,12 +1282,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   {service.estimatePitch.subtitle}
                 </p>
                 <div className="space-y-3">
-                  <Link
-                    href="/contact"
-                    className="flex items-center justify-center h-[54px] bg-orange hover:bg-orange-hover text-white font-[700] text-[15.5px] rounded-[12px] transition-colors"
+                  <a
+                    href={BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 h-[54px] bg-orange hover:bg-orange-hover text-white font-[700] text-[15.5px] rounded-[12px] transition-colors"
                   >
+                    <CalendarCheck className="w-4 h-4" />
                     Schedule Online
-                  </Link>
+                  </a>
                   <a
                     href={PHONE_HREF}
                     className="flex items-center justify-center h-[54px] bg-white border border-border-light hover:border-navy/30 text-navy font-[700] text-[15.5px] rounded-[12px] transition-colors"

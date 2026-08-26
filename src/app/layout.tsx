@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
+import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import TopProgressBar from "@/components/layout/TopProgressBar";
@@ -88,6 +89,13 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Script
+          id="housecall-pro-chat-bubble"
+          src="https://chat.housecallpro.com/proChat.js"
+          data-color="#F15A29"
+          data-organization="419e6050-bc8f-4dc9-9053-e6abd3bc5229"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

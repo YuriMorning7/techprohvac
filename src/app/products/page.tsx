@@ -15,8 +15,10 @@ import {
   Gauge,
   Layers,
   ArrowRight,
+  CalendarCheck,
 } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
+import { BOOKING_URL } from "@/lib/constants";
 
 /* ------------------------------------------------------------------ */
 /*  DATA                                                               */
@@ -278,13 +280,15 @@ export default function ProductsPage() {
             installations.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-orange hover:bg-orange-hover text-white font-[700] px-7 py-3.5 rounded-[12px] transition-colors text-[15px]"
             >
-              Get Free Estimate
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              <CalendarCheck className="w-4 h-4" />
+              Schedule Online
+            </a>
             <Link
               href="/services"
               className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-[600] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] border border-white/20"

@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { SITE_NAME, PHONE, PHONE_HREF } from "@/lib/constants";
+import { SITE_NAME, PHONE, PHONE_HREF, BOOKING_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: `Our Services | ${SITE_NAME}`,
@@ -253,13 +253,15 @@ export default function ServicesPage() {
               <Phone className="w-4 h-4" />
               Call {PHONE}
             </Link>
-            <Link
-              href="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-[600] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] border border-white/20"
             >
-              Get Free Estimate
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              <CalendarCheck className="w-4 h-4" />
+              Schedule Online
+            </a>
           </div>
         </div>
       </section>

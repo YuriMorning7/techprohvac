@@ -73,9 +73,9 @@ export const metadata: Metadata = {
 const trustBadges = [
   { icon: CalendarCheck, label: "Established in", sublabel: "2005" },
   { icon: Users, label: "Father & Son", sublabel: "Owned" },
-  { icon: Shield, label: "Based in", sublabel: "San Carlos" },
-  { icon: Shield, label: "Serving San", sublabel: "Mateo County" },
-  { icon: Shield, label: "Licensed &", sublabel : "Insured"},
+  { icon: MapPin, label: "Based in", sublabel: "San Carlos" },
+  { icon: Wind, label: "Serving San", sublabel: "Mateo County" },
+  { icon: BadgeCheck, label: "Licensed &", sublabel: "Insured" },
   { icon: Award, label: "Residential &", sublabel: "Light Commercial" },
 ];
 
@@ -367,20 +367,20 @@ export default function HomePage() {
       {/* ========== TRUST BADGES ========== */}
       <section className="bg-white border-b border-border-light">
         <div className="container-site py-8">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-4">
             {trustBadges.map((badge) => (
               <div
                 key={badge.label}
-                className="flex items-center gap-2.5 justify-center lg:justify-start"
+                className="flex items-start gap-3"
               >
-                <div className="w-9 h-9 rounded-[10px] bg-badge-bg flex items-center justify-center shrink-0">
-                  <badge.icon className="w-4 h-4 text-orange" />
+                <div className="w-10 h-10 rounded-[10px] bg-badge-bg flex items-center justify-center shrink-0">
+                  <badge.icon className="w-[18px] h-[18px] text-orange" />
                 </div>
-                <div className="min-w-0">
-                  <p className="text-[14px] font-[800] text-text-dark leading-tight">
+                <div className="min-w-0 pt-[2px]">
+                  <p className="text-[13.5px] sm:text-[14px] font-[800] text-text-dark leading-[1.25]">
                     {badge.label}
                   </p>
-                  <p className="text-[14px] font-[800] text-text-dark leading-tight mt-0.5">
+                  <p className="text-[13.5px] sm:text-[14px] font-[800] text-text-dark leading-[1.25]">
                     {badge.sublabel}
                   </p>
                 </div>
@@ -403,12 +403,11 @@ export default function HomePage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {services.map((service) => (
-              <Link
+              <div
                 key={service.slug}
-                href={`/services/${service.slug}`}
-                className="group bg-white rounded-[18px] p-8 border border-border-light hover:border-orange/30 hover:shadow-lg transition-all duration-300"
+                className="bg-white rounded-[18px] p-8 border border-border-light"
               >
-                <div className="w-14 h-14 rounded-[14px] bg-badge-bg flex items-center justify-center mb-5 group-hover:bg-orange/10 transition-colors">
+                <div className="w-14 h-14 rounded-[14px] bg-badge-bg flex items-center justify-center mb-5">
                   <service.icon className="w-6 h-6 text-orange" />
                 </div>
                 <h3 className="text-xl font-[700] text-text-dark mb-3">
@@ -417,10 +416,7 @@ export default function HomePage() {
                 <p className="text-text-muted leading-relaxed text-[15px]">
                   {service.description}
                 </p>
-                <span className="inline-flex items-center gap-1 text-orange font-[600] text-[14px] mt-4 group-hover:gap-2 transition-all">
-                  Learn More <ChevronRight className="w-4 h-4" />
-                </span>
-              </Link>
+              </div>
             ))}
           </div>
 
@@ -544,7 +540,7 @@ export default function HomePage() {
       {/* ========== REVIEWS ========== */}
       <section className="bg-light-bg section-padding">
         <div className="container-site">
-          <div className="grid lg:grid-cols-[340px_1fr] gap-10 lg:gap-12">
+          <div className="grid lg:grid-cols-[340px_1fr] gap-8 lg:gap-12">
             {/* Rating Summary */}
             <div className="bg-white rounded-[18px] p-8 border border-border-light text-center lg:text-left self-start">
               <SectionLabel>Reviews</SectionLabel>
@@ -561,51 +557,29 @@ export default function HomePage() {
                   />
                 ))}
               </div>
-              <p className="text-text-muted text-[14px] mb-4">
-                Based on 200+ Google reviews
+              <p className="text-text-muted text-[14px] mb-5">
+                Real reviews from happy neighbors across San Mateo County.
               </p>
               <a
-                href="https://google.com"
+                href="https://share.google/g7zNtg0V0XtDAKYCA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-orange font-[600] text-[14px]"
+                className="inline-flex items-center gap-2 text-orange font-[700] text-[14px] hover:gap-3 transition-all"
               >
-                View on Google <ArrowRight className="w-3.5 h-3.5" />
+                Read all on Google <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
-            {/* Testimonial Cards */}
-            <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-5">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-[18px] p-7 border border-border-light"
-                >
-                  <div className="flex items-center gap-1 mb-3">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className="w-4 h-4 fill-orange text-orange"
-                      />
-                    ))}
-                  </div>
-                  <p className="text-text-dark text-[15px] leading-relaxed mb-4">
-                    &ldquo;{testimonial.text}&rdquo;
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-[700] text-text-dark text-[14px]">
-                        {testimonial.name}
-                      </p>
-                      <p className="text-text-muted text-[13px]">
-                        {testimonial.location}
-                      </p>
-                    </div>
-                    <span className="text-[12px] font-[600] text-text-muted bg-light-bg px-3 py-1 rounded-full">
-                      {testimonial.service}
-                    </span>
-                  </div>
-                </div>
-              ))}
+
+            {/* Housecall Pro Reviews Widget — wrapped in brand chrome */}
+            <div className="bg-white rounded-[18px] border border-border-light overflow-hidden">
+              <div className="relative w-full" style={{ height: "620px" }}>
+                <iframe
+                  src="https://client.housecallpro.com/reviews/widget/419e6050-bc8f-4dc9-9053-e6abd3bc5229"
+                  title="Verified customer reviews for TechPro Heating & Cooling"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full border-0"
+                />
+              </div>
             </div>
           </div>
         </div>

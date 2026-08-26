@@ -7,11 +7,11 @@ import { placeholderImage } from "@/lib/placeholder";
 import {
   ChevronRight,
   MapPin,
-  ArrowRight,
   Phone,
+  CalendarCheck,
 } from "lucide-react";
 import SectionLabel from "@/components/ui/SectionLabel";
-import { PHONE, PHONE_HREF } from "@/lib/constants";
+import { PHONE, PHONE_HREF, BOOKING_URL } from "@/lib/constants";
 
 /* ------------------------------------------------------------------ */
 /*  DATA                                                               */
@@ -272,13 +272,15 @@ export default function ProjectsPage() {
               <Phone className="w-4 h-4" />
               Call {PHONE}
             </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white font-[600] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] border border-white/30"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-orange hover:bg-orange-hover text-white font-[700] px-7 py-3.5 rounded-[12px] transition-colors text-[15px]"
             >
-              Get Free Estimate
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              <CalendarCheck className="w-4 h-4" />
+              Schedule Online
+            </a>
           </div>
         </div>
       </section>
