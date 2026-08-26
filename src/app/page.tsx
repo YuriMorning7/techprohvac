@@ -71,9 +71,11 @@ export const metadata: Metadata = {
 
 const trustBadges = [
   { icon: CalendarCheck, label: "Established in", sublabel: "2005" },
-  { icon: Heart, label: "Father & Son", sublabel: "Owned" },
-  { icon: MapPin, label: "Based in", sublabel: "San Carlos" },
-  { icon: Users, label: "Serving San Mateo", sublabel: "County" },
+  { icon: Users, label: "Father & Son", sublabel: "Owned" },
+  { icon: Shield, label: "Based in", sublabel: "San Carlos" },
+  { icon: Shield, label: "Serving San", sublabel: "Mateo County" },
+  { icon: Shield, label: "Licensed", sublabel : "Insured"},
+  { icon: Award, label: "Residential &", sublabel: "Light Commercial" },
 ];
 
 const services = [
@@ -365,20 +367,20 @@ export default function HomePage() {
       {/* ========== TRUST BADGES ========== */}
       <section className="bg-white border-b border-border-light">
         <div className="container-site py-8">
-          <div className="flex flex-wrap justify-center gap-x-10 gap-y-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-5">
             {trustBadges.map((badge) => (
               <div
                 key={badge.label}
-                className="flex items-center gap-3"
+                className="flex items-center gap-2.5 justify-center lg:justify-start"
               >
-                <div className="w-11 h-11 rounded-[14px] bg-badge-bg flex items-center justify-center shrink-0">
-                  <badge.icon className="w-5 h-5 text-orange" />
+                <div className="w-9 h-9 rounded-[10px] bg-badge-bg flex items-center justify-center shrink-0">
+                  <badge.icon className="w-4 h-4 text-orange" />
                 </div>
-                <div>
-                  <p className="text-[14px] font-[800] text-text-dark leading-tight">
+                <div className="min-w-0">
+                  <p className="text-[12.5px] font-[800] text-text-dark leading-tight">
                     {badge.label}
                   </p>
-                  <p className="text-[14px] font-[800] text-text-dark leading-tight mt-0.5">
+                  <p className="text-[12.5px] font-[800] text-text-dark leading-tight mt-0.5">
                     {badge.sublabel}
                   </p>
                 </div>
