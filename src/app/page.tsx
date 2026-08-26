@@ -70,7 +70,7 @@ export const metadata: Metadata = {
 /* ------------------------------------------------------------------ */
 
 const trustBadges = [
-  { icon: Users, label: "Family Owned", sublabel: "Since 2005" },
+  { icon: Users, label: "Established in", sublabel: "2005" },
   { icon: Shield, label: "Licensed & Insured", sublabel: LICENSE },
   { icon: Award, label: "EPA Certified", sublabel: "Certified Technicians" },
   { icon: Clock, label: "24/7 Service", sublabel: "Emergency Available" },
@@ -314,15 +314,14 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="max-w-xl">
               <span className="inline-block text-[13px] font-[700] tracking-[.13em] uppercase text-orange mb-4">
-                San Mateo County&apos;s Trusted HVAC Experts
+                Local father & son HVAC Company 
               </span>
               <h1 className="text-[clamp(32px,4.4vw,52px)] font-[800] tracking-[-.02em] leading-[1.1] mb-6">
                 <span className="block">San Mateo County’s</span>
                 <span className="block">Heat Pump Specialists</span>
               </h1>
               <p className="text-lg text-white/80 leading-relaxed mb-8 max-w-md">
-                Family-owned since 2005. Professional HVAC installation, repair,
-                and maintenance for homes and businesses across San Mateo County.
+              Learn more about switching from gas to electric heating & cooling ...
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
@@ -376,10 +375,10 @@ export default function HomePage() {
                   <badge.icon className="w-5 h-5 text-orange" />
                 </div>
                 <div>
-                  <p className="text-[14px] font-[700] text-text-dark leading-tight">
+                  <p className="text-[14px] font-[800] text-text-dark leading-tight">
                     {badge.label}
                   </p>
-                  <p className="text-[12px] text-text-muted leading-tight">
+                  <p className="text-[12px] font-[700] text-text-muted leading-tight mt-0.5">
                     {badge.sublabel}
                   </p>
                 </div>
