@@ -71,10 +71,9 @@ export const metadata: Metadata = {
 
 const trustBadges = [
   { icon: CalendarCheck, label: "Established in", sublabel: "2005" },
-  { icon: Users, label: "Father & Son", sublabel: "Owned" },
-  { icon: Shield, label: "Licensed & Insured", sublabel: LICENSE },
-  { icon: Award, label: "EPA Certified", sublabel: "Certified Technicians" },
-  { icon: Clock, label: "24/7 Service", sublabel: "Emergency Available" },
+  { icon: Heart, label: "Father & Son", sublabel: "Owned" },
+  { icon: MapPin, label: "Based in", sublabel: "San Carlos" },
+  { icon: Users, label: "Serving San Mateo", sublabel: "County" },
 ];
 
 const services = [
@@ -366,11 +365,11 @@ export default function HomePage() {
       {/* ========== TRUST BADGES ========== */}
       <section className="bg-white border-b border-border-light">
         <div className="container-site py-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+          <div className="flex flex-wrap justify-center gap-x-10 gap-y-6">
             {trustBadges.map((badge) => (
               <div
                 key={badge.label}
-                className="flex items-center gap-3 justify-center md:justify-start"
+                className="flex items-center gap-3"
               >
                 <div className="w-11 h-11 rounded-[14px] bg-badge-bg flex items-center justify-center shrink-0">
                   <badge.icon className="w-5 h-5 text-orange" />
