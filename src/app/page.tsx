@@ -423,12 +423,11 @@ export default function HomePage() {
           {/* CTA Banner */}
           <div className="mt-10 bg-navy rounded-[18px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <h3 className="text-xl font-[700] text-white mb-1">
-                Need emergency HVAC service?
+              <h3 className="text-xl font-[700] text-white mb-1 uppercase tracking-wide">
+                Ready to schedule?
               </h3>
               <p className="text-white/70 text-[15px]">
-                Our 24/7 answering service ensures you are never left without
-                help.
+              Book your appointment anytime with our 24/7 online scheduling.
               </p>
             </div>
             <Link
