@@ -74,7 +74,7 @@ const trustBadges = [
   { icon: Users, label: "Father & Son", sublabel: "Owned" },
   { icon: Shield, label: "Based in", sublabel: "San Carlos" },
   { icon: Shield, label: "Serving San", sublabel: "Mateo County" },
-  { icon: Shield, label: "Licensed", sublabel : "Insured"},
+  { icon: Shield, label: "Licensed &", sublabel : "Insured"},
   { icon: Award, label: "Residential &", sublabel: "Light Commercial" },
 ];
 
@@ -377,10 +377,10 @@ export default function HomePage() {
                   <badge.icon className="w-4 h-4 text-orange" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[12.5px] font-[800] text-text-dark leading-tight">
+                  <p className="text-[14px] font-[800] text-text-dark leading-tight">
                     {badge.label}
                   </p>
-                  <p className="text-[12.5px] font-[800] text-text-dark leading-tight mt-0.5">
+                  <p className="text-[14px] font-[800] text-text-dark leading-tight mt-0.5">
                     {badge.sublabel}
                   </p>
                 </div>
