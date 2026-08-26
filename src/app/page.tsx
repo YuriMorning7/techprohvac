@@ -430,13 +430,15 @@ export default function HomePage() {
               Book your appointment anytime with our 24/7 online scheduling.
               </p>
             </div>
-            <Link
-              href="/contact"
+            <a
+              href="https://book.housecallpro.com/book/Techpro-Heating--Cooling/cc0bcd03c19a4600b90514f4a5edeee0?v2=true"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-orange hover:bg-orange-hover text-white font-[700] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] shrink-0"
             >
               <CalendarCheck className="w-4 h-4" />
               Schedule online
-            </Link>
+            </a>
           </div>
         </div>
       </section>
