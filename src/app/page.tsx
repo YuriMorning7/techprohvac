@@ -13,9 +13,9 @@ import {
   Flame,
   Droplets,
   Wind,
-  Gauge,
-  Layers,
   Fan,
+  Box,
+  AirVent,
   Star,
   CheckCircle,
   Phone,
@@ -102,13 +102,13 @@ const services = [
 
 const productCategories = [
   { icon: ThermometerSun, title: "Heat Pumps", slug: "heat-pumps" },
-  { icon: Flame, title: "Furnaces", slug: "furnaces" },
-  { icon: Snowflake, title: "Air Conditioners", slug: "air-conditioners" },
+  { icon: Fan, title: "Mini-Split Systems", slug: "mini-split-systems" },
   { icon: Droplets, title: "Water Heaters", slug: "water-heaters" },
-  { icon: Gauge, title: "Thermostats", slug: "thermostats" },
-  { icon: Fan, title: "Ductless Systems", slug: "ductless-systems" },
+  { icon: AirVent, title: "Ductwork", slug: "ductwork" },
+  { icon: Flame, title: "Gas Furnaces", slug: "gas-furnaces" },
+  { icon: Snowflake, title: "Air Conditioners", slug: "air-conditioners" },
   { icon: Wind, title: "Indoor Air Quality", slug: "indoor-air-quality" },
-  { icon: Layers, title: "Zoning Systems", slug: "zoning-systems" },
+  { icon: Box, title: "Packaged Units", slug: "packaged-units" },
 ];
 
 const whyTechPro = [
@@ -423,6 +423,7 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+
           {/* CTA Banner */}
           <div className="mt-10 bg-navy rounded-[18px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
@@ -450,13 +451,11 @@ export default function HomePage() {
       <section className="bg-white section-padding">
         <div className="container-site">
           <div className="text-center mb-12">
-            <SectionLabel>Equipment We Install</SectionLabel>
             <SectionTitle className="mt-3">
-              Quality Products, Expert Installation
+              Our Products
             </SectionTitle>
             <p className="text-text-muted text-lg mt-4 max-w-2xl mx-auto">
-              We install and service all major HVAC brands. Browse our product
-              categories to find the right solution for your home.
+              HVAC Products & Equipment We install, Repair or Maintain.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -486,100 +485,61 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ========== WHY TECHPRO ========== */}
-      <section className="bg-navy section-padding">
+      {/* ========== SERVICE AREAS ========== */}
+      <section
+        id="service-areas"
+        className="bg-white section-padding scroll-mt-[100px]"
+      >
         <div className="container-site">
-          <div className="text-center mb-12">
-            <span className="inline-block text-[13px] font-[700] tracking-[.13em] uppercase text-orange">
-              Why Choose Us
-            </span>
-            <h2 className="text-[clamp(30px,3.2vw,44px)] font-[800] tracking-[-.02em] text-white leading-[1.15] mt-3">
-              The TechPro Difference
-            </h2>
-            <p className="text-white/60 text-lg mt-4 max-w-2xl mx-auto">
-              We are more than an HVAC company. We are your neighbors, committed
-              to keeping San Mateo County comfortable.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {whyTechPro.map((item) => (
-              <div
-                key={item.title}
-                className="bg-white/[0.06] rounded-[18px] p-7 border border-white/10 hover:bg-white/[0.1] transition-colors"
-              >
-                <div className="w-12 h-12 rounded-[14px] bg-orange/10 flex items-center justify-center mb-4">
-                  <item.icon className="w-5 h-5 text-orange" />
-                </div>
-                <h3 className="text-lg font-[700] text-white mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-white/60 text-[14px] leading-relaxed">
-                  {item.description}
-                </p>
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div>
+              <SectionTitle className="mt-3">
+                Serving San Mateo County
+              </SectionTitle>
+              <p className="text-text-muted text-lg mt-4 mb-8">
+                Based in San Carlos,  We keep our service area local for faster & more reliable HVAC service.
+              </p>
+              <h3 className="text-lg font-[700] text-text-dark mb-5">
+                Cities We Serve
+              </h3>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+                {serviceAreas.map((city) => (
+                  <div key={city} className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-success shrink-0" />
+                    <span className="text-[15px] text-text-dark">{city}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <ServiceAreaMap
+              defaultQuery="San Mateo County, CA"
+              defaultLabel="San Mateo County"
+            />
+          </div>
+                    {/* CTA Banner */}
+          <div className="mt-10 bg-navy rounded-[18px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h3 className="text-xl font-[700] text-white mb-1 uppercase tracking-wide">
+                CHECK YOUR SERVICE AREA
+              </h3>
+              <p className="text-white/70 text-[15px]">
+                Enter your ZIP code to confirm availability & schedule online.
+              </p>
+            </div>
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-orange hover:bg-orange-hover text-white font-[700] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] shrink-0"
+            >
+              <CalendarCheck className="w-4 h-4" />
+              Schedule Online
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ========== RECENT PROJECTS ========== */}
-      <section className="bg-white section-padding">
-        <div className="container-site">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div>
-              <SectionLabel>Recent Projects</SectionLabel>
-              <SectionTitle className="mt-3">Our Latest Work</SectionTitle>
-            </div>
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 text-orange font-[600] text-[15px] hover:gap-3 transition-all"
-            >
-              View All Projects <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {recentProjects.map((project) => (
-              <Link
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                className="group bg-light-bg rounded-[18px] overflow-hidden border border-border-light hover:shadow-lg hover:border-orange/20 transition-all duration-300"
-              >
-                <div className="aspect-[16/10] bg-border-light relative overflow-hidden">
-                  <Image
-                    src={placeholderImage(project.imageTags, {
-                      w: 800,
-                      h: 500,
-                      seed: `home-proj-${project.slug}`,
-                    })}
-                    alt={`${project.title} (placeholder)`}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                  <div className="absolute top-3 left-3">
-                    <span className="text-[11px] font-[700] bg-white/95 backdrop-blur text-navy px-3 py-1 rounded-full">
-                      {project.category}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-1 text-text-muted text-[13px] mb-2">
-                    <MapPin className="w-3.5 h-3.5" />
-                    {project.location}
-                  </div>
-                  <h3 className="text-lg font-[700] text-text-dark mb-2 group-hover:text-orange transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-text-muted text-[14px] leading-relaxed line-clamp-2">
-                    {project.description}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* ========== REVIEWS ========== */}
       <section className="bg-light-bg section-padding">
@@ -651,92 +611,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ========== SERVICE AREAS ========== */}
-      <section
-        id="service-areas"
-        className="bg-white section-padding scroll-mt-[100px]"
-      >
-        <div className="container-site">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <SectionLabel>Service Areas</SectionLabel>
-              <SectionTitle className="mt-3">
-                Serving San Mateo County
-              </SectionTitle>
-              <p className="text-text-muted text-lg mt-4 mb-8">
-                We proudly serve {CITIES_SERVED} cities across San Mateo County
-                and surrounding areas.
-              </p>
-              <h3 className="text-lg font-[700] text-text-dark mb-5">
-                Cities We Serve
-              </h3>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-                {serviceAreas.map((city) => (
-                  <div key={city} className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-success shrink-0" />
-                    <span className="text-[15px] text-text-dark">{city}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <ServiceAreaMap
-              defaultQuery="San Mateo County, CA"
-              defaultLabel="San Mateo County"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ========== ABOUT / STATS ========== */}
-      <section className="bg-light-bg section-padding">
-        <div className="container-site">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <SectionLabel>About TechPro</SectionLabel>
-              <SectionTitle className="mt-3">
-                {YEARS_IN_BUSINESS} Years of Trusted Service
-              </SectionTitle>
-              <p className="text-text-muted text-lg mt-4 mb-8 leading-relaxed">
-                Since 2005, TechPro Heating &amp; Cooling has been the trusted
-                choice for HVAC services in San Mateo County. As a
-                family-owned business, we bring a personal touch to every
-                job, large or small.
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                {stats.map((stat) => (
-                  <div key={stat.label}>
-                    <p className="text-3xl font-[800] text-navy">
-                      {stat.value}
-                    </p>
-                    <p className="text-text-muted text-[13px] mt-1">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 text-orange font-[600] text-[15px] hover:gap-3 transition-all"
-              >
-                Learn More About Us <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-            <div className="relative rounded-[18px] overflow-hidden aspect-[4/3] bg-light-bg">
-              <Image
-                src={placeholderImage("hvac,technician,workshop", {
-                  w: 960,
-                  h: 720,
-                  seed: "techpro-crew",
-                })}
-                alt="TechPro Heating & Cooling crew (placeholder)"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ========== CONTACT CTA ========== */}
       <section className="bg-orange section-padding">
@@ -744,11 +618,10 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div className="text-white">
               <h2 className="text-[clamp(30px,3.2vw,44px)] font-[800] tracking-[-.02em] leading-[1.15] mb-4">
-                Ready for Reliable HVAC Service?
+                Ready to contact Techpro?
               </h2>
               <p className="text-white/80 text-lg mb-8 leading-relaxed">
-                Get a free estimate or schedule a service call today. Our team is
-                ready to help.
+                Send a message to the Techpro team by filling out the form or call/text directly.
               </p>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-4">
