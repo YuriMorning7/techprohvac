@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ChevronRight, Menu, Phone, X } from "lucide-react";
-import { PHONE, PHONE_HREF } from "@/lib/constants";
+import { PHONE, PHONE_HREF, BOOKING_URL } from "@/lib/constants";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -84,12 +84,14 @@ export default function Header() {
             <Phone className="w-[18px] h-[18px] shrink-0" />
             {PHONE}
           </a>
-          <Link
-            href="/contact"
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center h-[48px] px-6 2xl:px-7 bg-[#DF6339] rounded-lg text-white text-[15px] 2xl:text-[16px] font-[700] whitespace-nowrap hover:bg-[#c8562f] transition-colors"
           >
             Schedule Online
-          </Link>
+          </a>
         </div>
 
         {/* Mobile/Tablet Toggle */}
@@ -200,13 +202,15 @@ export default function Header() {
               <Phone className="w-[18px] h-[18px]" />
               {PHONE}
             </a>
-            <Link
-              href="/contact"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center h-[50px] bg-[#DF6339] hover:bg-[#c8562f] rounded-[12px] text-white text-[15px] font-[700] transition-colors shadow-[0_6px_18px_rgba(223,99,57,0.35)]"
             >
               Schedule Online
-            </Link>
+            </a>
           </div>
         </nav>
       </div>

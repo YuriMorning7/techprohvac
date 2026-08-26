@@ -47,6 +47,7 @@ import {
   GOOGLE_RATING,
   YEARS_IN_BUSINESS,
   CITIES_SERVED,
+  BOOKING_URL,
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -330,13 +331,15 @@ export default function HomePage() {
                   <Phone className="w-4 h-4" />
                   Call {PHONE}
                 </Link>
-                <Link
-                  href="/contact"
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-[600] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] border border-white/20"
                 >
-                  Get Free Estimate
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                  <CalendarCheck className="w-4 h-4" />
+                  Schedule Online
+                </a>
               </div>
             </div>
             <div className="relative hidden lg:flex items-center justify-center lg:justify-end lg:-mr-6 xl:-mr-12">
@@ -431,13 +434,13 @@ export default function HomePage() {
               </p>
             </div>
             <a
-              href="https://book.housecallpro.com/book/Techpro-Heating--Cooling/cc0bcd03c19a4600b90514f4a5edeee0?v2=true"
+              href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-orange hover:bg-orange-hover text-white font-[700] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] shrink-0"
             >
               <CalendarCheck className="w-4 h-4" />
-              Schedule online
+              Schedule Online
             </a>
           </div>
         </div>

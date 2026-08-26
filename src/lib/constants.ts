@@ -10,3 +10,5 @@ export const EMERGENCY_HOURS = "Answering service 24/7"
 export const GOOGLE_RATING = "4.9"
 export const YEARS_IN_BUSINESS = "20+"
 export const CITIES_SERVED = "18"
+export const BOOKING_URL =
+  "https://book.housecallpro.com/book/Techpro-Heating--Cooling/cc0bcd03c19a4600b90514f4a5edeee0?v2=true"
