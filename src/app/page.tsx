@@ -81,9 +81,8 @@ const trustBadges = [
 const services = [
   {
     icon: Settings,
-    title: "Installation",
-    description:
-      "Expert installation of heating and cooling systems, sized and configured for maximum comfort and efficiency.",
+    title: "Estimates",
+    description: "Replace or install a new system.",
     slug: "installation",
   },
   {
@@ -394,13 +393,11 @@ export default function HomePage() {
       <section className="bg-light-bg section-padding">
         <div className="container-site">
           <div className="text-center mb-12">
-            <SectionLabel>Our Services</SectionLabel>
             <SectionTitle className="mt-3">
-              Comprehensive HVAC Solutions
+              Our Services
             </SectionTitle>
             <p className="text-text-muted text-lg mt-4 max-w-2xl mx-auto">
-              From installation to maintenance, we provide complete heating and
-              cooling services for residential and commercial properties.
+              Complete Heating & Cooling Services for Your Home or Business.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
