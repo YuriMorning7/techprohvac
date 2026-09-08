@@ -2,26 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Shield,
   Award,
   Clock,
   Users,
-  Wrench,
-  Settings,
-  ThermometerSun,
-  Snowflake,
-  Flame,
-  Droplets,
   Wind,
-  Fan,
-  Box,
-  AirVent,
   Star,
   CheckCircle,
   Phone,
   MapPin,
   ArrowRight,
-  ChevronRight,
   Headphones,
   BadgeCheck,
   Zap,
@@ -33,7 +22,6 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import SectionTitle from "@/components/ui/SectionTitle";
 import ContactForm from "@/components/ui/ContactForm";
 import ServiceAreaMap from "@/components/ui/ServiceAreaMap";
-import { placeholderImage } from "@/lib/placeholder";
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
@@ -41,9 +29,7 @@ import {
   PHONE_HREF,
   ADDRESS,
   CITY_STATE_ZIP,
-  LICENSE,
   OFFICE_HOURS,
-  EMERGENCY_HOURS,
   GOOGLE_RATING,
   YEARS_IN_BUSINESS,
   CITIES_SERVED,
@@ -81,19 +67,22 @@ const trustBadges = [
 
 const services = [
   {
-    icon: Settings,
+    image: "/images/Estimates.jpeg",
+    tint: "bg-green-50",
     title: "Estimates",
     description: "Replace or install a new system.",
     slug: "installation",
   },
   {
-    icon: Wrench,
+    image: "/images/Repairs.jpeg",
+    tint: "bg-red-50",
     title: "Repairs",
     description: "Troubleshoot & diagnose your existing system.",
     slug: "repairs",
   },
   {
-    icon: CalendarCheck,
+    image: "/images/Maintenance.jpeg",
+    tint: "bg-blue-50",
     title: "Maintenance",
     description: "Tune-up & protect your existing system.",
     slug: "maintenance",
@@ -101,14 +90,14 @@ const services = [
 ];
 
 const productCategories = [
-  { icon: ThermometerSun, title: "Heat Pumps", slug: "heat-pumps" },
-  { icon: Fan, title: "Mini-Split Systems", slug: "mini-split-systems" },
-  { icon: Droplets, title: "Water Heaters", slug: "water-heaters" },
-  { icon: AirVent, title: "Ductwork", slug: "ductwork" },
-  { icon: Flame, title: "Gas Furnaces", slug: "gas-furnaces" },
-  { icon: Snowflake, title: "Air Conditioners", slug: "air-conditioners" },
-  { icon: Wind, title: "Indoor Air Quality", slug: "indoor-air-quality" },
-  { icon: Box, title: "Packaged Units", slug: "packaged-units" },
+  { image: "/images/Heat pumps.jpeg", title: "Heat Pumps", slug: "heat-pumps" },
+  { image: "/images/Mini Split System.jpeg", title: "Mini-Split Systems", slug: "mini-split-systems" },
+  { image: "/images/Water Heaters.jpeg", title: "Water Heaters", slug: "water-heaters" },
+  { image: "/images/Ductwork.jpeg", title: "Ductwork", slug: "ductwork" },
+  { image: "/images/Gas furnaces.jpeg", title: "Gas Furnaces", slug: "gas-furnaces" },
+  { image: "/images/Air conditioners.jpeg", title: "Air Conditioners", slug: "air-conditioners" },
+  { image: "/images/Indoor air quality.jpeg", title: "Indoor Air Quality", slug: "indoor-air-quality" },
+  { image: "/images/Packaged units.jpeg", title: "Packaged Units", slug: "packaged-units" },
 ];
 
 const whyTechPro = [
@@ -310,8 +299,8 @@ export default function HomePage() {
 
       {/* ========== HERO ========== */}
       <section className="relative bg-navy text-white overflow-hidden">
-        <div className="container-site relative z-10 py-20 md:py-28 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container-site relative z-10 py-16 md:py-20 lg:py-0 lg:min-h-[calc(100vh-var(--header-height))] flex items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
             <div className="max-w-xl">
               <span className="inline-block text-[13px] font-[700] tracking-[.13em] uppercase text-orange mb-4">
                 Local father & son HVAC Company 
@@ -343,20 +332,34 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative hidden lg:flex items-center justify-center lg:justify-end lg:-mr-6 xl:-mr-12">
-              {/* Soft radial glow behind the van */}
+              {/* Warm orange spotlight behind the van */}
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(241,90,41,0.18),transparent_60%)] pointer-events-none"
+                className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(241,90,41,0.28),transparent_60%)] pointer-events-none"
               />
-              <Image
-                src="/images/van-cut.png"
-                alt="TechPro Heating & Cooling service van"
-                width={1200}
-                height={800}
-                priority
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                className="relative w-full max-w-[720px] xl:max-w-[820px] h-auto drop-shadow-2xl"
-              />
+              {/* Van + floor reflection stack */}
+              <div className="relative w-full max-w-[760px] xl:max-w-[880px]">
+                <Image
+                  src="/images/van-tech.png"
+                  alt="TechPro Heating & Cooling service van with technician at the wheel"
+                  width={612}
+                  height={408}
+                  priority
+                  quality={92}
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="relative w-full h-auto drop-shadow-[0_35px_45px_rgba(0,0,0,0.55)]"
+                />
+                {/* Mirrored floor reflection */}
+                <Image
+                  src="/images/van-tech.png"
+                  alt=""
+                  aria-hidden="true"
+                  width={612}
+                  height={408}
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="absolute inset-x-0 top-full -mt-2 w-full h-auto scale-y-[-1] opacity-25 blur-[3px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.6),transparent_55%)] pointer-events-none"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -407,8 +410,14 @@ export default function HomePage() {
                 key={service.slug}
                 className="bg-white rounded-[18px] p-8 border border-border-light"
               >
-                <div className="w-14 h-14 rounded-[14px] bg-badge-bg flex items-center justify-center mb-5">
-                  <service.icon className="w-6 h-6 text-orange" />
+                <div className={`w-20 h-20 rounded-[18px] ${service.tint} flex items-center justify-center mb-5 overflow-hidden`}>
+                  <Image
+                    src={service.image}
+                    alt={`${service.title} icon`}
+                    width={80}
+                    height={80}
+                    className="w-16 h-16 object-contain mix-blend-multiply"
+                  />
                 </div>
                 <h3 className="text-xl font-[700] text-text-dark mb-3">
                   {service.title}
@@ -459,12 +468,18 @@ export default function HomePage() {
               <Link
                 key={product.slug}
                 href={`/products?category=${product.slug}`}
-                className="group bg-light-bg rounded-[18px] p-6 text-center hover:bg-white hover:shadow-lg hover:border-orange/20 border border-transparent transition-all duration-300"
+                className="group bg-light-bg rounded-[18px] p-4 sm:p-5 text-center hover:bg-white hover:shadow-lg hover:border-orange/20 border border-transparent transition-all duration-300 flex flex-col"
               >
-                <div className="w-14 h-14 rounded-[14px] bg-white flex items-center justify-center mx-auto mb-4 group-hover:bg-badge-bg transition-colors shadow-sm">
-                  <product.icon className="w-6 h-6 text-navy group-hover:text-orange transition-colors" />
+                <div className="relative aspect-square w-full rounded-[14px] bg-white overflow-hidden mb-4 shadow-sm">
+                  <Image
+                    src={product.image}
+                    alt={`${product.title} — TechPro HVAC product`}
+                    fill
+                    sizes="(max-width: 768px) 40vw, 22vw"
+                    className="object-contain p-3 group-hover:scale-[1.04] transition-transform duration-300"
+                  />
                 </div>
-                <h3 className="text-[15px] font-[700] text-text-dark">
+                <h3 className="text-[15px] font-[700] text-text-dark mt-auto">
                   {product.title}
                 </h3>
               </Link>

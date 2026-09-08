@@ -28,7 +28,7 @@ import {
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `About Us | ${SITE_NAME}`,
+  title: "About Us",
   description:
     "Family-owned HVAC company serving San Mateo County since 2005. Learn about our team, values, and commitment to quality heating and cooling services.",
   openGraph: {

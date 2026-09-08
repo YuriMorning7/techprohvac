@@ -19,7 +19,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import { SITE_NAME, PHONE, PHONE_HREF, BOOKING_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Our Services | ${SITE_NAME}`,
+  title: "Our Services",
   description:
     "Professional HVAC services including installation, repairs, and maintenance. Heat pumps, AC, furnaces, water heaters, and more. Serving San Mateo County.",
   openGraph: {

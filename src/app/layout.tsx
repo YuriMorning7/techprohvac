@@ -69,8 +69,11 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
   },
   icons: {
-    icon: "/images/Techpro_logo.png",
-    apple: "/images/Techpro_logo.png",
+    icon: [
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -80,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${archivo.variable} antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${archivo.variable} antialiased`}>
       <body
         className="min-h-screen flex flex-col"
         suppressHydrationWarning

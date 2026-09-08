@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { placeholderImage } from "@/lib/placeholder";
 import {
   ChevronRight,
   ThermometerSun,
@@ -12,8 +11,8 @@ import {
   Droplets,
   Wind,
   Fan,
-  Gauge,
-  Layers,
+  Box,
+  AirVent,
   ArrowRight,
   CalendarCheck,
 } from "lucide-react";
@@ -38,7 +37,7 @@ interface ProductItem {
   category: ProductCategory[];
   brands: string[];
   slug: string;
-  imageTags: string;
+  image: string;
 }
 
 const filterTabs: { value: ProductCategory; label: string }[] = [
@@ -58,27 +57,17 @@ const products: ProductItem[] = [
     category: ["heating", "cooling"],
     brands: ["Carrier", "Lennox", "Trane", "Daikin"],
     slug: "heat-pumps",
-    imageTags: "heat-pump,hvac,outdoor-unit",
+    image: "/images/Heat pumps.jpeg",
   },
   {
-    icon: Flame,
-    title: "Furnaces",
+    icon: Fan,
+    title: "Mini-Split Systems",
     description:
-      "High-efficiency gas and electric furnaces for reliable home heating. Available in single-stage, two-stage, and variable-speed models.",
-    category: ["heating"],
-    brands: ["Carrier", "Lennox", "Trane", "Rheem"],
-    slug: "furnaces",
-    imageTags: "furnace,boiler,heater",
-  },
-  {
-    icon: Snowflake,
-    title: "Air Conditioners",
-    description:
-      "Central air conditioning systems designed for maximum cooling efficiency. SEER ratings up to 26 for significant energy savings.",
-    category: ["cooling"],
-    brands: ["Carrier", "Lennox", "Trane", "Goodman"],
-    slug: "air-conditioners",
-    imageTags: "air-conditioner,ac-unit,condenser",
+      "Ductless mini-split systems for flexible zone-based heating and cooling. Perfect for room additions, garages, and homes without ductwork.",
+    category: ["heating", "cooling"],
+    brands: ["Mitsubishi", "Daikin", "Fujitsu", "LG"],
+    slug: "mini-split-systems",
+    image: "/images/Mini Split System.jpeg",
   },
   {
     icon: Droplets,
@@ -88,27 +77,37 @@ const products: ProductItem[] = [
     category: ["water-air"],
     brands: ["Rheem", "Rinnai", "Navien", "A.O. Smith"],
     slug: "water-heaters",
-    imageTags: "water-heater,tankless,boiler",
+    image: "/images/Water Heaters.jpeg",
   },
   {
-    icon: Gauge,
-    title: "Thermostats",
+    icon: AirVent,
+    title: "Ductwork",
     description:
-      "Smart and programmable thermostats for precise temperature control. Wi-Fi enabled models with app control and energy usage tracking.",
-    category: ["controls"],
-    brands: ["Ecobee", "Honeywell", "Nest", "Carrier"],
-    slug: "thermostats",
-    imageTags: "thermostat,smart-home,nest",
-  },
-  {
-    icon: Fan,
-    title: "Ductless Systems",
-    description:
-      "Ductless mini-split systems for flexible zone-based heating and cooling. Perfect for room additions, garages, and homes without ductwork.",
+      "Custom ductwork design, installation, sealing, and repair. Proper ductwork is the backbone of an efficient HVAC system.",
     category: ["heating", "cooling"],
-    brands: ["Mitsubishi", "Daikin", "Fujitsu", "LG"],
-    slug: "ductless-systems",
-    imageTags: "mini-split,ductless,indoor-unit",
+    brands: ["Custom Fabrication", "Sheet Metal", "Insulated Flex"],
+    slug: "ductwork",
+    image: "/images/Ductwork.jpeg",
+  },
+  {
+    icon: Flame,
+    title: "Gas Furnaces",
+    description:
+      "High-efficiency gas furnaces for reliable home heating. Available in single-stage, two-stage, and variable-speed models with AFUE ratings up to 98%.",
+    category: ["heating"],
+    brands: ["Carrier", "Lennox", "Trane", "Rheem"],
+    slug: "gas-furnaces",
+    image: "/images/Gas furnaces.jpeg",
+  },
+  {
+    icon: Snowflake,
+    title: "Air Conditioners",
+    description:
+      "Central air conditioning systems designed for maximum cooling efficiency. SEER ratings up to 26 for significant energy savings.",
+    category: ["cooling"],
+    brands: ["Carrier", "Lennox", "Trane", "Goodman"],
+    slug: "air-conditioners",
+    image: "/images/Air conditioners.jpeg",
   },
   {
     icon: Wind,
@@ -118,17 +117,17 @@ const products: ProductItem[] = [
     category: ["water-air"],
     brands: ["Aprilaire", "Honeywell", "Carrier", "Lennox"],
     slug: "indoor-air-quality",
-    imageTags: "air-purifier,filter,clean-air",
+    image: "/images/Indoor air quality.jpeg",
   },
   {
-    icon: Layers,
-    title: "Zoning Systems",
+    icon: Box,
+    title: "Packaged Units",
     description:
-      "Multi-zone HVAC controls that let you heat and cool different areas independently. Eliminate hot and cold spots for consistent comfort.",
-    category: ["controls"],
-    brands: ["Honeywell", "Carrier", "EWC Controls", "Arzel"],
-    slug: "zoning-systems",
-    imageTags: "smart-thermostat,zone-control,home-tech",
+      "All-in-one heating and cooling packaged units for homes and light commercial spaces where indoor equipment isn't practical.",
+    category: ["heating", "cooling"],
+    brands: ["Carrier", "Lennox", "Trane", "Rheem"],
+    slug: "packaged-units",
+    image: "/images/Packaged units.jpeg",
   },
 ];
 
@@ -197,20 +196,15 @@ export default function ProductsPage() {
                 key={product.slug}
                 className="group bg-light-bg rounded-[18px] overflow-hidden border border-border-light hover:border-orange/30 hover:shadow-lg transition-all duration-300"
               >
-                {/* Cover image (placeholder) */}
-                <div className="aspect-[4/3] bg-border-lighter relative overflow-hidden">
+                {/* Cover image */}
+                <div className="aspect-[4/3] bg-white relative overflow-hidden">
                   <Image
-                    src={placeholderImage(product.imageTags, {
-                      w: 640,
-                      h: 480,
-                      seed: `prod-${product.slug}`,
-                    })}
-                    alt={`${product.title} (placeholder)`}
+                    src={product.image}
+                    alt={product.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="object-contain p-6 transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 25vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
                   <div className="absolute top-3 left-3 flex items-center gap-2">
                     <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/95 backdrop-blur">
                       <product.icon className="w-4 h-4 text-orange" />

@@ -42,7 +42,7 @@ export default function Header() {
       <div className="container-site h-full flex items-center justify-between gap-4">
         {/* Logo — mark + wordmark */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
-          <div className="relative w-[44px] h-[44px] lg:w-[48px] lg:h-[48px] xl:w-[52px] xl:h-[52px] bg-[#1a2238] rounded-2xl overflow-hidden shrink-0">
+          <div className="relative w-[44px] h-[44px] lg:w-[48px] lg:h-[48px] xl:w-[52px] xl:h-[52px] bg-white rounded-full overflow-hidden shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
             <Image
               src="/images/Techpro_logo.png"
               alt="TechPro Heating & Cooling"

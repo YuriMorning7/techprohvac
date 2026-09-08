@@ -140,3 +140,17 @@
     }
   }
 }
+/* Subtle continuous float for the hero van image. */
+@keyframes van-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.van-float {
+  animation: van-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .van-float { animation: none; }
+}

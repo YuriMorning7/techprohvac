@@ -995,12 +995,12 @@ export async function generateMetadata({
 
   if (!service) {
     return {
-      title: `Service Not Found | ${SITE_NAME}`,
+      title: "Service Not Found",
     };
   }
 
   return {
-    title: `${service.title} | ${SITE_NAME}`,
+    title: service.title,
     description: service.heroDescription,
     openGraph: {
       title: `${service.title} | ${SITE_NAME}`,
