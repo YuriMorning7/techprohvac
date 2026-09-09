@@ -299,8 +299,8 @@ export default function HomePage() {
 
       {/* ========== HERO ========== */}
       <section className="relative bg-navy text-white overflow-hidden">
-        <div className="container-site relative z-10 py-12 md:py-16 lg:py-0 lg:min-h-[calc(100vh-var(--header-height))] flex items-center">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
+        <div className="container-site relative z-10 py-6 md:py-10 lg:py-0 lg:min-h-[calc(100vh-var(--header-height))] flex items-center">
+          <div className="grid lg:grid-cols-2 gap-3 lg:gap-12 items-center w-full">
             <div className="max-w-xl order-2 lg:order-1">
               <span className="inline-block text-[13px] font-[700] tracking-[.13em] uppercase text-orange mb-4">
                 Local father & son HVAC Company 
@@ -342,8 +342,8 @@ export default function HomePage() {
                 <Image
                   src="/images/techprovan.png"
                   alt="TechPro Heating & Cooling service van with technician at the wheel"
-                  width={1024}
-                  height={1024}
+                  width={894}
+                  height={416}
                   priority
                   quality={92}
                   sizes="(max-width: 640px) 360px, (max-width: 1024px) 440px, 60vw"
@@ -354,8 +354,8 @@ export default function HomePage() {
                   src="/images/techprovan.png"
                   alt=""
                   aria-hidden="true"
-                  width={1024}
-                  height={1024}
+                  width={894}
+                  height={416}
                   sizes="60vw"
                   className="hidden lg:block absolute inset-x-0 top-full -mt-16 w-full h-auto scale-y-[-1] opacity-25 blur-[3px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.6),transparent_55%)] pointer-events-none"
                 />
