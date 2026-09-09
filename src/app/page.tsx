@@ -299,9 +299,9 @@ export default function HomePage() {
 
       {/* ========== HERO ========== */}
       <section className="relative bg-navy text-white overflow-hidden">
-        <div className="container-site relative z-10 py-16 md:py-20 lg:py-0 lg:min-h-[calc(100vh-var(--header-height))] flex items-center">
-          <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
-            <div className="max-w-xl">
+        <div className="container-site relative z-10 py-12 md:py-16 lg:py-0 lg:min-h-[calc(100vh-var(--header-height))] flex items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
+            <div className="max-w-xl order-2 lg:order-1">
               <span className="inline-block text-[13px] font-[700] tracking-[.13em] uppercase text-orange mb-4">
                 Local father & son HVAC Company 
               </span>
@@ -331,33 +331,33 @@ export default function HomePage() {
                 </a>
               </div>
             </div>
-            <div className="relative hidden lg:flex items-center justify-center lg:justify-end lg:-mr-6 xl:-mr-12">
+            <div className="relative flex items-center justify-center lg:justify-end order-1 lg:order-2 lg:-mr-6 xl:-mr-12">
               {/* Warm orange spotlight behind the van */}
               <div
                 aria-hidden="true"
                 className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(241,90,41,0.28),transparent_60%)] pointer-events-none"
               />
               {/* Van + floor reflection stack */}
-              <div className="relative w-full max-w-[760px] xl:max-w-[880px]">
+              <div className="relative w-full max-w-[360px] sm:max-w-[440px] lg:max-w-[760px] xl:max-w-[880px]">
                 <Image
-                  src="/images/van-tech.png"
+                  src="/images/techprovan.png"
                   alt="TechPro Heating & Cooling service van with technician at the wheel"
-                  width={612}
-                  height={408}
+                  width={1024}
+                  height={1024}
                   priority
                   quality={92}
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                  className="relative w-full h-auto drop-shadow-[0_35px_45px_rgba(0,0,0,0.55)]"
+                  sizes="(max-width: 640px) 360px, (max-width: 1024px) 440px, 60vw"
+                  className="relative w-full h-auto drop-shadow-[0_25px_35px_rgba(0,0,0,0.45)] lg:drop-shadow-[0_35px_45px_rgba(0,0,0,0.55)]"
                 />
-                {/* Mirrored floor reflection */}
+                {/* Mirrored floor reflection — desktop only, keeps mobile lean */}
                 <Image
-                  src="/images/van-tech.png"
+                  src="/images/techprovan.png"
                   alt=""
                   aria-hidden="true"
-                  width={612}
-                  height={408}
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                  className="absolute inset-x-0 top-full -mt-2 w-full h-auto scale-y-[-1] opacity-25 blur-[3px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.6),transparent_55%)] pointer-events-none"
+                  width={1024}
+                  height={1024}
+                  sizes="60vw"
+                  className="hidden lg:block absolute inset-x-0 top-full -mt-16 w-full h-auto scale-y-[-1] opacity-25 blur-[3px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.6),transparent_55%)] pointer-events-none"
                 />
               </div>
             </div>
