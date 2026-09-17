@@ -42,22 +42,21 @@ export default function Header() {
       <div className="container-site h-full flex items-center justify-between gap-4">
         {/* Logo — mark + wordmark */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
-          <div className="relative w-[44px] h-[44px] lg:w-[48px] lg:h-[48px] xl:w-[52px] xl:h-[52px] bg-white rounded-full overflow-hidden shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.15)]">
-            <Image
-              src="/images/Techpro_logo.png"
-              alt="TechPro Heating & Cooling"
-              fill
-              priority
-              sizes="52px"
-              className="object-contain p-[10%]"
-            />
-          </div>
-          <div className="flex flex-col">
+          <Image
+            src="/images/Techpro_logo.png"
+            alt="TechPro Heating & Cooling"
+            width={1192}
+            height={1193}
+            priority
+            sizes="64px"
+            className="h-[56px] lg:h-[60px] xl:h-[64px] w-auto shrink-0 object-contain"
+          />
+          <div className="flex flex-col items-start">
             <span className="text-[19px] lg:text-[22px] xl:text-[25px] font-[900] text-white leading-none tracking-tight">
               TECHPRO
             </span>
-            <span className="text-[11px] lg:text-[11px] xl:text-[12px] font-[700] text-orange tracking-[.14em] leading-none mt-[5px] xl:mt-[6px]">
-              HEATING &amp; COOLING
+            <span className="text-[10.5px] lg:text-[12px] xl:text-[13px] font-[600] text-orange leading-none mt-[5px] xl:mt-[6px] self-stretch flex justify-between">
+              <span>H</span><span>e</span><span>a</span><span>t</span><span>i</span><span>n</span><span>g</span><span>&nbsp;&amp;&nbsp;</span><span>C</span><span>o</span><span>o</span><span>l</span><span>i</span><span>n</span><span>g</span>
             </span>
           </div>
         </Link>

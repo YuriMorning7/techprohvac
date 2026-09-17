@@ -349,16 +349,6 @@ export default function HomePage() {
                   sizes="(max-width: 640px) 360px, (max-width: 1024px) 440px, 60vw"
                   className="relative w-full h-auto drop-shadow-[0_25px_35px_rgba(0,0,0,0.45)] lg:drop-shadow-[0_35px_45px_rgba(0,0,0,0.55)]"
                 />
-                {/* Mirrored floor reflection — desktop only, keeps mobile lean */}
-                <Image
-                  src="/images/techprovan.png"
-                  alt=""
-                  aria-hidden="true"
-                  width={894}
-                  height={416}
-                  sizes="60vw"
-                  className="hidden lg:block absolute inset-x-0 top-full -mt-16 w-full h-auto scale-y-[-1] opacity-25 blur-[3px] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,0.6),transparent_55%)] pointer-events-none"
-                />
               </div>
             </div>
           </div>
