@@ -9,11 +9,11 @@ import { PHONE, PHONE_HREF, BOOKING_URL } from "@/lib/constants";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Products", href: "/products" },
-  { label: "Projects", href: "/projects" },
+  { label: "Services", href: "/#services" },
+  { label: "Products", href: "/#products" },
+  // { label: "Projects", href: "/projects" }, // hidden for now — page still exists
   { label: "Service Areas", href: "/#service-areas" },
-  { label: "About", href: "/about" },
+  // { label: "About", href: "/about" }, // hidden for now — page still exists
   { label: "Contact", href: "/contact" },
 ];
 

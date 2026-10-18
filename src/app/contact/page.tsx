@@ -112,11 +112,6 @@ export default function ContactPage() {
             <h1 className="text-[clamp(32px,5vw,56px)] font-[800] tracking-[-.02em] leading-[1.08] mb-4">
               Contact Us
             </h1>
-            <p className="text-[16px] md:text-lg text-white/70 leading-relaxed">
-              Get in touch with our team for a free estimate, to schedule
-              service, or for any questions about your heating and cooling
-              needs.
-            </p>
           </div>
         </div>
       </section>

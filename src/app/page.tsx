@@ -384,7 +384,7 @@ export default function HomePage() {
       </section>
 
       {/* ========== SERVICES ========== */}
-      <section className="bg-light-bg section-padding">
+      <section id="services" className="bg-light-bg section-padding scroll-mt-[100px]">
         <div className="container-site">
           <div className="text-center mb-12">
             <SectionTitle className="mt-3">
@@ -443,7 +443,7 @@ export default function HomePage() {
       </section>
 
       {/* ========== PRODUCTS ========== */}
-      <section className="bg-white section-padding">
+      <section id="products" className="bg-white section-padding scroll-mt-[100px]">
         <div className="container-site">
           <div className="text-center mb-12">
             <SectionTitle className="mt-3">
@@ -455,10 +455,9 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {productCategories.map((product) => (
-              <Link
+              <div
                 key={product.slug}
-                href={`/products?category=${product.slug}`}
-                className="group bg-light-bg rounded-[18px] p-4 sm:p-5 text-center hover:bg-white hover:shadow-lg hover:border-orange/20 border border-transparent transition-all duration-300 flex flex-col"
+                className="bg-light-bg rounded-[18px] p-4 sm:p-5 text-center border border-transparent flex flex-col"
               >
                 <div className="relative aspect-square w-full rounded-[14px] bg-white overflow-hidden mb-4 shadow-sm">
                   <Image
@@ -466,22 +465,14 @@ export default function HomePage() {
                     alt={`${product.title} — TechPro HVAC product`}
                     fill
                     sizes="(max-width: 768px) 40vw, 22vw"
-                    className="object-contain p-3 group-hover:scale-[1.04] transition-transform duration-300"
+                    className="object-contain p-3"
                   />
                 </div>
                 <h3 className="text-[15px] font-[700] text-text-dark mt-auto">
                   {product.title}
                 </h3>
-              </Link>
+              </div>
             ))}
-          </div>
-          <div className="text-center mt-10">
-            <Link
-              href="/products"
-              className="inline-flex items-center gap-2 text-orange font-[600] text-[15px] hover:gap-3 transition-all"
-            >
-              View All Products <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         </div>
       </section>

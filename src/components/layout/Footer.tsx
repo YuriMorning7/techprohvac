@@ -12,39 +12,13 @@ import {
   EMERGENCY_HOURS,
 } from "@/lib/constants";
 
-const serviceLinks = [
-  { label: "AC Repair", href: "/services/ac-repair" },
-  { label: "Heating Repair", href: "/services/heating-repair" },
-  { label: "Installation", href: "/services/installation" },
-  { label: "Maintenance", href: "/services/maintenance" },
-  { label: "Duct Services", href: "/services/duct-services" },
-  { label: "Indoor Air Quality", href: "/services/indoor-air-quality" },
-];
-
-const productLinks = [
-  { label: "Air Conditioners", href: "/products/air-conditioners" },
-  { label: "Furnaces", href: "/products/furnaces" },
-  { label: "Heat Pumps", href: "/products/heat-pumps" },
-  { label: "Ductless Mini-Splits", href: "/products/mini-splits" },
-  { label: "Thermostats", href: "/products/thermostats" },
-  { label: "Air Purifiers", href: "/products/air-purifiers" },
-];
-
-const companyLinks = [
-  { label: "About Us", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Service Areas", href: "/#service-areas" },
-  { label: "Contact", href: "/contact" },
-  { label: "Careers", href: "/careers" },
-];
-
 export default function Footer() {
   return (
     <footer className="bg-navy">
       <div className="container-site py-16 lg:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 lg:gap-16">
           {/* Brand Column */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div>
             <Link href="/" className="flex items-center gap-3 mb-5">
               <Image
                 src="/images/Techpro_logo.png"
@@ -84,63 +58,6 @@ export default function Footer() {
               </div>
               <p className="text-[13px] text-white/40">{LICENSE}</p>
             </div>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="text-[12.5px] font-[700] text-orange tracking-[.13em] uppercase mb-5">
-              Services
-            </h4>
-            <ul className="space-y-2.5">
-              {serviceLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-[15px] text-white/78 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Products */}
-          <div>
-            <h4 className="text-[12.5px] font-[700] text-orange tracking-[.13em] uppercase mb-5">
-              Products
-            </h4>
-            <ul className="space-y-2.5">
-              {productLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-[15px] text-white/78 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="text-[12.5px] font-[700] text-orange tracking-[.13em] uppercase mb-5">
-              Company
-            </h4>
-            <ul className="space-y-2.5">
-              {companyLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-[15px] text-white/78 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Hours + Social */}
@@ -235,12 +152,6 @@ export default function Footer() {
               className="text-[13.5px] text-white/45 hover:text-white/70 transition-colors"
             >
               Terms of Service
-            </Link>
-            <Link
-              href="/accessibility"
-              className="text-[13.5px] text-white/45 hover:text-white/70 transition-colors"
-            >
-              Accessibility
             </Link>
           </div>
         </div>

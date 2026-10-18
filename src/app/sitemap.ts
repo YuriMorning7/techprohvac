@@ -29,30 +29,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
-    {
-      url: `${BASE_URL}/services`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/products`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/projects`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/about`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
+    // /services, /products, /projects, /about index pages hidden from nav for
+    // now — kept out of the sitemap so they aren't indexed while hidden. The
+    // underlying files still exist and the routes still resolve.
     {
       url: `${BASE_URL}/contact`,
       lastModified: now,
