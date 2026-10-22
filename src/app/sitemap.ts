@@ -3,35 +3,21 @@ import type { MetadataRoute } from "next";
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://techprohvac.com";
 
-// Keep this list in sync with generateStaticParams in
-// src/app/services/[slug]/page.tsx — every slug here must resolve.
-const serviceSlugs = [
-  "heat-pump-installation",
-  "ac-repair",
-  "furnace-maintenance",
-  "heating-repair",
-  "installation",
-  "maintenance",
-  "duct-services",
-  "indoor-air-quality",
-  "repairs",
-  "water-heater-services",
-  "ductless-mini-splits",
-];
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const staticPages: MetadataRoute.Sitemap = [
+  // Only pages that should be indexed by search engines.
+  // /services, /services/*, /products, /products/*, /projects, /about are
+  // all 308-redirected to the home page in next.config.ts, so they are
+  // deliberately omitted here. Service detail files still exist in the
+  // repo but the redirect short-circuits them.
+  return [
     {
       url: BASE_URL,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
     },
-    // /services, /products, /projects, /about index pages hidden from nav for
-    // now — kept out of the sitemap so they aren't indexed while hidden. The
-    // underlying files still exist and the routes still resolve.
     {
       url: `${BASE_URL}/contact`,
       lastModified: now,
@@ -51,13 +37,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
   ];
-
-  const servicePages: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
-    url: `${BASE_URL}/services/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
-
-  return [...staticPages, ...servicePages];
 }
