@@ -1067,7 +1067,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             The service you are looking for does not exist.
           </p>
           <Link
-            href="/services"
+            href="/#services"
             className="inline-flex items-center gap-2 text-orange font-[600]"
           >
             View All Services <ArrowRight className="w-4 h-4" />
@@ -1111,7 +1111,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </Link>
             <ChevronRight className="w-3.5 h-3.5" />
             <Link
-              href="/services"
+              href="/#services"
               className="hover:text-white/80 transition-colors"
             >
               Services

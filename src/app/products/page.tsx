@@ -284,7 +284,7 @@ export default function ProductsPage() {
               Schedule Online
             </a>
             <Link
-              href="/services"
+              href="/#services"
               className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-[600] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] border border-white/20"
             >
               View Our Services

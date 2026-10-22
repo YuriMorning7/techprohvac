@@ -18,6 +18,33 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Permanent redirects for pages hidden from the nav.
+  // Keeps Google/old links from landing on dead-end pages — they bounce
+  // to the matching section anchor on the home page instead.
+  async redirects() {
+    return [
+      {
+        source: "/services",
+        destination: "/#services",
+        permanent: true,
+      },
+      {
+        source: "/products",
+        destination: "/#products",
+        permanent: true,
+      },
+      {
+        source: "/projects",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/about",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
