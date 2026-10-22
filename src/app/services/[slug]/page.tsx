@@ -6,8 +6,9 @@ import { permanentRedirect } from "next/navigation";
 // hits a real 308 and updates search results. Restore the full detail page
 // implementation from git history when the client is ready to re-enable it.
 
-export const dynamic = "force-static";
-export const dynamicParams = true;
+// force-dynamic + no generateStaticParams ⇒ no SSG pre-rendering, so every
+// request runs this function and the redirect fires.
+export const dynamic = "force-dynamic";
 
 export default function ServiceSlugRedirect() {
   permanentRedirect("/#services");
