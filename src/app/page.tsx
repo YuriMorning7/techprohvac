@@ -21,7 +21,7 @@ import {
 import SectionLabel from "@/components/ui/SectionLabel";
 import SectionTitle from "@/components/ui/SectionTitle";
 import ContactForm from "@/components/ui/ContactForm";
-import ServiceAreaMap from "@/components/ui/ServiceAreaMap";
+import ProjectsMap from "@/components/ui/ProjectsMap";
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
@@ -489,7 +489,9 @@ export default function HomePage() {
                 Serving San Mateo County
               </SectionTitle>
               <p className="text-text-muted text-lg mt-4 mb-8">
-                Based in San Carlos,  We keep our service area local for faster & more reliable HVAC service.
+                Based in San Carlos, we keep our service area local for faster &amp;
+                more reliable HVAC service. Every orange pin on the map is a
+                real 2026 installation — click one to read the project.
               </p>
               <h3 className="text-lg font-[700] text-text-dark mb-5">
                 Cities We Serve
@@ -503,10 +505,7 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <ServiceAreaMap
-              defaultQuery="San Mateo County, CA"
-              defaultLabel="San Mateo County"
-            />
+            <ProjectsMap />
           </div>
                     {/* CTA Banner */}
           <div className="mt-10 bg-navy rounded-[18px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -556,14 +555,36 @@ export default function HomePage() {
               <p className="text-text-muted text-[14px] mb-5">
                 Real reviews from happy neighbors across San Mateo County.
               </p>
-              <a
-                href="https://share.google/g7zNtg0V0XtDAKYCA"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-orange font-[700] text-[14px] hover:gap-3 transition-all"
-              >
-                Read all on Google <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              <div className="flex flex-col gap-3 items-center lg:items-start">
+                <a
+                  href="https://share.google/g7zNtg0V0XtDAKYCA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 h-[44px] px-5 rounded-[10px] bg-white border-2 border-[#4285F4] text-[#4285F4] font-[700] text-[13.5px] hover:bg-[#4285F4] hover:text-white transition-colors"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#4285F4] text-white font-[800] text-[13px]"
+                  >
+                    G
+                  </span>
+                  Read our Google reviews
+                </a>
+                <a
+                  href="https://www.yelp.com/biz/techpro-builders-san-carlos-6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 h-[44px] px-5 rounded-[10px] bg-white border-2 border-[#D32323] text-[#D32323] font-[700] text-[13.5px] hover:bg-[#D32323] hover:text-white transition-colors"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#D32323] text-white font-[800] text-[13px]"
+                  >
+                    Y
+                  </span>
+                  Read our Yelp reviews
+                </a>
+              </div>
             </div>
 
             {/* Housecall Pro Reviews Widget — wrapped in brand chrome */}

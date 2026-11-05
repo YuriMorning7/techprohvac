@@ -60,8 +60,38 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Hours + Social */}
+          {/* Hours + Social + Explore */}
           <div>
+            <h4 className="text-[12.5px] font-[700] text-orange tracking-[.13em] uppercase mb-5">
+              Explore
+            </h4>
+            <ul className="space-y-2.5 mb-7">
+              <li>
+                <Link
+                  href="/blog"
+                  className="text-[14px] text-white/78 hover:text-white transition-colors"
+                >
+                  Projects &amp; Blog
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/service-areas"
+                  className="text-[14px] text-white/78 hover:text-white transition-colors"
+                >
+                  Service Areas
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="text-[14px] text-white/78 hover:text-white transition-colors"
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+
             <h4 className="text-[12.5px] font-[700] text-orange tracking-[.13em] uppercase mb-5">
               Hours
             </h4>

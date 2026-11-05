@@ -12,3 +12,7 @@ export const YEARS_IN_BUSINESS = "20+"
 export const CITIES_SERVED = "18"
 export const BOOKING_URL =
   "https://book.housecallpro.com/book/Techpro-Heating--Cooling/cc0bcd03c19a4600b90514f4a5edeee0?v2=true"
+
+// Public review destinations used by review widgets and the map pins.
+export const GOOGLE_REVIEWS_URL = "https://maps.app.goo.gl/SuPQZ6RdxRUCr3Yx5"
+export const YELP_REVIEWS_URL = "https://www.yelp.com/biz/techpro-builders-san-carlos-6"

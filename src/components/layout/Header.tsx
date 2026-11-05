@@ -11,9 +11,8 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/#services" },
   { label: "Products", href: "/#products" },
-  // { label: "Projects", href: "/projects" }, // hidden for now — page still exists
-  { label: "Service Areas", href: "/#service-areas" },
-  // { label: "About", href: "/about" }, // hidden for now — page still exists
+  { label: "Projects", href: "/blog" },
+  { label: "Service Areas", href: "/service-areas" },
   { label: "Contact", href: "/contact" },
 ];
 
