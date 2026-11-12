@@ -59,12 +59,12 @@ export const metadata: Metadata = {
 /* ------------------------------------------------------------------ */
 
 const trustBadges = [
-  { icon: CalendarCheck, label: "Established in", sublabel: "2005" },
-  { icon: Users, label: "Father & Son", sublabel: "Owned" },
-  { icon: MapPin, label: "Based in", sublabel: "San Carlos" },
-  { icon: Wind, label: "Serving San", sublabel: "Mateo County" },
-  { icon: BadgeCheck, label: "Licensed &", sublabel: "Insured" },
-  { icon: Award, label: "Residential &", sublabel: "Light Commercial" },
+  { icon: CalendarCheck, label: "Since 2005", sublabel: "20+ years local" },
+  { icon: Users, label: "Family-owned", sublabel: "Father & son team" },
+  { icon: MapPin, label: "San Carlos HQ", sublabel: "Short drive to you" },
+  { icon: Wind, label: "San Mateo County", sublabel: "22 cities served" },
+  { icon: BadgeCheck, label: "CSLB #860715", sublabel: "Bonded & insured" },
+  { icon: Award, label: "Residential + Commercial", sublabel: "Light commercial too" },
 ];
 
 const services = [
@@ -415,18 +415,18 @@ export default function HomePage() {
 
       {/* ========== TRUST BADGES ========== */}
       <section className="bg-white border-b border-border-light">
-        <div className="container-site py-8">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-4">
+        <div className="container-site py-9 sm:py-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-5 gap-y-5">
             {trustBadges.map((badge) => (
-              <div key={badge.label} className="flex items-start gap-3">
+              <div key={badge.label} className="flex items-start gap-3 min-w-0">
                 <div className="w-10 h-10 rounded-[10px] bg-badge-bg flex items-center justify-center shrink-0">
                   <badge.icon className="w-[18px] h-[18px] text-orange" />
                 </div>
-                <div className="min-w-0 pt-[2px]">
+                <div className="min-w-0 pt-[1px]">
                   <p className="text-[13.5px] sm:text-[14px] font-[800] text-text-dark leading-[1.25]">
                     {badge.label}
                   </p>
-                  <p className="text-[13.5px] sm:text-[14px] font-[800] text-text-dark leading-[1.25]">
+                  <p className="text-[11.5px] sm:text-[12px] font-[500] text-text-muted leading-[1.3] mt-[3px]">
                     {badge.sublabel}
                   </p>
                 </div>

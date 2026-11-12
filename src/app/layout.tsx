@@ -4,7 +4,6 @@ import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import TopProgressBar from "@/components/layout/TopProgressBar";
-import StickyActionBar from "@/components/layout/StickyActionBar";
 import GoogleAnalytics from "@/components/layout/GoogleAnalytics";
 import GtmNoScript from "@/components/layout/GtmNoScript";
 import AnalyticsAutoTracker from "@/components/layout/AnalyticsAutoTracker";
@@ -107,7 +106,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
       </head>
       <body
-        className="min-h-screen flex flex-col pb-[84px] lg:pb-0"
+        className="min-h-screen flex flex-col"
         suppressHydrationWarning
       >
         <GtmNoScript />
@@ -117,7 +116,6 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <StickyActionBar />
         <Script
           id="housecall-pro-chat-bubble"
           src="https://chat.housecallpro.com/proChat.js"
