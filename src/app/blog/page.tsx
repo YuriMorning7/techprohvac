@@ -3,7 +3,10 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ChevronRight, Hammer, MapPin, CalendarCheck } from "lucide-react";
 import { projects } from "@/content/projects";
-import ProjectsExplorer from "@/components/projects/ProjectsExplorer";
+import { BRANDS } from "@/content/brands";
+import ProjectsExplorer, {
+  type BrandOption,
+} from "@/components/projects/ProjectsExplorer";
 
 export const metadata: Metadata = {
   title: "HVAC Installation Projects & Case Studies",
@@ -39,8 +42,59 @@ function stats() {
   };
 }
 
+// Build the brand filter options. Count = projects that include AT LEAST
+// ONE unit from that brand (primary or secondary). Catalog brands with
+// zero 2026 installs are kept so deep-links from /brands (e.g.
+// ?brand=carrier) still produce a recognised chip + a real empty state
+// rather than silently reverting to the full catalog. Sentinel "Not
+// documented" brand is skipped.
+function brandOptions(): BrandOption[] {
+  const counts = new Map<string, number>();
+  for (const p of projects) {
+    const list =
+      p.allEquipment && p.allEquipment.length > 0
+        ? p.allEquipment
+        : p.equipment
+          ? [p.equipment]
+          : [];
+    const seen = new Set<string>();
+    for (const e of list) {
+      const raw = (e?.brand ?? "").trim();
+      if (!raw || raw.toLowerCase() === "not documented") continue;
+      const key = raw.toLowerCase();
+      if (seen.has(key)) continue;
+      seen.add(key);
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+  }
+
+  // Seed with the canonical catalog. We derive the chip label from the
+  // slug so it stays short (e.g. "Mitsubishi" instead of "Mitsubishi
+  // Electric") — the full catalog name still appears on /brands.
+  const combined = new Map<string, BrandOption>();
+  for (const b of BRANDS) {
+    const key = b.slug.toLowerCase();
+    const label = key.charAt(0).toUpperCase() + key.slice(1);
+    combined.set(key, { key, label, count: counts.get(key) ?? 0 });
+  }
+  // Then fold in any brand that showed up in projects but isn't in the
+  // catalog (defensive — content drops can introduce new brands).
+  for (const [key, count] of counts.entries()) {
+    if (combined.has(key)) continue;
+    combined.set(key, {
+      key,
+      label: key.charAt(0).toUpperCase() + key.slice(1).toLowerCase(),
+      count,
+    });
+  }
+
+  const options = [...combined.values()].sort((a, b) => b.count - a.count);
+  return [{ key: "all", label: "All brands", count: projects.length }, ...options];
+}
+
 export default function BlogIndexPage() {
   const { totalProjects, cityCount, latestYear } = stats();
+  const brands = brandOptions();
 
   return (
     <>
@@ -120,7 +174,11 @@ export default function BlogIndexPage() {
             </div>
           }
         >
-          <ProjectsExplorer projects={projects} installationTypes={installationTypes} />
+          <ProjectsExplorer
+            projects={projects}
+            installationTypes={installationTypes}
+            brands={brands}
+          />
         </Suspense>
       </section>
     </>

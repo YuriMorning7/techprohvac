@@ -20,27 +20,61 @@ import {
   tintForInstallationType,
 } from "@/lib/project-image";
 
+export type BrandOption = {
+  key: string; // lowercase canonical key — what we store in URL and state
+  label: string; // Title Case display label (e.g. "Mitsubishi")
+  count: number;
+};
+
 type Props = {
   projects: Project[];
   installationTypes: readonly string[];
+  brands: BrandOption[];
 };
 
 const PAGE_SIZE = 24;
+const ALL_BRAND_KEY = "all";
 
-export default function ProjectsExplorer({ projects, installationTypes }: Props) {
+// A project is considered a match for a brand filter when ANY of its
+// equipment entries (primary or secondary) is from that brand. This
+// matches customer intent — "show me Mitsubishi jobs" should include a
+// Bryant furnace + Mitsubishi mini-split project.
+function projectMatchesBrand(p: Project, brandKey: string): boolean {
+  if (brandKey === ALL_BRAND_KEY) return true;
+  const list =
+    p.allEquipment && p.allEquipment.length > 0
+      ? p.allEquipment
+      : p.equipment
+        ? [p.equipment]
+        : [];
+  return list.some((e) => (e?.brand ?? "").toLowerCase() === brandKey);
+}
+
+export default function ProjectsExplorer({
+  projects,
+  installationTypes,
+  brands,
+}: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const [type, setType] = useState<string>("All");
+  const [brand, setBrand] = useState<string>(ALL_BRAND_KEY);
   const [query, setQuery] = useState<string>("");
   const [visible, setVisible] = useState<number>(PAGE_SIZE);
 
-  // Pick up initial filter state from URL (?type=Heat Pump&q=San Mateo).
-  // Homepage equipment tiles deep-link here with ?type=... — we honor that.
+  // Pick up initial filter state from URL (?type=Heat Pump&brand=mitsubishi&q=…).
+  // Homepage equipment tiles deep-link with ?type=…; /brands cards deep-link
+  // with ?brand=…. We honor both.
   useEffect(() => {
     const t = searchParams.get("type");
+    const b = searchParams.get("brand");
     const q = searchParams.get("q");
     if (t && installationTypes.includes(t)) setType(t);
+    if (b) {
+      const normalized = b.toLowerCase();
+      if (brands.some((br) => br.key === normalized)) setBrand(normalized);
+    }
     if (q) setQuery(q);
     // Intentionally dependency-free to run once on mount — subsequent filter
     // changes come from user interaction, which pushes back to the URL below.
@@ -51,20 +85,22 @@ export default function ProjectsExplorer({ projects, installationTypes }: Props)
   useEffect(() => {
     const params = new URLSearchParams();
     if (type !== "All") params.set("type", type);
+    if (brand !== ALL_BRAND_KEY) params.set("brand", brand);
     if (query.trim()) params.set("q", query.trim());
     const qs = params.toString();
     router.replace(qs ? `/blog?${qs}` : "/blog", { scroll: false });
-  }, [type, query, router]);
+  }, [type, brand, query, router]);
 
   // Reset visible-count when filters change so pagination doesn't skip rows.
   useEffect(() => {
     setVisible(PAGE_SIZE);
-  }, [type, query]);
+  }, [type, brand, query]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return projects.filter((p) => {
       if (type !== "All" && p.installationType !== type) return false;
+      if (!projectMatchesBrand(p, brand)) return false;
       if (!q) return true;
       return (
         p.city.toLowerCase().includes(q) ||
@@ -73,7 +109,7 @@ export default function ProjectsExplorer({ projects, installationTypes }: Props)
         (p.zip ?? "").includes(q)
       );
     });
-  }, [projects, type, query]);
+  }, [projects, type, brand, query]);
 
   const shown = filtered.slice(0, visible);
   const hasMore = filtered.length > visible;
@@ -86,52 +122,69 @@ export default function ProjectsExplorer({ projects, installationTypes }: Props)
     return counts;
   }, [projects]);
 
+  // The brand option list the parent passed is already All + brands sorted
+  // by count desc. Rebuild it here as a quick lookup table so the active
+  // label can be shown in the result counter.
+  const brandLabel = useMemo(
+    () => brands.find((b) => b.key === brand)?.label ?? "",
+    [brands, brand],
+  );
+
   function resetFilters() {
     setType("All");
+    setBrand(ALL_BRAND_KEY);
     setQuery("");
   }
 
-  const activeFilterCount = (type !== "All" ? 1 : 0) + (query.trim() ? 1 : 0);
+  const activeFilterCount =
+    (type !== "All" ? 1 : 0) +
+    (brand !== ALL_BRAND_KEY ? 1 : 0) +
+    (query.trim() ? 1 : 0);
 
   return (
     <>
       {/* ── Filter bar ────────────────────────────────────────────────── */}
       <div className="sticky top-[72px] xl:top-[88px] z-30 bg-light-bg/90 backdrop-blur-md border-b border-border-light">
-        <div className="container-site py-4 lg:py-5">
+        <div className="container-site py-4 lg:py-5 space-y-3">
+          {/* Row 1 — Type chips + search */}
           <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-5">
-            {/* Type chips */}
-            <div className="flex-1 overflow-x-auto scrollbar-none -mx-4 px-4 lg:mx-0 lg:px-0">
-              <ul className="flex items-center gap-2 min-w-max">
-                {installationTypes.map((t) => {
-                  const active = t === type;
-                  const count = typeCounts[t] ?? 0;
-                  return (
-                    <li key={t} className="shrink-0">
-                      <button
-                        type="button"
-                        onClick={() => setType(t)}
-                        aria-pressed={active}
-                        className={`inline-flex items-center gap-1.5 h-[36px] px-3.5 rounded-full border text-[13px] font-[700] whitespace-nowrap transition-all ${
-                          active
-                            ? "bg-navy text-white border-navy shadow-[0_8px_20px_-10px_rgba(10,19,41,0.5)]"
-                            : "bg-white text-navy border-border-light hover:border-orange/40 hover:text-orange"
-                        }`}
-                      >
-                        {t}
-                        {count > 0 && (
-                          <span
-                            className={`inline-flex items-center justify-center min-w-[20px] h-[18px] px-1.5 rounded-full text-[10.5px] font-[800] tracking-tight ${
-                              active ? "bg-white/20 text-white" : "bg-light-bg text-text-muted"
-                            }`}
-                          >
-                            {count}
-                          </span>
-                        )}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <span className="hidden sm:inline-flex items-center h-[26px] px-2.5 rounded-full bg-white border border-border-light text-[10.5px] font-[800] text-text-muted tracking-[.12em] uppercase shrink-0">
+                Type
+              </span>
+              <div className="flex-1 overflow-x-auto scrollbar-none -mx-4 px-4 lg:mx-0 lg:px-0">
+                <ul className="flex items-center gap-2 min-w-max">
+                  {installationTypes.map((t) => {
+                    const active = t === type;
+                    const count = typeCounts[t] ?? 0;
+                    return (
+                      <li key={t} className="shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setType(t)}
+                          aria-pressed={active}
+                          className={`inline-flex items-center gap-1.5 h-[36px] px-3.5 rounded-full border text-[13px] font-[700] whitespace-nowrap transition-all ${
+                            active
+                              ? "bg-navy text-white border-navy shadow-[0_8px_20px_-10px_rgba(10,19,41,0.5)]"
+                              : "bg-white text-navy border-border-light hover:border-orange/40 hover:text-orange"
+                          }`}
+                        >
+                          {t}
+                          {count > 0 && (
+                            <span
+                              className={`inline-flex items-center justify-center min-w-[20px] h-[18px] px-1.5 rounded-full text-[10.5px] font-[800] tracking-tight ${
+                                active ? "bg-white/20 text-white" : "bg-light-bg text-text-muted"
+                              }`}
+                            >
+                              {count}
+                            </span>
+                          )}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
 
             {/* Search */}
@@ -157,6 +210,50 @@ export default function ProjectsExplorer({ projects, installationTypes }: Props)
               )}
             </div>
           </div>
+
+          {/* Row 2 — Brand chips. Uses orange active state so the two rows
+              stay visually distinct from each other at a glance. */}
+          {brands.length > 1 && (
+            <div className="flex items-center gap-3">
+              <span className="hidden sm:inline-flex items-center h-[26px] px-2.5 rounded-full bg-white border border-border-light text-[10.5px] font-[800] text-text-muted tracking-[.12em] uppercase shrink-0">
+                Brand
+              </span>
+              <div className="flex-1 overflow-x-auto scrollbar-none -mx-4 px-4 lg:mx-0 lg:px-0">
+                <ul className="flex items-center gap-2 min-w-max">
+                  {brands.map((b) => {
+                    const active = b.key === brand;
+                    return (
+                      <li key={b.key} className="shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setBrand(b.key)}
+                          aria-pressed={active}
+                          className={`inline-flex items-center gap-1.5 h-[32px] px-3 rounded-full border text-[12.5px] font-[700] whitespace-nowrap transition-all ${
+                            active
+                              ? "bg-orange text-white border-orange shadow-[0_8px_20px_-10px_rgba(241,90,41,0.55)]"
+                              : "bg-white text-text-dark border-border-light hover:border-orange/40 hover:text-orange"
+                          }`}
+                        >
+                          {b.label}
+                          {b.count > 0 && (
+                            <span
+                              className={`inline-flex items-center justify-center min-w-[20px] h-[17px] px-1.5 rounded-full text-[10px] font-[800] tracking-tight ${
+                                active
+                                  ? "bg-white/25 text-white"
+                                  : "bg-light-bg text-text-muted"
+                              }`}
+                            >
+                              {b.count}
+                            </span>
+                          )}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -168,6 +265,12 @@ export default function ProjectsExplorer({ projects, installationTypes }: Props)
           {type !== "All" && (
             <>
               {" "}of type <span className="font-[700] text-navy">{type}</span>
+            </>
+          )}
+          {brand !== ALL_BRAND_KEY && brandLabel && (
+            <>
+              {" "}with <span className="font-[700] text-orange">{brandLabel}</span>{" "}
+              equipment
             </>
           )}
           {query && (
@@ -212,6 +315,12 @@ export default function ProjectsExplorer({ projects, installationTypes }: Props)
                     <span className="absolute top-3 left-3 inline-flex items-center h-[26px] px-2.5 rounded-full bg-white/95 backdrop-blur text-[11px] font-[800] text-orange tracking-[.08em] uppercase shadow-sm">
                       {p.installationType}
                     </span>
+                    {p.equipment?.brand && p.equipment.brand !== "Not documented" && (
+                      <span className="absolute top-3 right-3 inline-flex items-center h-[26px] px-2.5 rounded-full bg-navy/92 backdrop-blur text-[11px] font-[800] text-white tracking-[.08em] uppercase shadow-sm">
+                        {p.equipment.brand.charAt(0) +
+                          p.equipment.brand.slice(1).toLowerCase()}
+                      </span>
+                    )}
                   </div>
                   <div className="p-5 sm:p-6 flex flex-col flex-1">
                     <h2 className="text-[17px] sm:text-[18px] font-[800] text-navy leading-[1.3] tracking-tight mb-2 group-hover:text-orange transition-colors">

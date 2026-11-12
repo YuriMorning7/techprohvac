@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronRight, Phone } from "lucide-react";
+import { ChevronRight, Phone, Clock, ShieldCheck, Zap } from "lucide-react";
 import ContactForm from "@/components/ui/ContactForm";
 import {
   PHONE,
@@ -99,8 +99,13 @@ export default function ContactPage() {
   return (
     <>
       {/* ========== HERO ========== */}
-      <section className="bg-navy text-white">
-        <div className="container-site py-14 md:py-20">
+      <section className="bg-navy text-white relative overflow-hidden">
+        {/* Soft orange radial glow — same accent pattern as /blog hero */}
+        <div
+          aria-hidden="true"
+          className="absolute -top-20 -right-20 w-[380px] h-[380px] rounded-full bg-[radial-gradient(ellipse,rgba(241,90,41,0.18),transparent_60%)] pointer-events-none"
+        />
+        <div className="container-site relative py-14 md:py-20">
           <nav className="flex items-center gap-2 text-[13px] text-white/50 mb-6">
             <Link href="/" className="hover:text-white/80 transition-colors">
               Home
@@ -108,10 +113,31 @@ export default function ContactPage() {
             <ChevronRight className="w-3.5 h-3.5" />
             <span className="text-white/90">Contact</span>
           </nav>
-          <div className="max-w-2xl">
-            <h1 className="text-[clamp(32px,5vw,56px)] font-[800] tracking-[-.02em] leading-[1.08] mb-4">
-              Contact Us
+          <div className="max-w-3xl">
+            <h1 className="text-[clamp(32px,5vw,56px)] font-[800] tracking-[-.02em] leading-[1.08] mb-5">
+              Let&rsquo;s scope your{" "}
+              <span className="text-orange">heating &amp; cooling</span>{" "}
+              project.
             </h1>
+            <p className="text-[16px] md:text-lg text-white/70 leading-relaxed max-w-2xl mb-7">
+              Tell us a little about the home and what&rsquo;s going on with the
+              system. We&rsquo;ll follow up with scheduling and next steps — no
+              sales call, no pushy upgrades.
+            </p>
+            <ul className="flex flex-wrap gap-x-6 gap-y-3 text-[13.5px] text-white/80">
+              <li className="inline-flex items-center gap-2">
+                <Clock className="w-4 h-4 text-orange" />
+                Replies within one business hour
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <Zap className="w-4 h-4 text-orange" />
+                Same-day emergency dispatch
+              </li>
+              <li className="inline-flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-orange" />
+                CSLB licensed, bonded &amp; insured
+              </li>
+            </ul>
           </div>
         </div>
       </section>

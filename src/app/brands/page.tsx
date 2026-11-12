@@ -157,7 +157,7 @@ export default function BrandsPage() {
                       <p className="text-[12px] font-[800] text-text-muted tracking-[.1em] uppercase mb-3">
                         Best For
                       </p>
-                      <ul className="space-y-2">
+                      <ul className="space-y-2 mb-6">
                         {brand.bestFor.map((item) => (
                           <li
                             key={item}
@@ -168,6 +168,25 @@ export default function BrandsPage() {
                           </li>
                         ))}
                       </ul>
+
+                      {/* Deep-link into the Projects explorer pre-filtered to
+                          this brand. Count-less brands still show the link so
+                          visitors who click Rheem / Carrier / Trane land on
+                          an empty state we control, not a dead end. */}
+                      <Link
+                        href={`/blog?brand=${encodeURIComponent(brand.slug)}`}
+                        className="group/cta inline-flex items-center gap-2 text-orange hover:text-orange-hover font-[700] text-[13.5px] transition-colors"
+                      >
+                        {count > 0 ? (
+                          <>
+                            View {count} {brand.name} install
+                            {count === 1 ? "" : "s"}
+                          </>
+                        ) : (
+                          <>Browse {brand.name} projects</>
+                        )}
+                        <ArrowRight className="w-3.5 h-3.5 group-hover/cta:translate-x-0.5 transition-transform" />
+                      </Link>
                     </div>
                   </div>
                 </li>

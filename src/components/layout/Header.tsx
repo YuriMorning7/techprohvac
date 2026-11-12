@@ -20,26 +20,23 @@ type NavItem = { label: string; href: string; badge?: string; children?: NavChil
 // Top-level nav is deliberately 5 items. Everything deeper lives inside
 // hover dropdowns, so the bar breathes instead of competing with the logo
 // + CTAs for horizontal space.
+// Dropdowns only carry children when each child routes somewhere distinct.
+// Services previously had three children (Install / Repair / Maintenance) that
+// all pointed at /#services — pure redundancy. Collapsed to a plain top-level
+// link. Equipment items deep-link to the /blog type filter, matching the
+// homepage product tiles so the nav and the hero both lead somewhere real.
 const navItems: NavItem[] = [
-  {
-    label: "Services",
-    href: "/#services",
-    children: [
-      { label: "Install", href: "/#services", description: "Replace or install a new system" },
-      { label: "Repair", href: "/#services", description: "Troubleshoot & fix your existing system" },
-      { label: "Maintenance", href: "/#services", description: "Tune-ups that extend system life" },
-    ],
-  },
+  { label: "Services", href: "/#services" },
   {
     label: "Equipment",
     href: "/#products",
     children: [
-      { label: "Heat Pumps", href: "/#products", description: "Electric heating + cooling, 2-4× efficiency" },
-      { label: "Mini-Split Systems", href: "/#products", description: "Room-by-room, no ducts needed" },
-      { label: "Gas Furnaces", href: "/#products", description: "High-efficiency gas heat" },
-      { label: "Air Conditioners", href: "/#products", description: "Central cooling for ducted homes" },
-      { label: "Water Heaters", href: "/#products", description: "Tank, tankless, and heat-pump" },
-      { label: "Ductwork", href: "/#products", description: "New builds and replacements" },
+      { label: "Heat Pumps", href: "/blog?type=Heat%20Pump", description: "37 recent installs across the county" },
+      { label: "Mini-Split Systems", href: "/blog?type=Mini%20Split", description: "20 installs — room-by-room, no ducts" },
+      { label: "Gas Furnaces", href: "/blog?type=Furnace", description: "High-efficiency gas heat" },
+      { label: "Air Conditioners", href: "/blog?type=Air%20Conditioner", description: "Central cooling for ducted homes" },
+      { label: "Ductwork", href: "/blog?type=Ductwork", description: "New builds and replacements" },
+      { label: "Water Heaters", href: "/contact", description: "Tank, tankless, and heat-pump — ask us" },
     ],
   },
   {
