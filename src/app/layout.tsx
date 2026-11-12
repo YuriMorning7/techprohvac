@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import TopProgressBar from "@/components/layout/TopProgressBar";
 import StickyActionBar from "@/components/layout/StickyActionBar";
 import GoogleAnalytics from "@/components/layout/GoogleAnalytics";
+import GtmNoScript from "@/components/layout/GtmNoScript";
 import AnalyticsAutoTracker from "@/components/layout/AnalyticsAutoTracker";
 import "./globals.css";
 
@@ -109,6 +110,7 @@ export default function RootLayout({
         className="min-h-screen flex flex-col pb-[84px] lg:pb-0"
         suppressHydrationWarning
       >
+        <GtmNoScript />
         <GoogleAnalytics />
         <AnalyticsAutoTracker />
         <TopProgressBar />
