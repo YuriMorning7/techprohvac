@@ -91,18 +91,19 @@ const services = [
   },
 ];
 
-// Each tile links into the Instant Estimate wizard (prefilled when the
-// product maps to a priced service) or /contact when the service is a
-// scope-of-work consultation we quote on site rather than from a wizard.
+// Each tile deep-links to real projects of that type on /blog. The ?type=
+// query param is read by the projects list page and auto-selects the matching
+// filter chip, so a visitor curious about heat pumps lands on 40+ real heat
+// pump installs rather than a generic product splash.
 const productCategories = [
-  { image: "/images/Heat pumps.jpeg", title: "Heat Pumps", slug: "heat-pumps", estimate: "heat-pump" },
-  { image: "/images/Mini Split System.jpeg", title: "Mini-Split Systems", slug: "mini-split-systems", estimate: "mini-split" },
-  { image: "/images/Water Heaters.jpeg", title: "Water Heaters", slug: "water-heaters", estimate: "water-heater-tank" },
-  { image: "/images/Ductwork.jpeg", title: "Ductwork", slug: "ductwork", estimate: "ductwork" },
-  { image: "/images/Gas furnaces.jpeg", title: "Gas Furnaces", slug: "gas-furnaces", estimate: "furnace" },
-  { image: "/images/Air conditioners.jpeg", title: "Air Conditioners", slug: "air-conditioners", estimate: "ac" },
-  { image: "/images/Indoor air quality.jpeg", title: "Indoor Air Quality", slug: "indoor-air-quality", estimate: null },
-  { image: "/images/Packaged units.jpeg", title: "Packaged Units", slug: "packaged-units", estimate: null },
+  { image: "/images/Heat pumps.jpeg", title: "Heat Pumps", slug: "heat-pumps", type: "Heat Pump" },
+  { image: "/images/Mini Split System.jpeg", title: "Mini-Split Systems", slug: "mini-split-systems", type: "Mini Split" },
+  { image: "/images/Water Heaters.jpeg", title: "Water Heaters", slug: "water-heaters", type: null },
+  { image: "/images/Ductwork.jpeg", title: "Ductwork", slug: "ductwork", type: "Ductwork" },
+  { image: "/images/Gas furnaces.jpeg", title: "Gas Furnaces", slug: "gas-furnaces", type: "Furnace" },
+  { image: "/images/Air conditioners.jpeg", title: "Air Conditioners", slug: "air-conditioners", type: "Air Conditioner" },
+  { image: "/images/Indoor air quality.jpeg", title: "Indoor Air Quality", slug: "indoor-air-quality", type: null },
+  { image: "/images/Packaged units.jpeg", title: "Packaged Units", slug: "packaged-units", type: null },
 ];
 
 const whyTechPro = [
@@ -511,16 +512,16 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {productCategories.map((product) => {
-              const href = product.estimate
-                ? `/estimate?service=${product.estimate}`
+              const href = product.type
+                ? `/blog?type=${encodeURIComponent(product.type)}`
                 : "/contact";
               return (
                 <Link
                   key={product.slug}
                   href={href}
                   aria-label={
-                    product.estimate
-                      ? `Get an instant estimate for ${product.title}`
+                    product.type
+                      ? `See our ${product.title} installations`
                       : `Ask us about ${product.title}`
                   }
                   className="group bg-light-bg rounded-[18px] p-4 sm:p-5 text-center border border-transparent hover:border-orange/30 hover:shadow-[0_18px_40px_-18px_rgba(10,19,41,0.18)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col"
@@ -538,7 +539,7 @@ export default function HomePage() {
                     {product.title}
                   </h3>
                   <p className="text-[11.5px] font-[700] text-text-muted/70 tracking-[.08em] uppercase mt-1.5 group-hover:text-orange transition-colors">
-                    {product.estimate ? "Get estimate →" : "Ask us →"}
+                    {product.type ? "See projects →" : "Ask us →"}
                   </p>
                 </Link>
               );

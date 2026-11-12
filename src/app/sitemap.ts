@@ -14,12 +14,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // deliberately omitted here.
   const core: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    {
-      url: `${BASE_URL}/estimate`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.95,
-    },
+    // /estimate deliberately omitted — the page resolves but is not promoted
+    // until the instant-estimate feature is approved. Add it back here when
+    // we re-enable the nav entry.
     {
       url: `${BASE_URL}/brands`,
       lastModified: now,

@@ -51,11 +51,9 @@ const navItems: NavItem[] = [
       { label: "Brands We Install", href: "/brands", description: "Mitsubishi, Bryant, Carrier and more" },
     ],
   },
-  {
-    label: "Instant Estimate",
-    href: "/estimate",
-    badge: "New",
-  },
+  // Instant Estimate temporarily hidden pending client approval. The /estimate
+  // page still resolves (so pasted links don't 404) but it's absent from every
+  // navigation surface. Restore by adding back a NavItem with href: "/estimate".
   { label: "Contact", href: "/contact" },
 ];
 
@@ -140,7 +138,6 @@ const mobileLinks: { label: string; href: string; badge?: string }[] = [
   { label: "Recent Projects", href: "/blog" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Brands", href: "/brands" },
-  { label: "Instant Estimate", href: "/estimate", badge: "New" },
   { label: "Contact", href: "/contact" },
 ];
 

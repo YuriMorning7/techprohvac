@@ -8,19 +8,14 @@ import {
   Calendar,
   Wrench,
   ArrowRight,
-  Phone,
-  CalendarCheck,
 } from "lucide-react";
 import { projects } from "@/content/projects";
 import { getProject, getRelated, formatDate } from "@/lib/content-helpers";
-import {
-  SITE_NAME,
-  PHONE,
-  PHONE_HREF,
-  BOOKING_URL,
-} from "@/lib/constants";
+import { SITE_NAME } from "@/lib/constants";
 import { RenderMarkdown } from "@/lib/render-md";
 import { imageForInstallationType, tintForInstallationType } from "@/lib/project-image";
+import InstallTimeline from "@/components/projects/InstallTimeline";
+import ProjectCtaCard from "@/components/projects/ProjectCtaCard";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.techprohvac.com";
@@ -178,6 +173,10 @@ export default async function BlogPostPage({ params }: PageProps) {
             <article className="bg-white rounded-[20px] border border-border-light p-6 sm:p-8 lg:p-10">
               <RenderMarkdown md={project.body} />
 
+              {/* Visual install timeline — frames the markdown body as a real
+                  process rather than a wall of text. */}
+              <InstallTimeline completionDate={project.completionDate} />
+
               {/* Internal link row — helps SEO + discovery */}
               <div className="mt-10 pt-6 border-t border-border-lighter flex flex-wrap gap-3">
                 <Link
@@ -229,37 +228,18 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </div>
               )}
 
-              {/* CTA card */}
-              <div className="bg-navy rounded-[20px] p-6 sm:p-7 text-white">
-                <p className="text-[11.5px] font-[800] text-orange tracking-[.16em] uppercase mb-3">
-                  Free Estimate
-                </p>
-                <h3 className="text-[20px] sm:text-[22px] font-[800] leading-[1.2] tracking-tight mb-3">
-                  Thinking about a similar install?
-                </h3>
-                <p className="text-[14px] text-white/70 leading-relaxed mb-5">
-                  Get a free estimate from our team. We serve every ZIP in San
-                  Mateo County and respond fast.
-                </p>
-                <div className="space-y-3">
-                  <a
-                    href={BOOKING_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 h-[48px] bg-orange hover:bg-orange-hover text-white font-[700] text-[14.5px] rounded-full transition-colors shadow-[0_8px_24px_-10px_rgba(241,90,41,0.6)]"
-                  >
-                    <CalendarCheck className="w-4 h-4" />
-                    Schedule Online
-                  </a>
-                  <a
-                    href={PHONE_HREF}
-                    className="flex items-center justify-center gap-2 h-[48px] bg-white/10 hover:bg-white/15 border border-white/20 text-white font-[700] text-[14.5px] rounded-full transition-colors"
-                  >
-                    <Phone className="w-4 h-4" />
-                    {PHONE}
-                  </a>
-                </div>
-              </div>
+              {/* CTA card (opens QuickRequestModal with project context prefilled) */}
+              <ProjectCtaCard
+                installationType={project.installationType}
+                city={project.city}
+                equipment={
+                  project.equipment
+                    ? `${project.equipment.brand.charAt(0) + project.equipment.brand.slice(1).toLowerCase()}${
+                        project.equipment.capacity ? ` · ${project.equipment.capacity}` : ""
+                      }`
+                    : undefined
+                }
+              />
             </aside>
           </div>
 

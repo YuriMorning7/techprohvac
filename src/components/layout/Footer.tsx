@@ -92,17 +92,6 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/estimate"
-                  className="inline-flex items-center gap-2 text-[14px] text-white/78 hover:text-white transition-colors"
-                >
-                  Instant Estimate
-                  <span className="inline-flex items-center h-[16px] px-1.5 rounded-full bg-orange text-white text-[9px] font-[800] tracking-[.1em] uppercase">
-                    New
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/contact"
                   className="text-[14px] text-white/78 hover:text-white transition-colors"
                 >
