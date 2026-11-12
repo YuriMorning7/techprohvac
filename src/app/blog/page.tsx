@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, MapPin, Calendar } from "lucide-react";
+import { ChevronRight, MapPin, Calendar, ArrowRight } from "lucide-react";
 import { projects } from "@/content/projects";
 import { formatDate } from "@/lib/content-helpers";
+import { imageForInstallationType, tintForInstallationType } from "@/lib/project-image";
 
 export const metadata: Metadata = {
   title: "HVAC Installation Projects & Case Studies",
@@ -69,34 +71,48 @@ export default function BlogIndexPage() {
               <Link
                 key={p.slug}
                 href={`/blog/${p.slug}`}
-                className="group bg-white rounded-[18px] border border-border-light p-6 flex flex-col hover:border-orange/40 hover:shadow-lg transition-all duration-200"
+                className="group bg-white rounded-[20px] border border-border-light overflow-hidden flex flex-col hover:border-orange/40 hover:shadow-[0_18px_40px_-18px_rgba(10,19,41,0.18)] transition-all duration-300"
               >
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="inline-flex items-center h-[26px] px-2.5 rounded-full bg-badge-bg text-[11.5px] font-[800] text-orange tracking-[.08em] uppercase">
+                {/* Hero image (placeholder — typed equipment photo) */}
+                <div className={`relative aspect-[4/3] ${tintForInstallationType(p.installationType)} overflow-hidden`}>
+                  <Image
+                    src={imageForInstallationType(p.installationType)}
+                    alt={`${p.installationType} installation in ${p.city}, CA by TechPro Heating & Cooling`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-contain p-6 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <span className="absolute top-3 left-3 inline-flex items-center h-[26px] px-2.5 rounded-full bg-white/95 backdrop-blur text-[11px] font-[800] text-orange tracking-[.08em] uppercase shadow-sm">
                     {p.installationType}
                   </span>
                 </div>
-                <h2 className="text-[18px] sm:text-[19px] font-[800] text-navy leading-[1.25] tracking-tight mb-3 group-hover:text-orange transition-colors">
-                  {p.installationType} Installation in {p.city}
-                </h2>
-                {p.equipment && (
-                  <p className="text-[14px] text-text-muted leading-relaxed mb-4 flex-1">
-                    <span className="font-[700] text-text-dark">
-                      {p.equipment.brand.charAt(0) + p.equipment.brand.slice(1).toLowerCase()}
+
+                {/* Body */}
+                <div className="p-5 sm:p-6 flex flex-col flex-1">
+                  <h2 className="text-[17px] sm:text-[18px] font-[800] text-navy leading-[1.3] tracking-tight mb-2 group-hover:text-orange transition-colors">
+                    {p.installationType} Installation in {p.city}
+                  </h2>
+                  {p.equipment && (
+                    <p className="text-[13.5px] text-text-muted leading-relaxed mb-4 flex-1">
+                      <span className="font-[700] text-text-dark">
+                        {p.equipment.brand.charAt(0) + p.equipment.brand.slice(1).toLowerCase()}
+                      </span>
+                      {" "}
+                      {p.equipment.capacity}
+                    </p>
+                  )}
+                  <div className="flex items-center justify-between text-[12px] text-text-muted pt-3 border-t border-border-lighter">
+                    <span className="inline-flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-orange" />
+                      {p.city}, CA
                     </span>
-                    {" "}
-                    {p.equipment.capacity}
-                    {p.equipment.model ? ` · ${p.equipment.model}` : ""}
-                  </p>
-                )}
-                <div className="flex items-center justify-between text-[12.5px] text-text-muted pt-3 border-t border-border-lighter">
-                  <span className="inline-flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-orange" />
-                    {p.city}, CA
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-orange" />
-                    {formatDate(p.completionDate)}
+                    <span className="inline-flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-orange" />
+                      {formatDate(p.completionDate)}
+                    </span>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 text-orange font-[700] text-[13px] mt-4 group-hover:gap-2 transition-all">
+                    See project <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
               </Link>

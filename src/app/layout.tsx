@@ -4,6 +4,9 @@ import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import TopProgressBar from "@/components/layout/TopProgressBar";
+import StickyActionBar from "@/components/layout/StickyActionBar";
+import GoogleAnalytics from "@/components/layout/GoogleAnalytics";
+import AnalyticsAutoTracker from "@/components/layout/AnalyticsAutoTracker";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -84,14 +87,35 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${archivo.variable} antialiased`}>
+      <head>
+        {/* Preconnect to origins we fetch from early in the page life so DNS /
+            TLS handshakes complete in parallel with HTML parsing — meaningful
+            for Housecall Pro (booking iframe + chat bubble), Google Fonts,
+            and OpenFreeMap tiles used by the projects map. */}
+        <link rel="preconnect" href="https://book.housecallpro.com" />
+        <link rel="dns-prefetch" href="https://book.housecallpro.com" />
+        <link rel="preconnect" href="https://chat.housecallpro.com" />
+        <link rel="dns-prefetch" href="https://chat.housecallpro.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="preconnect" href="https://tiles.openfreemap.org" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://tiles.openfreemap.org" />
+      </head>
       <body
-        className="min-h-screen flex flex-col"
+        className="min-h-screen flex flex-col pb-[84px] lg:pb-0"
         suppressHydrationWarning
       >
+        <GoogleAnalytics />
+        <AnalyticsAutoTracker />
         <TopProgressBar />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <StickyActionBar />
         <Script
           id="housecall-pro-chat-bubble"
           src="https://chat.housecallpro.com/proChat.js"

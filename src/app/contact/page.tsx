@@ -167,7 +167,7 @@ export default function ContactPage() {
           </p>
           <Link
             href={PHONE_HREF}
-            className="inline-flex items-center gap-2 bg-orange hover:bg-orange-hover text-white font-[700] px-7 sm:px-8 py-4 rounded-[12px] transition-colors text-[16px] sm:text-lg"
+            className="inline-flex items-center gap-2 h-[58px] px-8 rounded-full bg-orange hover:bg-orange-hover text-white font-[700] text-[16px] sm:text-lg transition-colors shadow-[0_12px_32px_-10px_rgba(241,90,41,0.6)]"
           >
             <Phone className="w-5 h-5" />
             {PHONE}

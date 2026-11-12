@@ -71,7 +71,7 @@ export default function Footer() {
                   href="/blog"
                   className="text-[14px] text-white/78 hover:text-white transition-colors"
                 >
-                  Projects &amp; Blog
+                  Recent Work
                 </Link>
               </li>
               <li>
@@ -80,6 +80,25 @@ export default function Footer() {
                   className="text-[14px] text-white/78 hover:text-white transition-colors"
                 >
                   Service Areas
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/brands"
+                  className="text-[14px] text-white/78 hover:text-white transition-colors"
+                >
+                  Brands
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/estimate"
+                  className="inline-flex items-center gap-2 text-[14px] text-white/78 hover:text-white transition-colors"
+                >
+                  Instant Estimate
+                  <span className="inline-flex items-center h-[16px] px-1.5 rounded-full bg-orange text-white text-[9px] font-[800] tracking-[.1em] uppercase">
+                    New
+                  </span>
                 </Link>
               </li>
               <li>
@@ -116,7 +135,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.yelp.com/biz/techpro-builders-san-carlos-6"
+                href="https://www.yelp.com/biz/techpro-heating-and-cooling-san-carlos-2"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Yelp"

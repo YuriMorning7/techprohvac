@@ -4,7 +4,7 @@ import Script from "next/script";
 
 export default function ContactForm() {
   return (
-    <div className="w-full bg-white rounded-[18px] border border-border-light overflow-hidden relative">
+    <div className="w-full bg-white rounded-[20px] border border-border-light overflow-hidden relative">
       <Script
         src="https://online-booking.housecallpro.com/script.js?token=5dd2ad6590584e6aa2859d5433854c08&orgName=Techpro-Heating--Cooling"
         strategy="afterInteractive"

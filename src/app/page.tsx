@@ -18,10 +18,12 @@ import {
   CalendarCheck,
   TrendingUp,
 } from "lucide-react";
-import SectionLabel from "@/components/ui/SectionLabel";
 import SectionTitle from "@/components/ui/SectionTitle";
 import ContactForm from "@/components/ui/ContactForm";
 import ProjectsMap from "@/components/ui/ProjectsMap";
+import ReviewsSection from "@/components/ui/ReviewsSection";
+import FaqSection from "@/components/ui/FaqSection";
+import { faqs } from "@/content/faqs";
 import {
   SITE_NAME,
   SITE_DESCRIPTION,
@@ -89,15 +91,18 @@ const services = [
   },
 ];
 
+// Each tile links into the Instant Estimate wizard (prefilled when the
+// product maps to a priced service) or /contact when the service is a
+// scope-of-work consultation we quote on site rather than from a wizard.
 const productCategories = [
-  { image: "/images/Heat pumps.jpeg", title: "Heat Pumps", slug: "heat-pumps" },
-  { image: "/images/Mini Split System.jpeg", title: "Mini-Split Systems", slug: "mini-split-systems" },
-  { image: "/images/Water Heaters.jpeg", title: "Water Heaters", slug: "water-heaters" },
-  { image: "/images/Ductwork.jpeg", title: "Ductwork", slug: "ductwork" },
-  { image: "/images/Gas furnaces.jpeg", title: "Gas Furnaces", slug: "gas-furnaces" },
-  { image: "/images/Air conditioners.jpeg", title: "Air Conditioners", slug: "air-conditioners" },
-  { image: "/images/Indoor air quality.jpeg", title: "Indoor Air Quality", slug: "indoor-air-quality" },
-  { image: "/images/Packaged units.jpeg", title: "Packaged Units", slug: "packaged-units" },
+  { image: "/images/Heat pumps.jpeg", title: "Heat Pumps", slug: "heat-pumps", estimate: "heat-pump" },
+  { image: "/images/Mini Split System.jpeg", title: "Mini-Split Systems", slug: "mini-split-systems", estimate: "mini-split" },
+  { image: "/images/Water Heaters.jpeg", title: "Water Heaters", slug: "water-heaters", estimate: "water-heater-tank" },
+  { image: "/images/Ductwork.jpeg", title: "Ductwork", slug: "ductwork", estimate: "ductwork" },
+  { image: "/images/Gas furnaces.jpeg", title: "Gas Furnaces", slug: "gas-furnaces", estimate: "furnace" },
+  { image: "/images/Air conditioners.jpeg", title: "Air Conditioners", slug: "air-conditioners", estimate: "ac" },
+  { image: "/images/Indoor air quality.jpeg", title: "Indoor Air Quality", slug: "indoor-air-quality", estimate: null },
+  { image: "/images/Packaged units.jpeg", title: "Packaged Units", slug: "packaged-units", estimate: null },
 ];
 
 const whyTechPro = [
@@ -225,16 +230,20 @@ const stats = [
 /*  JSON-LD STRUCTURED DATA                                           */
 /* ------------------------------------------------------------------ */
 
+const SITE_URL = "https://www.techprohvac.com";
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "LocalBusiness",
-      "@id": "https://techprohvac.com/#business",
+      // HVACBusiness is a more specific LocalBusiness subtype — better local SEO.
+      "@type": "HVACBusiness",
+      "@id": `${SITE_URL}/#business`,
       name: SITE_NAME,
       description: SITE_DESCRIPTION,
-      url: "https://techprohvac.com",
+      url: SITE_URL,
       telephone: PHONE,
+      email: "info@techprohvac.com",
       address: {
         "@type": "PostalAddress",
         streetAddress: ADDRESS,
@@ -243,44 +252,73 @@ const jsonLd = {
         postalCode: "94070",
         addressCountry: "US",
       },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: 37.5072,
-        longitude: -122.2605,
-      },
+      geo: { "@type": "GeoCoordinates", latitude: 37.5072, longitude: -122.2605 },
       openingHoursSpecification: {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         opens: "08:00",
         closes: "16:00",
       },
+      // Keep these aligned with ReviewsSection platform stats.
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: GOOGLE_RATING,
-        reviewCount: "200",
+        reviewCount: "140",
         bestRating: "5",
+        worstRating: "1",
       },
       priceRange: "$$",
-      image: "https://techprohvac.com/images/team.png",
-      sameAs: [],
+      image: `${SITE_URL}/images/Techpro_logo.png`,
+      logo: `${SITE_URL}/images/Techpro_logo.png`,
+      currenciesAccepted: "USD",
+      paymentAccepted: "Cash, Check, Credit Card, Financing",
+      sameAs: [
+        "https://maps.app.goo.gl/SuPQZ6RdxRUCr3Yx5",
+        "https://www.yelp.com/biz/techpro-heating-and-cooling-san-carlos-2",
+        "https://www.facebook.com/techproheatingcooling/",
+        "https://www.instagram.com/techproheatingcooling/",
+        "https://nextdoor.com/pages/techpro-builders-belmont-ca/",
+      ],
+      areaServed: serviceAreas.map((city) => ({ "@type": "City", name: city })),
     },
     {
-      "@type": "Organization",
-      "@id": "https://techprohvac.com/#organization",
-      name: SITE_NAME,
-      url: "https://techprohvac.com",
-      logo: "https://techprohvac.com/images/logo.png",
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: PHONE,
-        contactType: "customer service",
-        availableLanguage: ["English"],
-      },
-      areaServed: serviceAreas.map((city) => ({
-        "@type": "City",
-        name: city,
-        "@id": `https://techprohvac.com/#area-${city.toLowerCase().replace(/\s+/g, "-")}`,
+      // Services offered — gives Google a structured list for rich results.
+      "@type": "ItemList",
+      "@id": `${SITE_URL}/#services`,
+      name: "HVAC Services",
+      itemListElement: [
+        "Heat Pump Installation",
+        "Mini-Split Installation",
+        "Furnace Installation & Repair",
+        "Air Conditioner Installation & Repair",
+        "Ductwork",
+        "Water Heater Installation",
+        "Indoor Air Quality",
+        "Maintenance & Tune-ups",
+      ].map((name, i) => ({
+        "@type": "Service",
+        position: i + 1,
+        name,
+        provider: { "@id": `${SITE_URL}/#business` },
+        areaServed: "San Mateo County, CA",
       })),
+    },
+    {
+      // FAQPage — enables the FAQ rich result in Google search.
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.question,
+        acceptedAnswer: { "@type": "Answer", text: f.answer },
+      })),
+    },
+    {
+      // Breadcrumb for Google — even a 1-item breadcrumb helps on home.
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      ],
     },
   ],
 };
@@ -307,29 +345,47 @@ export default function HomePage() {
               </span>
               <h1 className="text-[clamp(32px,4.4vw,52px)] font-[800] tracking-[-.02em] leading-[1.1] mb-6">
                 <span className="block">San Mateo County’s</span>
-                <span className="block">Heat Pump Specialists</span>
+                <span className="block text-orange">Heat Pump Specialists</span>
               </h1>
               <p className="text-lg text-white/80 leading-relaxed mb-8 max-w-md">
-              Learn more about switching from gas to electric heating & cooling ...
+                Family-owned since 2005. We install heat pumps, mini-splits,
+                furnaces and AC across San Mateo County — and handle the
+                rebate paperwork for you.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href={PHONE_HREF}
-                  className="inline-flex items-center gap-2 bg-orange hover:bg-orange-hover text-white font-[700] px-7 py-3.5 rounded-[12px] transition-colors text-[15px]"
-                >
-                  <Phone className="w-4 h-4" />
-                  Call {PHONE}
-                </Link>
+              <div className="flex flex-wrap gap-3">
                 <a
                   href={BOOKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-[600] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] border border-white/20"
+                  className="inline-flex items-center gap-2 h-[54px] px-7 rounded-full bg-orange hover:bg-orange-hover text-white font-[700] text-[15px] transition-colors shadow-[0_10px_30px_-10px_rgba(241,90,41,0.6)]"
                 >
                   <CalendarCheck className="w-4 h-4" />
                   Schedule Online
                 </a>
+                <Link
+                  href={PHONE_HREF}
+                  className="inline-flex items-center gap-2 h-[54px] px-7 rounded-full bg-white/10 hover:bg-white/15 text-white font-[700] text-[15px] border border-white/25 transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                  Call {PHONE}
+                </Link>
               </div>
+
+              {/* Trust signal row */}
+              <ul className="flex flex-wrap items-center gap-x-5 gap-y-2.5 mt-7 text-[13px] text-white/75">
+                <li className="inline-flex items-center gap-1.5">
+                  <BadgeCheck className="w-4 h-4 text-orange" />
+                  Licensed &amp; Insured
+                </li>
+                <li className="inline-flex items-center gap-1.5">
+                  <Clock className="w-4 h-4 text-orange" />
+                  20+ years
+                </li>
+                <li className="inline-flex items-center gap-1.5">
+                  <Star className="w-4 h-4 text-orange" fill="currentColor" strokeWidth={0} />
+                  {GOOGLE_RATING}★ · 140+ Google reviews
+                </li>
+              </ul>
             </div>
             <div className="relative flex items-center justify-center lg:justify-end order-1 lg:order-2 lg:-mr-6 xl:-mr-12">
               {/* Warm orange spotlight behind the van */}
@@ -362,10 +418,7 @@ export default function HomePage() {
         <div className="container-site py-8">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-4">
             {trustBadges.map((badge) => (
-              <div
-                key={badge.label}
-                className="flex items-start gap-3"
-              >
+              <div key={badge.label} className="flex items-start gap-3">
                 <div className="w-10 h-10 rounded-[10px] bg-badge-bg flex items-center justify-center shrink-0">
                   <badge.icon className="w-[18px] h-[18px] text-orange" />
                 </div>
@@ -388,10 +441,11 @@ export default function HomePage() {
         <div className="container-site">
           <div className="text-center mb-12">
             <SectionTitle className="mt-3">
-              Our Services
+              How We Help
             </SectionTitle>
             <p className="text-text-muted text-lg mt-4 max-w-2xl mx-auto">
-              Complete Heating & Cooling Services for Your Home or Business.
+              Install, repair, maintain — one local crew handling heating,
+              cooling and water heating from first visit to final invoice.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
@@ -423,17 +477,18 @@ export default function HomePage() {
           <div className="mt-10 bg-navy rounded-[18px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="text-xl font-[700] text-white mb-1 uppercase tracking-wide">
-                Ready to schedule?
+                Ready to upgrade your comfort?
               </h3>
               <p className="text-white/70 text-[15px]">
-              Book your appointment anytime with our 24/7 online scheduling.
+                Free in-home estimates — book a time that works for you, day
+                or night, through our online scheduler.
               </p>
             </div>
             <a
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-orange hover:bg-orange-hover text-white font-[700] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] shrink-0"
+              className="inline-flex items-center gap-2 h-[48px] px-6 rounded-full bg-orange hover:bg-orange-hover text-white font-[700] text-[14.5px] transition-colors shrink-0"
             >
               <CalendarCheck className="w-4 h-4" />
               Schedule Online
@@ -447,32 +502,47 @@ export default function HomePage() {
         <div className="container-site">
           <div className="text-center mb-12">
             <SectionTitle className="mt-3">
-              Our Products
+              Equipment We Install
             </SectionTitle>
             <p className="text-text-muted text-lg mt-4 max-w-2xl mx-auto">
-              HVAC Products & Equipment We install, Repair or Maintain.
+              High-efficiency heat pumps, mini-splits, furnaces, AC and water
+              heaters — matched to your home and the rebates you qualify for.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {productCategories.map((product) => (
-              <div
-                key={product.slug}
-                className="bg-light-bg rounded-[18px] p-4 sm:p-5 text-center border border-transparent flex flex-col"
-              >
-                <div className="relative aspect-square w-full rounded-[14px] bg-white overflow-hidden mb-4 shadow-sm">
-                  <Image
-                    src={product.image}
-                    alt={`${product.title} — TechPro HVAC product`}
-                    fill
-                    sizes="(max-width: 768px) 40vw, 22vw"
-                    className="object-contain p-3"
-                  />
-                </div>
-                <h3 className="text-[15px] font-[700] text-text-dark mt-auto">
-                  {product.title}
-                </h3>
-              </div>
-            ))}
+            {productCategories.map((product) => {
+              const href = product.estimate
+                ? `/estimate?service=${product.estimate}`
+                : "/contact";
+              return (
+                <Link
+                  key={product.slug}
+                  href={href}
+                  aria-label={
+                    product.estimate
+                      ? `Get an instant estimate for ${product.title}`
+                      : `Ask us about ${product.title}`
+                  }
+                  className="group bg-light-bg rounded-[18px] p-4 sm:p-5 text-center border border-transparent hover:border-orange/30 hover:shadow-[0_18px_40px_-18px_rgba(10,19,41,0.18)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col"
+                >
+                  <div className="relative aspect-square w-full rounded-[14px] bg-white overflow-hidden mb-4 shadow-sm">
+                    <Image
+                      src={product.image}
+                      alt={`${product.title} — TechPro HVAC product`}
+                      fill
+                      sizes="(max-width: 768px) 40vw, 22vw"
+                      className="object-contain p-3 group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <h3 className="text-[15px] font-[700] text-text-dark mt-auto group-hover:text-orange transition-colors">
+                    {product.title}
+                  </h3>
+                  <p className="text-[11.5px] font-[700] text-text-muted/70 tracking-[.08em] uppercase mt-1.5 group-hover:text-orange transition-colors">
+                    {product.estimate ? "Get estimate →" : "Ask us →"}
+                  </p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -486,12 +556,13 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div>
               <SectionTitle className="mt-3">
-                Serving San Mateo County
+                Where We Work
               </SectionTitle>
               <p className="text-text-muted text-lg mt-4 mb-8">
-                Based in San Carlos, we keep our service area local for faster &amp;
-                more reliable HVAC service. Every orange pin on the map is a
-                real 2026 installation — click one to read the project.
+                Based in San Carlos, we stay local on purpose — shorter drives
+                mean faster response and lower trip overhead. Every orange pin
+                on the map is a real 2026 install. Click one to read what we
+                did.
               </p>
               <h3 className="text-lg font-[700] text-text-dark mb-5">
                 Cities We Serve
@@ -511,17 +582,18 @@ export default function HomePage() {
           <div className="mt-10 bg-navy rounded-[18px] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="text-xl font-[700] text-white mb-1 uppercase tracking-wide">
-                CHECK YOUR SERVICE AREA
+                Not sure we cover you?
               </h3>
               <p className="text-white/70 text-[15px]">
-                Enter your ZIP code to confirm availability & schedule online.
+                Start booking online — enter your ZIP code and we&apos;ll
+                confirm availability on the next screen.
               </p>
             </div>
             <a
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-orange hover:bg-orange-hover text-white font-[700] px-7 py-3.5 rounded-[12px] transition-colors text-[15px] shrink-0"
+              className="inline-flex items-center gap-2 h-[48px] px-6 rounded-full bg-orange hover:bg-orange-hover text-white font-[700] text-[14.5px] transition-colors shrink-0"
             >
               <CalendarCheck className="w-4 h-4" />
               Schedule Online
@@ -533,74 +605,10 @@ export default function HomePage() {
 
 
       {/* ========== REVIEWS ========== */}
-      <section className="bg-light-bg section-padding">
-        <div className="container-site">
-          <div className="grid lg:grid-cols-[340px_1fr] gap-8 lg:gap-12">
-            {/* Rating Summary */}
-            <div className="bg-white rounded-[18px] p-8 border border-border-light text-center lg:text-left self-start">
-              <SectionLabel>Reviews</SectionLabel>
-              <div className="mt-3 mb-2">
-                <span className="text-5xl font-[800] text-navy">
-                  {GOOGLE_RATING}
-                </span>
-              </div>
-              <div className="flex items-center gap-1 justify-center lg:justify-start mb-3">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star
-                    key={star}
-                    className="w-5 h-5 fill-orange text-orange"
-                  />
-                ))}
-              </div>
-              <p className="text-text-muted text-[14px] mb-5">
-                Real reviews from happy neighbors across San Mateo County.
-              </p>
-              <div className="flex flex-col gap-3 items-center lg:items-start">
-                <a
-                  href="https://share.google/g7zNtg0V0XtDAKYCA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 h-[44px] px-5 rounded-[10px] bg-white border-2 border-[#4285F4] text-[#4285F4] font-[700] text-[13.5px] hover:bg-[#4285F4] hover:text-white transition-colors"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#4285F4] text-white font-[800] text-[13px]"
-                  >
-                    G
-                  </span>
-                  Read our Google reviews
-                </a>
-                <a
-                  href="https://www.yelp.com/biz/techpro-builders-san-carlos-6"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 h-[44px] px-5 rounded-[10px] bg-white border-2 border-[#D32323] text-[#D32323] font-[700] text-[13.5px] hover:bg-[#D32323] hover:text-white transition-colors"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#D32323] text-white font-[800] text-[13px]"
-                  >
-                    Y
-                  </span>
-                  Read our Yelp reviews
-                </a>
-              </div>
-            </div>
+      <ReviewsSection />
 
-            {/* Housecall Pro Reviews Widget — wrapped in brand chrome */}
-            <div className="bg-white rounded-[18px] border border-border-light overflow-hidden">
-              <div className="relative w-full" style={{ height: "620px" }}>
-                <iframe
-                  src="https://client.housecallpro.com/reviews/widget/419e6050-bc8f-4dc9-9053-e6abd3bc5229"
-                  title="Verified customer reviews for TechPro Heating & Cooling"
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full border-0"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ========== FAQ ========== */}
+      <FaqSection />
 
 
       {/* ========== CONTACT CTA ========== */}
@@ -609,10 +617,11 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div className="text-white">
               <h2 className="text-[clamp(30px,3.2vw,44px)] font-[800] tracking-[-.02em] leading-[1.15] mb-4">
-                Ready to contact Techpro?
+                Let&apos;s talk about your home.
               </h2>
               <p className="text-white/80 text-lg mb-8 leading-relaxed">
-                Send a message to the Techpro team by filling out the form or call/text directly.
+                Send a quick note, call, or text — a real person on our team
+                replies the same business day.
               </p>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-4">

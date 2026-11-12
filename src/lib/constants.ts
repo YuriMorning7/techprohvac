@@ -15,4 +15,19 @@ export const BOOKING_URL =
 
 // Public review destinations used by review widgets and the map pins.
 export const GOOGLE_REVIEWS_URL = "https://maps.app.goo.gl/SuPQZ6RdxRUCr3Yx5"
-export const YELP_REVIEWS_URL = "https://www.yelp.com/biz/techpro-builders-san-carlos-6"
+export const YELP_REVIEWS_URL = "https://www.yelp.com/biz/techpro-heating-and-cooling-san-carlos-2"
+
+// SMS entry point for the sticky action bar — same number as voice.
+export const SMS_HREF = "sms:6502756357"
+
+// Brands we install on a regular basis. Used by the trust strip + estimate
+// wizard; do not list anything the shop is not actually authorized for.
+export const INSTALL_BRANDS = [
+  "Mitsubishi",
+  "Bryant",
+  "Carrier",
+  "Daikin",
+  "Rheem",
+  "Lennox",
+  "Trane",
+] as const

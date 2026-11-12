@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -19,6 +20,7 @@ import {
   BOOKING_URL,
 } from "@/lib/constants";
 import { RenderMarkdown } from "@/lib/render-md";
+import { imageForInstallationType, tintForInstallationType } from "@/lib/project-image";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.techprohvac.com";
@@ -173,7 +175,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="container-site">
           <div className="grid lg:grid-cols-[1fr_320px] gap-8 lg:gap-12 items-start">
             {/* Article */}
-            <article className="bg-white rounded-[18px] border border-border-light p-6 sm:p-8 lg:p-10">
+            <article className="bg-white rounded-[20px] border border-border-light p-6 sm:p-8 lg:p-10">
               <RenderMarkdown md={project.body} />
 
               {/* Internal link row — helps SEO + discovery */}
@@ -205,7 +207,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <aside className="lg:sticky lg:top-24 space-y-5">
               {/* Equipment detail */}
               {project.allEquipment.length > 0 && (
-                <div className="bg-white rounded-[18px] border border-border-light p-6 sm:p-7">
+                <div className="bg-white rounded-[20px] border border-border-light p-6 sm:p-7">
                   <p className="text-[11.5px] font-[800] text-orange tracking-[.16em] uppercase mb-3">
                     Equipment Installed
                   </p>
@@ -228,7 +230,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               )}
 
               {/* CTA card */}
-              <div className="bg-navy rounded-[18px] p-6 sm:p-7 text-white">
+              <div className="bg-navy rounded-[20px] p-6 sm:p-7 text-white">
                 <p className="text-[11.5px] font-[800] text-orange tracking-[.16em] uppercase mb-3">
                   Free Estimate
                 </p>
@@ -244,14 +246,14 @@ export default async function BlogPostPage({ params }: PageProps) {
                     href={BOOKING_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 h-[48px] bg-orange hover:bg-orange-hover text-white font-[700] text-[14.5px] rounded-[12px] transition-colors"
+                    className="flex items-center justify-center gap-2 h-[48px] bg-orange hover:bg-orange-hover text-white font-[700] text-[14.5px] rounded-full transition-colors shadow-[0_8px_24px_-10px_rgba(241,90,41,0.6)]"
                   >
                     <CalendarCheck className="w-4 h-4" />
                     Schedule Online
                   </a>
                   <a
                     href={PHONE_HREF}
-                    className="flex items-center justify-center gap-2 h-[48px] bg-white/10 hover:bg-white/15 border border-white/20 text-white font-[700] text-[14.5px] rounded-[12px] transition-colors"
+                    className="flex items-center justify-center gap-2 h-[48px] bg-white/10 hover:bg-white/15 border border-white/20 text-white font-[700] text-[14.5px] rounded-full transition-colors"
                   >
                     <Phone className="w-4 h-4" />
                     {PHONE}
@@ -272,17 +274,28 @@ export default async function BlogPostPage({ params }: PageProps) {
                   <Link
                     key={p.slug}
                     href={`/blog/${p.slug}`}
-                    className="group bg-white rounded-[18px] border border-border-light p-6 hover:border-orange/40 hover:shadow-lg transition-all duration-200"
+                    className="group bg-white rounded-[20px] border border-border-light overflow-hidden flex flex-col hover:border-orange/40 hover:shadow-[0_18px_40px_-18px_rgba(10,19,41,0.18)] transition-all duration-300"
                   >
-                    <span className="inline-flex items-center h-[24px] px-2.5 rounded-full bg-badge-bg text-[11px] font-[800] text-orange tracking-[.08em] uppercase mb-3">
-                      {p.installationType}
-                    </span>
-                    <h3 className="text-[16px] sm:text-[17px] font-[800] text-navy leading-[1.3] tracking-tight group-hover:text-orange transition-colors">
-                      {p.installationType} Installation in {p.city}
-                    </h3>
-                    <p className="text-[12.5px] text-text-muted mt-3">
-                      {formatDate(p.completionDate)}
-                    </p>
+                    <div className={`relative aspect-[4/3] ${tintForInstallationType(p.installationType)} overflow-hidden`}>
+                      <Image
+                        src={imageForInstallationType(p.installationType)}
+                        alt={`${p.installationType} installation in ${p.city}, CA`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-contain p-6 group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <span className="absolute top-3 left-3 inline-flex items-center h-[24px] px-2.5 rounded-full bg-white/95 backdrop-blur text-[11px] font-[800] text-orange tracking-[.08em] uppercase shadow-sm">
+                        {p.installationType}
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <h3 className="text-[16px] sm:text-[17px] font-[800] text-navy leading-[1.3] tracking-tight group-hover:text-orange transition-colors">
+                        {p.installationType} Installation in {p.city}
+                      </h3>
+                      <p className="text-[12.5px] text-text-muted mt-2">
+                        {formatDate(p.completionDate)}
+                      </p>
+                    </div>
                   </Link>
                 ))}
               </div>

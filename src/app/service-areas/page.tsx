@@ -51,7 +51,7 @@ export default function ServiceAreasIndexPage() {
               <Link
                 key={c.slug}
                 href={`/service-areas/${c.slug}`}
-                className="group bg-white rounded-[18px] border border-border-light p-6 hover:border-orange/40 hover:shadow-lg transition-all duration-200"
+                className="group bg-white rounded-[20px] border border-border-light p-6 hover:border-orange/40 hover:shadow-[0_18px_40px_-18px_rgba(10,19,41,0.18)] transition-all duration-300"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>

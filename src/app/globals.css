@@ -154,3 +154,15 @@
 @media (prefers-reduced-motion: reduce) {
   .van-float { animation: none; }
 }
+
+/* Push the Housecall Pro chat bubble up on mobile/tablet so it does not
+   collide with our sticky bottom action bar (Call | Text | Book | Estimate).
+   The bar is ~72px tall including gap + safe-area padding. */
+#proChatIframeContainer {
+  transition: transform 0.2s ease-out;
+}
+@media (max-width: 1023px) {
+  #proChatIframeContainer {
+    transform: translateY(-78px);
+  }
+}

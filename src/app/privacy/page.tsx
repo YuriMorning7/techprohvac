@@ -136,7 +136,7 @@ export default function PrivacyPage() {
 
       <section className="bg-light-bg section-padding">
         <div className="container-site">
-          <div className="max-w-3xl mx-auto bg-white rounded-[18px] border border-border-light p-6 sm:p-10 lg:p-12">
+          <div className="max-w-3xl mx-auto bg-white rounded-[20px] border border-border-light p-6 sm:p-10 lg:p-12">
             {sections.map((section) => (
               <div key={section.heading} className="mb-8 last:mb-0">
                 <h2 className="text-[22px] sm:text-[24px] font-[800] text-navy leading-tight tracking-tight mb-4">
