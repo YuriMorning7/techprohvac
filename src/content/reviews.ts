@@ -23,18 +23,19 @@ export type Review = {
 
 // Aggregate platform stats displayed as summary cards above the carousel.
 // Update these when new totals are available.
+// Last verified: 2026-11-14 from the live Google Knowledge Panel + Yelp page.
 export const platformStats = [
   {
     source: "google" as const,
     rating: 4.9,
-    reviewCount: 136,
+    reviewCount: 113,
     label: "San Carlos, CA",
     url: "https://maps.app.goo.gl/SuPQZ6RdxRUCr3Yx5",
   },
   {
     source: "yelp" as const,
     rating: 5.0,
-    reviewCount: 4,
+    reviewCount: 336,
     label: "San Carlos, CA",
     url: "https://www.yelp.com/biz/techpro-heating-and-cooling-san-carlos-2",
   },

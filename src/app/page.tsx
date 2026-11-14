@@ -260,11 +260,12 @@ const jsonLd = {
         opens: "08:00",
         closes: "16:00",
       },
-      // Keep these aligned with ReviewsSection platform stats.
+      // Combined Google (113) + Yelp (336) review totals. Keep in sync with
+      // platformStats in src/content/reviews.ts when totals change.
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: GOOGLE_RATING,
-        reviewCount: "140",
+        reviewCount: "449",
         bestRating: "5",
         worstRating: "1",
       },
@@ -384,7 +385,7 @@ export default function HomePage() {
                 </li>
                 <li className="inline-flex items-center gap-1.5">
                   <Star className="w-4 h-4 text-orange" fill="currentColor" strokeWidth={0} />
-                  {GOOGLE_RATING}★ · 140+ Google reviews
+                  {GOOGLE_RATING}★ · 449 Google + Yelp reviews
                 </li>
               </ul>
             </div>
