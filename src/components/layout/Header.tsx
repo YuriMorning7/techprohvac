@@ -46,6 +46,7 @@ const navItems: NavItem[] = [
       { label: "Recent Projects", href: "/blog", description: "72 real 2026 installs across the county" },
       { label: "Service Areas", href: "/service-areas", description: "22 cities we cover across San Mateo County" },
       { label: "Brands We Install", href: "/brands", description: "Mitsubishi, Bryant, Carrier and more" },
+      { label: "Reviews", href: "/reviews", description: "449 verified reviews from Google & Yelp" },
     ],
   },
   // Instant Estimate temporarily hidden pending client approval. The /estimate
@@ -135,6 +136,7 @@ const mobileLinks: { label: string; href: string; badge?: string }[] = [
   { label: "Recent Projects", href: "/blog" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Brands", href: "/brands" },
+  { label: "Reviews", href: "/reviews" },
   { label: "Contact", href: "/contact" },
 ];
 

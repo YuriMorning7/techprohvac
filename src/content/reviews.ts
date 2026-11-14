@@ -18,7 +18,9 @@ export type Review = {
   date: string;        // human-readable, e.g. "Oct 2026"
   rating: 1 | 2 | 3 | 4 | 5;
   text: string;
-  url?: string;        // optional direct link to the review
+  url?: string;        // direct link to the review on the platform
+  city?: string;       // reviewer's city when visible in the original post
+  response?: string;   // owner response from the review platform, verbatim
 };
 
 // Aggregate platform stats displayed as summary cards above the carousel.
@@ -165,6 +167,7 @@ export const reviews: Review[] = [
     source: "google",
     date: "Feb 2026",
     rating: 5,
+    city: "San Carlos",
     text:
       "We hired Techpro Heating & Cooling for a full heat pump replacement and new ductwork in our two-story home in San Carlos, and they did an excellent job. The team was professional, efficient, and very knowledgeable. Everything was installed cleanly and on schedule, and the airflow between floors is noticeably better.",
   },
@@ -177,20 +180,106 @@ export const reviews: Review[] = [
     text:
       "We had a wonderful experience with this company. We recently had a heating/cooling air pump system installed and our old gas furnace removed, and we couldn't be happier with the service. Armen, the owner, was extremely knowledgeable and took the time to answer all of our questions in detail. Park, the technician, was punctual, professional, and very precise in his work.",
   },
-  // Yelp slots — paste the review content here once you send me the text.
-  // The four hrids from the share links you pasted:
-  //   Ql7YEjzJ8BJmP6TXZnxn9A
-  //   FQoMQd_kDWNjhGs0DbmQuw
-  //   Zl406PhdZNMG-GQXUCfuEQ
-  //   cRKB-f2vWObGp6xW4KWyRg
-  // Example schema:
-  // {
-  //   id: "yelp-<reviewer-slug>",
-  //   name: "First L.",
-  //   source: "yelp",
-  //   date: "Oct 2026",
-  //   rating: 5,
-  //   text: "...",
-  //   url: "https://yelp.com/biz/techpro-heating-and-cooling-san-carlos-2?hrid=Ql7YEjzJ8BJmP6TXZnxn9A",
-  // },
+  // Yelp reviews — text is verbatim from the reviewer's Yelp post, including
+  // original wording and any typos. To add more, copy the same shape below.
+  {
+    id: "yelp-dmitry-k-2026-10-30",
+    name: "Dmitry K.",
+    source: "yelp",
+    date: "Oct 2026",
+    rating: 5,
+    city: "West Point",
+    text:
+      "TechPro has been handling the appliance maintenance for both our multi-apartment building and our personal home for the last five years, and they are truly exceptional. They consistently provide outstanding service, especially when it comes to keeping our wall heaters running perfectly.\nTheir customer service team is always responsive, friendly, and helpful. On top of that, every single technician who comes out to the site is professional, knowledgeable, and arrives exactly on time, every single occasion. Finding a company this reliable is rare. I highly recommend TechPro for any property manager or homeowner looking for top-tier service!",
+  },
+  {
+    id: "yelp-eric-y-2026-06-04",
+    name: "Eric Y.",
+    source: "yelp",
+    date: "Jun 2026",
+    rating: 5,
+    city: "San Francisco",
+    text:
+      "Great experience with Techpro for a Mitsubishi mini-split install. Our installer, Park, took real time to walk me through every part of the job - placement, linset routing, electrical, and condenser - and made sure the wiring and ductwork were clean and to my standard before signing off. No shortcuts.\n\nBeyond Park, the whole team (Armen, Danielle, and the crew) was responsive, transparent, and professional from quote to commissioning",
+  },
+  {
+    id: "yelp-gary-b-2026-11-05",
+    name: "Gary B.",
+    source: "yelp",
+    date: "Nov 2026",
+    rating: 5,
+    city: "Montara",
+    text:
+      "I am doing a major remodel on my 47-year-old home in Montara, CA. This includes converting the original garage to a one-bedroom ADU. I am extremely happy that I chose TechPro for the electric heat pump HVAC and water heater portions of the project. TechPro's prices are fair, and, most importantly, they proved to me many times during the process that customer satisfaction and professional work they can take pride in are their highest priorities!\n\nTechPro installed new ductwork for the main home's HVAC. The ADU HVAC used mini-splits. Both HVAC systems used Bryant Heat Pump units; State water heaters were used for both units.\n\nTech Pro's customer service team, especially Danielle, was phenomenal. Always responsive, friendly, helpful, and understanding...that not all customers are knowledgeable about what these installations entail. Danielle closely guided me through the somewhat complex rebate process offered by various agencies for converting the main home to electric and kept track of deadlines. She and Armen were always able to answer my questions and provide guidance. All of the technicians (Armen, Angel, and Fadi) were professional, knowledgeable, punctual, and did excellent, professional work.\n\nFinding a company as reliable and easy to work with is rare. I highly recommend TechPro for any homeowner or property manager looking for top-tier HVAC or water heating service!",
+  },
+  {
+    id: "yelp-amadee-v-2026-10-28",
+    name: "Amadee V.",
+    source: "yelp",
+    date: "Oct 2026",
+    rating: 5,
+    city: "Belmont",
+    text:
+      "We had them services our furnace twice now. Their technician, Park, is very knowledgeable, honest and easy to work with. He pointed out small issues in our system and helped prioritize important issues vs small issues we don't need to spend money to fix. In short, we feel very comfortable doing business with them and would recommend them to anyone.",
+  },
+  {
+    id: "yelp-chris-2026-11-02",
+    name: "Chris",
+    source: "yelp",
+    date: "Nov 2026",
+    rating: 5,
+    city: "La Mirada",
+    text:
+      "I had a great experience with Techpro. Armen gave me a clear quote and a timeline that met my rebate deadline. I had many questions about both the water heater options and the way it would need to be installed (it was a conversion from a gas water heater), and he answered each one quickly and clearly. His crew did the same on install day. They put in my new Rheem heat pump water heater cleanly and on time in my garage, and they kept me updated at every step. They also made the rebate process easy. Everything went smoothly, and the water heater works great. I am very happy and I would gladly recommend them!",
+  },
+  {
+    id: "yelp-sumant-s-2026-10-29",
+    name: "Sumant S.",
+    source: "yelp",
+    date: "Oct 2026",
+    rating: 5,
+    city: "Atlanta, GA",
+    text:
+      "Armen and team are not only knowledgeable about what they do but they are extremely efficient and patient. Highly recommend their HVAC installation and r replacement service.",
+  },
+  {
+    id: "yelp-sasha-s-2026-08-06",
+    name: "Sasha S.",
+    source: "yelp",
+    date: "Aug 2026",
+    rating: 5,
+    city: "San Mateo",
+    text:
+      "Techpro Heating & Cooling is an incredible company with professional and kind technicians. They installed our Heating & AC system, which we now can't live without. Whenever we had questions or issues they always answered them and even came out to service and optimize the system to ensure everything was working at the highest quality, which it always was. They also communicate with the planning and inspectors well, making sure everything is done properly and that we, the home owners, never worried about anything.\nI have recommended Techpro many times to family, friends, neighbors, colleagues, and clients; everyone agrees, Techpro provides outstanding service.",
+  },
+  {
+    id: "yelp-al-h-2026-11-06",
+    name: "Al H.",
+    source: "yelp",
+    date: "Nov 2026",
+    rating: 5,
+    city: "San Bruno",
+    text:
+      "No installations done at my home- however on mutiple occasions Armen has come to give estimates and assess trying to install hvac/heatpumps into our home's very bizzare (i.e. terrible) layout situation. He always gave me an upfront honest and realistic opinion and never tried to force the sale- we actually ended up not installing due to real safety hazards for the house -while other contractors were promising its fine (hint -it was not)",
+  },
+  {
+    id: "yelp-peter-w-2026-01-20",
+    name: "Peter W.",
+    source: "yelp",
+    date: "Jan 2026",
+    rating: 5,
+    city: "San Francisco",
+    text:
+      "Techpro replaced my gas furnace water heater with a heat pump water heater. I was *very* happy with the service. Everyone that I interacted with were friendly and professional. Most of my questions were answered within an hour.\n\nThe installation was delayed a few times due to issues in acquiring the water heater. Even though Techpro was not responsible for the delays, they went above and beyond to try to finish the project by the end of 2025 so I can qualify for the tax rebate.\n\nI would not hesistate the hire Techpro again for future projects.",
+  },
+  {
+    id: "yelp-gary-r-2026-07-30",
+    name: "Gary R.",
+    source: "yelp",
+    date: "Jul 2026",
+    rating: 5,
+    city: "Los Angeles",
+    text:
+      "I hired the Techpro team to replace my existing gas furnace and ductwork system with a new Mitsubishi heat pump fan coil and condenser. My existing ductwork was completely replaced and my energy bill now is half of what it was before. The peninsula clean energy and techclean rebates were processed smoothly although the rebate programs can take 1-2 months to receive payment we were very happy with techpro heating and cooling!",
+  },
 ];
