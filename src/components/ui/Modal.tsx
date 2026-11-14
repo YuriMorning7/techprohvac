@@ -68,7 +68,12 @@ export default function Modal({
         aria-hidden="true"
       />
 
-      {/* Panel */}
+      {/* Panel. IMPORTANT: pointer-events must toggle with `open`. The dialog
+          panel is positioned over the center of the viewport and has
+          `overflow-y-auto`; if we leave `pointer-events-auto` on it while
+          the modal is closed, the panel silently captures wheel + touch
+          events over most of the viewport — users can't scroll the page
+          even though the modal is visually hidden. */}
       <div className="absolute inset-0 flex items-end sm:items-center justify-center p-0 sm:p-6 pointer-events-none">
         <div
           ref={panelRef}
@@ -76,8 +81,10 @@ export default function Modal({
           role="dialog"
           aria-modal="true"
           aria-labelledby={typeof title === "string" ? "modal-title" : undefined}
-          className={`relative w-full ${maxW} bg-white rounded-t-[24px] sm:rounded-[20px] shadow-[0_30px_80px_-20px_rgba(10,19,41,0.45)] pointer-events-auto transition-transform duration-250 ease-out ${
-            open ? "translate-y-0" : "translate-y-6"
+          className={`relative w-full ${maxW} bg-white rounded-t-[24px] sm:rounded-[20px] shadow-[0_30px_80px_-20px_rgba(10,19,41,0.45)] transition-transform duration-250 ease-out ${
+            open
+              ? "pointer-events-auto translate-y-0"
+              : "pointer-events-none translate-y-6"
           } max-h-[92vh] overflow-y-auto`}
         >
           <button
