@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -22,7 +21,7 @@ import {
   PHONE_HREF,
   BOOKING_URL,
 } from "@/lib/constants";
-import { imageForInstallationType, tintForInstallationType } from "@/lib/project-image";
+import ProjectVisual from "@/components/projects/ProjectVisual";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.techprohvac.com";
@@ -230,17 +229,8 @@ export default async function ServiceAreaCityPage({ params }: PageProps) {
                   href={`/blog/${p.slug}`}
                   className="group bg-white rounded-[20px] border border-border-light overflow-hidden flex flex-col hover:border-orange/40 hover:shadow-[0_18px_40px_-18px_rgba(10,19,41,0.18)] transition-all duration-300"
                 >
-                  <div className={`relative aspect-[4/3] ${tintForInstallationType(p.installationType)} overflow-hidden`}>
-                    <Image
-                      src={imageForInstallationType(p.installationType)}
-                      alt={`${p.installationType} installation in ${match.name}, CA`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-contain p-6 group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <span className="absolute top-3 left-3 inline-flex items-center h-[24px] px-2.5 rounded-full bg-white/95 backdrop-blur text-[11px] font-[800] text-orange tracking-[.08em] uppercase shadow-sm">
-                      {p.installationType}
-                    </span>
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <ProjectVisual project={p} compact />
                   </div>
                   <div className="p-5 sm:p-6 flex flex-col flex-1">
                     <h3 className="text-[16px] sm:text-[17px] font-[800] text-navy leading-[1.3] tracking-tight mb-2 group-hover:text-orange transition-colors">

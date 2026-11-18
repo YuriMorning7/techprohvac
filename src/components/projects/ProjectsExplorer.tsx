@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -15,10 +14,7 @@ import {
 } from "lucide-react";
 import type { Project } from "@/content/projects";
 import { formatDate } from "@/lib/content-helpers";
-import {
-  imageForInstallationType,
-  tintForInstallationType,
-} from "@/lib/project-image";
+import ProjectVisual from "./ProjectVisual";
 
 export type BrandOption = {
   key: string; // lowercase canonical key — what we store in URL and state
@@ -302,25 +298,8 @@ export default function ProjectsExplorer({
                   href={`/blog/${p.slug}`}
                   className="group bg-white rounded-[20px] border border-border-light overflow-hidden flex flex-col hover:border-orange/40 hover:shadow-[0_18px_40px_-18px_rgba(10,19,41,0.18)] transition-all duration-300"
                 >
-                  <div
-                    className={`relative aspect-[4/3] ${tintForInstallationType(p.installationType)} overflow-hidden`}
-                  >
-                    <Image
-                      src={imageForInstallationType(p.installationType)}
-                      alt={`${p.installationType} installation in ${p.city}, CA by TechPro Heating & Cooling`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-contain p-6 group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <span className="absolute top-3 left-3 inline-flex items-center h-[26px] px-2.5 rounded-full bg-white/95 backdrop-blur text-[11px] font-[800] text-orange tracking-[.08em] uppercase shadow-sm">
-                      {p.installationType}
-                    </span>
-                    {p.equipment?.brand && p.equipment.brand !== "Not documented" && (
-                      <span className="absolute top-3 right-3 inline-flex items-center h-[26px] px-2.5 rounded-full bg-navy/92 backdrop-blur text-[11px] font-[800] text-white tracking-[.08em] uppercase shadow-sm">
-                        {p.equipment.brand.charAt(0) +
-                          p.equipment.brand.slice(1).toLowerCase()}
-                      </span>
-                    )}
+                  <div className="relative aspect-[4/3] overflow-hidden group-hover:scale-[1.015] transition-transform duration-500 origin-center">
+                    <ProjectVisual project={p} />
                   </div>
                   <div className="p-5 sm:p-6 flex flex-col flex-1">
                     <h2 className="text-[17px] sm:text-[18px] font-[800] text-navy leading-[1.3] tracking-tight mb-2 group-hover:text-orange transition-colors">
